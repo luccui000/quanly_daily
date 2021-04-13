@@ -1,97 +1,29 @@
-<div> 
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/3 px-3 mb-6 md:mb-0">
-            <x-input.group label="Username" for="email" :error="$errors->first('email')" > 
-                <x-input.text wire:model.lazy="email" id="email" placeholder="input" />
-            </x-input.group>
-          </div>
-          <div class="md:w-1/3 px-3 mb-6 md:mb-0">
-            <x-input.group label="password" for="password" :error="$errors->first('password')" > 
-                <x-input.text wire:model.lazy="password" id="password" placeholder="password" />
-            </x-input.group>
-          </div> 
-          <div class="md:w-1/3 px-3 mb-6 md:mb-0">
-            <x-input.group label="passwordConfirmation" for="passwordConfirmation" :error="$errors->first('passwordConfirmation')" > 
-                <x-input.text wire:model.lazy="passwordConfirmation" id="passwordConfirmation" placeholder="passwordConfirmation" />
-            </x-input.group>
-          </div>
-        </div>
-        <div class="-mx-3 md:flex mb-6">
-            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
-                <x-input.group label="Username" for="email" :error="$errors->first('email')" > 
-                    <x-input.select wire:model="select" id="email">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </x-input.select>
-                </x-input.group>
-            </div>
+<form wire:submit.prevent="login" class="flex flex-row w-full h-30 rounded-md text-md p-4 mb-5 space-x-7"> 
+    <x-input.group label="Tên đăng nhập" for="TenDangNhap" >
+        <x-input.text wire:model="TenDangNhap" class="text-grey-800"></x-input.text>
+        @error('TenDangNhap') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+    </x-input.group>
+    <x-input.group label="Mật khẩu" for="TenDangNhap">
+        <x-input.text wire:model="MatKhau" type="password" class="text-grey-800"></x-input.text> 
+        @error('MatKhau') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+    </x-input.group>
+    <x-input.group for="" label="." >
+        <x-button.success type="submit" class="w-36">Đăng nhập</x-button.success>
+    </x-input.group>  
+</form>
+<div class="grid grid-cols-5 gap-4 p-2"> 
+    @foreach ($nguoidung as $item)
+        <div class="relative bg-gray-100 text-gray-400 text-md border-2 border-gray-200 rounded-sm hover:shadow-md h-48 p-3">
+            <div class="inner p-3">
+                <h3 class="text-lg font-semibold text-gray-600">{{ $item->TenDangNhap }}</h3> 
+                <p class="py-2">Lần đăng nhập cuối nhất: {{ $item->date_for_humans }}</p>
+                <p>Thời gian: {{ $item->time_for_humans }}</p>
+            </div> 
+            @if($item->TrangThai) 
+                <div class="triangle">
+                    <a href="#"><i class="fas fa-check"></i></a>
+                </div>
+            @endif 
         </div> 
-        <div class="-mx-3 md:flex mb-6">
-            <x-table.heading sortable="asd"  direction="12"  multiColumn="dssdf">
-               Heading
-            </x-table.heading> 
-            
-        </div>
-        <div class="md:w-1/3 flex-grow pl-2 ">
-            <label for="TSelect" class="mb-1 text-sm font-medium leading-5 text-gray-700">Select</label> 
-            <div class="mt-1">
-                <select class="w-64 block w-full pl-3 pr-10 py-2 text-black placeholder-gray-400 transition duration-100 ease-in-out bg-white border border-gray-300 rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                    <option value="">...</option>
-                    <option value="">...</option>
-                    <option value="">...</option>
-                    <option value="">...</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <x-table>
-        <x-slot name="head">
-            <x-table.heading sortable >heading 1</x-table>
-            <x-table.heading >heading 2</x-table>
-            <x-table.heading >heading 2</x-table>
-            <x-table.heading >heading 2</x-table>
-            <x-table.heading >heading 2</x-table>
-        </x-slot>
-        <x-slot name="body">
-            <x-table.row >
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-            </x-table.row>
-            <x-table.row >
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-            </x-table.row>
-            <x-table.row >
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-            </x-table.row>
-            <x-table.row >
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-            </x-table.row>
-            <x-table.row >
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-                <x-table.cell >cell 1</x-table>
-            </x-table.row>
-        </x-slot>
-    </x-table>
-</div> 
+    @endforeach 
+</div>

@@ -14,9 +14,11 @@ class CreateVaiTroTable extends Migration
     public function up()
     {
         Schema::create('VAITRO', function (Blueprint $table) {
+            $table->bigIncrements('id');
+
             $table->string('MaVT', 10)->unique();
             $table->string('TenVT', 50);
-            $table->string('MoTa', 100);
+            $table->string('MoTa', 100)->nullable();
         });
     }
 

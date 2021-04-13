@@ -13,11 +13,9 @@ class CreateNguoiDungVaiTroTable extends Migration
      */
     public function up()
     {
-        Schema::create('NGUOIDUNG_VAITRO', function (Blueprint $table) {
-            $table->string('TenDangNhap', 10);
-            $table->foreign('TenDangNhap')->references('TenDangNhap')->on('NGUOIDUNG');
-            $table->string('MaVT', 10);
-            $table->foreign('MaVT')->references('MaVT')->on('VAITRO');
+        Schema::create('NGUOIDUNG_VAITRO', function (Blueprint $table) { 
+            $table->foreignId('nguoidung_id')->constrained('NGUOIDUNG', 'id'); 
+            $table->foreignId('vaitro_id')->constrained('VAITRO', 'id'); 
         });
     }
 

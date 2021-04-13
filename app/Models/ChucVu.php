@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ChucVu extends Model
 {
     use HasFactory;
+    public $table = 'CHUCVU';
+    public $fillable = [
+        'TenCV',
+        'MoTaCV'
+    ]; 
 }

@@ -14,12 +14,11 @@ class CreateChucVuTable extends Migration
     public function up()
     {
         Schema::create('CHUCVU', function (Blueprint $table) {
-            $table->string('MaCV', 10)->unique();
+            $table->bigIncrements('id');
             
             $table->string('TenCV', 50);
             $table->string('MoTaCV');
-            
-            $table->primary('MaCV');
+            $table->timestamps();
         });
     }
 

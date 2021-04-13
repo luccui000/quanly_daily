@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ URL::asset('css/tailwind.css') }}">
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <title>Document</title> 
+    @livewireStyles   
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ URL::asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Tempusdominus Bootstrap 4 -->
@@ -21,8 +21,11 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ URL::asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ URL::asset('plugins/daterangepicker/daterangepicker.css') }}"> 
-    <!-- summernote -->    
+    <link rel="stylesheet" href="{{ URL::asset('css/loading.css') }}"> 
+    <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}"> 
+    <!-- pickaday -->    
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+
     <!-- JQVMap -->
     <script
         src="https://code.jquery.com/jquery-3.6.0.js"
@@ -36,9 +39,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css"/> 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>  
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">  
-    @livewireStyles  
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> 
 </head>
-<body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed" style="font-family: 'Open Sans Regular', sans-serif;">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -102,8 +105,15 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item ">
-                                    <a href="{{ route('dashboard.nhanvien.index') }}" class="nav-link">
-                                        <i class="fas fa-list-ul nav-icon"></i><p>Danh Sách</p>
+                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link">
+                                        <i class="fas fa-list-ul nav-icon"></i><p>Hồ sơ người dùng</p>
+                                    </a>
+                                </li> 
+                            </ul>
+                            <ul class="nav nav-treeview" style="display: block;">
+                                <li class="nav-item ">
+                                    <a href="{{ route('dashboard.nhanvien') }}" class="nav-link">
+                                        <i class="fas fa-list-ul nav-icon"></i><p>Thông tin nhân viên</p>
                                     </a>
                                 </li> 
                             </ul>
@@ -115,7 +125,7 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.khachhang.index') }}" class="nav-link">
+                                    <a href="{{ route('dashboard.khachhang') }}" class="nav-link">
                                         <i class="fas fa-list-ul nav-icon"></i><p>Danh Sách</p>
                                     </a>
                                 </li> 
@@ -166,7 +176,18 @@
             @yield('content')
         </div>
     </div> 
-    @livewireScripts
+    @livewireScripts 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
+    <script>  
+        window.addEventListener('swal.modal', event => { 
+            Swal.fire({
+                title: event.detail.title,   
+                content: event.detail.content,   
+                icon: event.detail.type,   
+            }) 
+        }) 
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
 
     @if(Session::has('flash_message_warning'))
             <message message="{{ Session::get('flash_message_warning') }}" type="warning"></message>
