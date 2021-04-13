@@ -132,7 +132,7 @@ class NhanVien extends Component
         $nhanvien = ModelsNhanVien::query()->with('chucvu')
                     ->when($this->selectColumnsView, fn($query, $selectColumnsView) => $query->select(array_merge($selectColumnsView, ['chucvu_id'])))
                     ->when($this->search, fn($query) => $query->where('HoTenNV', 'like', '%'. $this->search .'%'))
-                    ->paginate(10);
+                    ->paginate(env('PAGINATE_PAGE') ?? 10);
         $chucvu = ChucVu::all();
         $this->nhanviens = $nhanvien->pluck('id')->toArray();
         return view('livewire.nhan-vien', compact('nhanvien', 'chucvu'))->extends('layouts.app');;

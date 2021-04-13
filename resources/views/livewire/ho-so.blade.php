@@ -3,26 +3,19 @@
         <div class="flex ml-1">
             <div class="float-right py-2 flex justify-between">
                 <x-input.text wire:model.debounce.500ms="search" placeholder="Search ..."></x-input.text> 
-            </div>
-            <div class="py-2 mt-1 ml-2">
-                <x-dropdown label="Hành động"> 
-                    <x-dropdown.item wire:click="export('csv')" label="" class="flex item-center space-x-3">
-                        <x-icon.csv ></x-icon.csv><span>csv</span>
-                    </x-dropdown.item>
-                    <x-dropdown.item wire:click="export('xlsx')" class="flex item-center space-x-3">
-                        <x-icon.xlsx></x-icon.xlsx><span>xlsx</span>
-                    </x-dropdown.item> 
-                </x-dropdown> 
-            </div>  
-            <div class="py-2 mt-1 ml-2">
-                <x-button.danger wire:click="deleteSelected">Delete</x-button.primary>
-            </div>  
+            </div>   
             <div class="py-2 mt-1 ml-2">
                 <x-button.success wire:click="create" >New</x-button.success>
             </div>
             <div class="py-2 mt-1 ml-2">
-                <x-button.primary wire:click="export('csv')" >export</x-button.success>
+                <x-button.primary wire:click="export('csv')" >export CSV</x-button.primary>
             </div>
+            <div class="py-2 mt-1 ml-2">
+                <x-button.primary wire:click="export('xlsx')" >export Excel</x-button.primary>
+            </div>
+            <div class="py-2 mt-1 ml-2">
+                <x-button.danger wire:click="deleteSelected">Delete</x-button.primary>
+            </div>  
         </div>   
         <x-table>   
             <x-slot name="head"> 

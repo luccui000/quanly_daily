@@ -129,7 +129,7 @@ class HoSo extends Component
                 'hoso' => NguoiDung::query()
                         ->when($this->search, fn($query, $search) => $query->where('TenDangNhap', 'like', '%'.$search.'%'))
                         ->orderBy($this->sortBy, $this->sortDirection)
-                        ->paginate(10)
+                        ->paginate(env('PAGINATE_PAGE') ?? 10)
             ])->extends('layouts.app');
     }
 }

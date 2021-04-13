@@ -50,10 +50,10 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('dashboard.index') }}" class="nav-link">Trang chủ</a>
+                <a href="{{ route('dashboard.hoso') }}" class="nav-link">Trang chủ</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('dashboard.search') }}" class="nav-link">Tìm kiếm</a>
+                <a href="{{ route('dashboard.hoso') }}" class="nav-link">Tìm kiếm</a>
             </li> 
         </ul>
 
@@ -138,14 +138,14 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.nhacungcap.index') }}" class="nav-link">
+                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link">
                                         <i class="fas fa-list-ul nav-icon"></i><p>Danh Sách</p>
                                     </a>
                                 </li> 
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.loaimathang.index') }}" class="nav-link">
+                            <a href="{{ route('dashboard.hoso') }}" class="nav-link">
                             <i class="nav-icon fab fa-gg-circle text-default"></i>
                             <p class="text">Phân loại hàng</p>
                             </a>
@@ -157,12 +157,12 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.hoadon.nhaphang.index') }}" class="nav-link"> 
+                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
                                     <i class="fas fa-chart-bar nav-icon"></i><p>Nhập hàng</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.hoadon.themhang.index') }}" class="nav-link"> 
+                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
                                     <i class="fas fa-plus nav-icon"></i><p>Thêm mặt hàng</p>
                                     </a>
                                 </li>  

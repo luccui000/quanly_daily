@@ -1,13 +1,22 @@
-<div>       
+<div>    
     <div class="flex-col space-y-6">  
         <div class="flex ml-1">
             <div class="float-right py-2 flex justify-between">
                 <x-input.text wire:model.debounce.500ms="search" placeholder="Search ..."></x-input.text> 
             </div>    
             <div class="py-2 mt-1 ml-2">
+                <x-dropdown label="Bộ lọc"> 
+                    <x-dropdown.item wire:click="" label="" class="flex item-center space-x-3">
+                        <x-icon.csv ></x-icon.csv><span>csv</span>
+                    </x-dropdown.item>
+                    <x-dropdown.item wire:click="" class="flex item-center space-x-3">
+                        <x-icon.xlsx></x-icon.xlsx><span>xlsx</span>
+                    </x-dropdown.item> 
+                </x-dropdown> 
+            </div>
+            <div class="py-2 mt-1 ml-2">
                 <x-button.success wire:click="create" >New</x-button.success>
             </div>
-          
             <div class="py-2 mt-1 ml-2">
                 <x-button.primary wire:click="export('csv')" >export CSV</x-button.success>
             </div>
@@ -64,34 +73,35 @@
             <x-modal.dialog wire:model.defer="showModal">
                 <x-slot name="title">{{ $modalTitle }}</x-slot>
                 <x-slot name="content"> 
-                    <x-input.group label="Họ tên nhân viên" for="tendangnhap">
+                    <x-input.group label="Họ tên khách hàng" for="tendangnhap">
                         @if($isEdit == 1) 
-                            <x-input.text id="HoTenNV" wire:model.lazy="HoTenNV" readonly :error="$errors->first('HoTenNV')"></x-input.text> 
-                            @error('HoTenNV') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                            <x-input.text id="MaKH" wire:model.lazy="MaKH" readonly :error="$errors->first('MaKH')"></x-input.text> 
+                            @error('MaKH') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                         @else 
-                            <x-input.text id="HoTenNV" wire:model="HoTenNV" :error="$errors->first('HoTenNV')"></x-input.text> 
-                            @error('HoTenNV') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                            <x-input.text id="MaKH" wire:model="MaKH" :error="$errors->first('MaKH')"></x-input.text> 
+                            @error('MaKH') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                         @endif
                     </x-input.group>
-                     
-                    <x-input.group label="Ngày sinh" for="NgaySinh">
-                        <x-input.date wire:model="NgaySinh" id="NgaySinh" autocomplete="off"></x-input.date>
-                        @error('NgaySinh') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror 
-                    </x-input.group> 
-                    <x-input.group label="Điện thoại" for="DienThoai"> 
-                        <x-input.text id="HoTenNV" wire:model.lazy="DienThoai" :error="$errors->first('DienThoai')"></x-input.text> 
-                        @error('DienThoai') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror 
+                    <x-input.group label="Họ tên khách hàng" for="tendangnhap">
+                        <x-input.text id="HoTenKH" wire:model.lazy="HoTenKH" :error="$errors->first('HoTenKH')"></x-input.text> 
+                        @error('HoTenKH') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror 
                     </x-input.group>
                     <x-input.group label="Địa chỉ" for="DiaChi"> 
-                        <x-input.text id="HoTenNV" wire:model.lazy="DiaChi" :error="$errors->first('DiaChi')"></x-input.text> 
+                        <x-input.text id="DiaChi" wire:model.lazy="DiaChi" :error="$errors->first('DiaChi')"></x-input.text> 
                         @error('DiaChi') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror 
                     </x-input.group> 
-                    <x-input.group label="Trạng thái" for="TrangThai">
-                        <x-input.select id="TrangThai" wire:model="TrangThai" :error="$errors->first('TrangThai')">
-                            <option value="1">Đang làm việc</option>
-                            <option value="0">Đã chờ xử lý</option>
-                        </x-input.select>
-                        @error('TrangThai') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                    <x-input.group label="Điện thoại" for="DienThoai"> 
+                        <x-input.text id="DienThoai" wire:model.lazy="DienThoai" :error="$errors->first('DienThoai')"></x-input.text> 
+                        @error('DienThoai') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror 
+                    </x-input.group>
+                     
+                    <x-input.group label="Email" for="Email"> 
+                        <x-input.text id="Email" wire:model.lazy="Email" :error="$errors->first('Email')"></x-input.text> 
+                        @error('Email') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror 
+                    </x-input.group> 
+                    <x-input.group label="Số tài khoản" for="SoTaiKhoan"> 
+                        <x-input.text id="SoTaiKhoan" wire:model.lazy="SoTaiKhoan" :error="$errors->first('SoTaiKhoan')"></x-input.text> 
+                        @error('SoTaiKhoan') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                     </x-input.group>
                 </x-slot>
                 <x-slot name="footer">

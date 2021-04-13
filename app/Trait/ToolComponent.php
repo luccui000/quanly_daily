@@ -4,7 +4,7 @@ namespace App\Trait;
 
 trait ToolComponent 
 {
-    private $showModal = false;
+    public $showModal = false;
     public $modalTitle = '';
     public $isEdit = false;
     public function dispatchAlert($type, $title, $content = null)
@@ -21,7 +21,7 @@ trait ToolComponent
     }
     public function create()
     {
-
+        $this->showModal = true;
     }
     public function save()
     {
