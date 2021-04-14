@@ -5,16 +5,16 @@
                 <x-input.text wire:model.debounce.500ms="search" placeholder="Search ..."></x-input.text> 
             </div>   
             <div class="py-2 mt-1 ml-2">
-                <x-button.success wire:click="create" >New</x-button.success>
+                <x-button.success wire:click="create" >Thêm mới</x-button.success>
             </div>
             <div class="py-2 mt-1 ml-2">
-                <x-button.primary wire:click="export('csv')" >export CSV</x-button.primary>
+                <x-button.primary wire:click="export('csv')" >Xuất CSV</x-button.primary>
             </div>
             <div class="py-2 mt-1 ml-2">
-                <x-button.primary wire:click="export('xlsx')" >export Excel</x-button.primary>
+                <x-button.primary wire:click="export('xlsx')" >Xuất Excel</x-button.primary>
             </div>
             <div class="py-2 mt-1 ml-2">
-                <x-button.danger wire:click="deleteSelected">Delete</x-button.primary>
+                <x-button.danger wire:click="deleteSelected">Xóa</x-button.primary>
             </div>  
         </div>   
         <x-table>   

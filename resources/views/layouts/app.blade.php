@@ -106,68 +106,90 @@
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item ">
                                     <a href="{{ route('dashboard.hoso') }}" class="nav-link">
-                                        <i class="fas fa-list-ul nav-icon"></i><p>Hồ sơ người dùng</p>
+                                        <i class="fab fa-slideshare nav-icon"></i><p>Hồ sơ người dùng</p>
                                     </a>
                                 </li> 
                             </ul>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item ">
                                     <a href="{{ route('dashboard.nhanvien') }}" class="nav-link">
-                                        <i class="fas fa-list-ul nav-icon"></i><p>Thông tin nhân viên</p>
+                                        <i class="fa-fw fas fa-user-friends nav-icon"></i><p>Thông tin nhân viên</p>
                                     </a>
                                 </li> 
                             </ul>
                         </li>
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-users-cog"></i>
-                                <p>Khách Hàng <i class="right fas fa-angle-left"></i></p>
+                                <i class="nav-icon fa fa-handshake"></i>
+                                <p>Đối tác <i class="right fas fa-angle-left"></i></p>
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.khachhang') }}" class="nav-link">
-                                        <i class="fas fa-list-ul nav-icon"></i><p>Danh Sách</p>
+                                        <i class="fas fa-user-cog nav-icon"></i><p>Khách hàng</p>
                                     </a>
                                 </li> 
-                            </ul>
-                        </li> 
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-industry"></i>
-                                <p>Nhà Cung Cấp <i class="right fas fa-angle-left"></i></p>
-                            </a>
-                            <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link">
-                                        <i class="fas fa-list-ul nav-icon"></i><p>Danh Sách</p>
+                                    <a href="{{ route('dashboard.khachhang') }}" class="nav-link">
+                                        <i class="fas fa-industry nav-icon"></i><p>Nhà cung cáp</p>
                                     </a>
-                                </li> 
+                                </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard.hoso') }}" class="nav-link">
-                            <i class="nav-icon fab fa-gg-circle text-default"></i>
-                            <p class="text">Phân loại hàng</p>
-                            </a>
-                        </li> 
+                        </li>   
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-money-check-alt"></i>
-                                <p>Hóa đơn <i class="right fas fa-angle-left"></i></p>
+                                <p>Hàng hóa<i class="right fas fa-angle-left"></i></p>
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
-                                    <i class="fas fa-chart-bar nav-icon"></i><p>Nhập hàng</p>
+                                    <a href="{{ route('dashboard.mathang') }}" class="nav-link"> 
+                                    <i class="fas fa-cube nav-icon"></i><p>Thiết lập hàng hóa</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
-                                    <i class="fas fa-plus nav-icon"></i><p>Thêm mặt hàng</p>
+                                    <i class="fas fa-fw fa fa-tags nav-icon"></i><p>Thiết lập giá</p>
+                                    </a>
+                                </li>   
+                            </ul>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-money-check-alt"></i>
+                                <p>Giao dịch<i class="right fas fa-angle-left"></i></p>
+                            </a>
+                            <ul class="nav nav-treeview" style="display: block;">
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
+                                    <i class="fa-fw fas fa-file-invoice-dollar nav-icon"></i><p>Hóa đơn</p>
                                     </a>
                                 </li>  
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
+                                    <i class="fas fa-fw fas fa-dolly-flatbed nav-icon"></i><p>Nhập hàng</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li> 
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-chart-line"></i>
+                                <p>Báo cáo<i class="right fas fa-angle-left"></i></p>
+                            </a>
+                            <ul class="nav nav-treeview" style="display: block;">
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
+                                    <i class="fas fa-chart-pie nav-icon"></i><p>Cuối ngày</p>
+                                    </a>
+                                </li>  
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
+                                    <i class="fas fa-fw fas fa-dolly-flatbed nav-icon"></i><p>Nhập hàng</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>  
                     </ul>
                 </nav>
             </div>
@@ -177,6 +199,7 @@
         </div>
     </div> 
     @livewireScripts 
+    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
     <script>  
         window.addEventListener('swal.modal', event => { 
