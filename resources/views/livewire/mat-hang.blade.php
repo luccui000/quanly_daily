@@ -1,4 +1,5 @@
 <div>
+    @json($showModal)
     <x-toolbar>
         <x-toolbar.search wire:model.debounce.500ms="search"></x-toolbar.search> 
         <x-toolbar.dropdown label="Bộ lọc">
@@ -64,9 +65,18 @@
                 </x-table.row>
             @endforeach
         </x-slot>  
-    </x-table> 
+    </x-table>
+    @foreach ($nhacungcap as $data)
+        <p>{{ $data->TenNCC }} </p>
+    @endforeach
+    @foreach ($loaimathang as $data)
+        <p>{{ $data->TenLoaiMH }} </p>
+    @endforeach
+    @foreach ($donvitinh as $data)
+        <p>{{ $data->TenDVT }} </p>
+    @endforeach
     <form wire:submit.prevent="save">
-        <x-modal.dialog wire:model.defer="showModal">
+        <x-modal.dialog wire:model="showModal">
             <x-slot name="title">{{ $modalTitle }}</x-slot>
             <x-slot name="content"> 
                 <x-input.group label="Mã mặt hàng" for="tendangnhap">

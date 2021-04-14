@@ -19,7 +19,7 @@ class MatHang extends Component
      public $TenMH;
      public $ThongSo;
      public $BaoHanh;
-     public $GiaNhap;
+     public $GiaNhap = '123456789';
      public $GiaXuat;
      public $TrangThai; 
 

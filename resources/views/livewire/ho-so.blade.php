@@ -62,7 +62,7 @@
             {{ $hoso->links('paginate-link') }}
         </div> 
         <form wire:submit.prevent="save">
-            <x-modal.dialog wire:model.defer="showEditModal">
+            <x-modal.dialog wire:model="showEditModal">
                 <x-slot name="title">{{ $modaTitle }}</x-slot>
                 <x-slot name="content"> 
                     <x-input.group label="Tên đăng nhập" for="tendangnhap">
