@@ -18,6 +18,7 @@ class MatHang extends Model
         'GiaXuat',
         'TrangThai',
     ];
+    public $timestamps = true;
     public function donvitinh()
     {
         return $this->hasOne(DonViTinh::class, 'id', 'donvitinh_id');

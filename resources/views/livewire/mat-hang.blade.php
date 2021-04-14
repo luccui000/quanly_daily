@@ -1,5 +1,5 @@
-<div>
-    @json($showModal)
+<div>    
+    @json($nhacungcap_id)
     <x-toolbar>
         <x-toolbar.search wire:model.debounce.500ms="search"></x-toolbar.search> 
         <x-toolbar.dropdown label="Bộ lọc">
@@ -39,7 +39,7 @@
             <x-table.heading >#</x-table.heading>
             <x-table.heading >Mã mặt hàng</x-table.heading>
             <x-table.heading >Tên mặt hàng</x-table.heading>
-            <x-table.heading >Nhóm mặt hàng</x-table.heading>
+            <x-table.heading >Loại mặt hàng</x-table.heading>
             <x-table.heading >Nhà cung cấp</x-table.heading>
             <x-table.heading >Đơn vị tính</x-table.heading>
             <x-table.heading >Giá nhập</x-table.heading>
@@ -65,43 +65,39 @@
                 </x-table.row>
             @endforeach
         </x-slot>  
-    </x-table>
-    @foreach ($nhacungcap as $data)
-        <p>{{ $data->TenNCC }} </p>
-    @endforeach
-    @foreach ($loaimathang as $data)
-        <p>{{ $data->TenLoaiMH }} </p>
-    @endforeach
-    @foreach ($donvitinh as $data)
-        <p>{{ $data->TenDVT }} </p>
-    @endforeach
+    </x-table>  
     <form wire:submit.prevent="save">
         <x-modal.dialog wire:model="showModal">
             <x-slot name="title">{{ $modalTitle }}</x-slot>
-            <x-slot name="content"> 
-                <x-input.group label="Mã mặt hàng" for="tendangnhap">
+            <x-slot name="content">   
+                <x-input.group label="Mã mặt hàng" for="MaMH">
                     @if($isEdit == 1) 
                         <x-input.text id="MaMH" wire:model.lazy="MaMH" readonly :error="$errors->first('MaMH')" ></x-input.text> 
                         @error('MaMH') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                     @else 
-                        <x-input.text id="MaMH" wire:model="MaMH" :error="$errors->first('MaMH')" placeholder="Tự động tạo"></x-input.text> 
-                        @error('MaMH') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
-                    @endif
-                </x-input.group> 
-                <x-input.group label="Tên mặt hàng" for="MatKhau">
+                        <x-input.text id="MaMH" wire:model.lazy="MaMH" :error="$errors->first('MaMH')"></x-input.text>
+                        @error('MaMH') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror 
+                    @endif 
+                </x-input.group>
+                <x-input.group label="Tên mặt hàng" for="TenMH">
                     <x-input.text id="TenMH" wire:model.lazy="TenMH" :error="$errors->first('TenMH')"></x-input.text>
                     @error('TenMH') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                 </x-input.group>
-                <x-input.group label="Mật khẩu" for="MatKhau">
-                    <x-input.text type="password" id="MatKhau" wire:model.lazy="MatKhau" :error="$errors->first('MatKhau')"></x-input.text>
-                    @error('MatKhau') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                <x-input.group label="Bảo hành" for="BaoHanh">
+                    <x-input.text type="text" id="BaoHanh" wire:model.lazy="BaoHanh" :error="$errors->first('BaoHanh')"></x-input.text>
+                    @error('BaoHanh') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                 </x-input.group>
-                <x-input.group label="Nhóm mặt hàng" for="loaimathang_id"> 
+                <x-input.group label="Thông số" for="ThongSo">
+                    <x-input.text type="text" id="ThongSo" wire:model.lazy="ThongSo" :error="$errors->first('ThongSo')"></x-input.text>
+                    @error('ThongSo') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                </x-input.group>
+                <x-input.group label="Loại mặt hàng" for="loaimathang_id"> 
                     <div class="grid grid-cols-10 gap-1">
                         <div class="col-span-9">
-                            <x-input.select wire.model="" for>
-                                <option value="">Điện thoại</option>
-                                <option value="">Laptop</option>
+                            <x-input.select wire.model="loaimathang_id" > 
+                                @foreach ($loaimathang as $data) 
+                                    <option value="{{ $data->id }}">{{ $data->TenLoaiMH }}</option> 
+                                @endforeach
                             </x-input>
                         </div>
                         <div class="bg-gray-200 rounded p-0 flex justify-center items-center hover:bg-gray-300 hover:cursor-pointer disabled:opacity-25 transition ml-2" style="width: 50px;">
@@ -109,25 +105,35 @@
                         </div>
                     </div>  
                 </x-input.group>
-                <x-input.group label="Nhà cung cấp" for="nhacungcap_id">
+                {{-- <x-input.group label="Nhà cung cấp" for="nhacungcap_id">
                     <div class="grid grid-cols-10 gap-1">
                         <div class="col-span-9">
-                            <x-input.select wire.model="" for>
-                                <option value="">DMX - Công ty Điện máy xanh</option>
-                                <option value="">TDDG - Công ty Thế giới di động</option>
+                            <x-input.select wire.model="nhacungcap_id" >
+                                @foreach ($nhacungcap as $data) 
+                                    <option value="{{ $data->id }}">{{ $data->MaNCC }} - {{ $data->TenNCC }}</option> 
+                                @endforeach
                             </x-input>
                         </div>
                         <div class="bg-gray-200 rounded p-0 flex justify-center items-center hover:bg-gray-300 hover:cursor-pointer disabled:opacity-25 transition ml-2" style="width: 50px;">
                             <i class="fa fa-plus text-gray-600"></i>
                         </div>
                     </div> 
+                </x-input.group> --}}
+                <x-input.group label="Chức vụ" for="chucvu_id">
+                    <x-input.select  wire:model="nhacungcap_id">
+                        @foreach ($nhacungcap as $item)
+                            <option value="{{ $item->id }}">{{ $item->TenNCC }}</option>
+                        @endforeach
+                    </x-input.select>
+                    @error('nhacungcap_id') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                 </x-input.group>
                 <x-input.group label="Đơn vị tính" for="donvitinh_id">
                     <div class="grid grid-cols-10 gap-1">
                         <div class="col-span-9">
-                            <x-input.select wire.model="" for>
-                                <option value="">Cái</option>
-                                <option value="">Chiếc</option>
+                            <x-input.select wire.model="donvitinh_id" >
+                                @foreach ($donvitinh as $data) 
+                                    <option value="{{ $data->id }}">{{ $data->TenDVT }} </option> 
+                                @endforeach 
                             </x-input>
                         </div>
                         <div class="bg-gray-200 rounded p-0 flex justify-center items-center hover:bg-gray-300 hover:cursor-pointer disabled:opacity-25 transition ml-2" style="width: 50px;">
@@ -135,6 +141,7 @@
                         </div>
                     </div>  
                 </x-input.group> 
+                
                 <x-input.group label="Giá nhập" for="GiaNhap">
                     <x-input.money id="GiaNhap" wire:model.lazy="GiaNhap" :error="$errors->first('GiaNhap')"></x-input.text>
                     @error('GiaNhap') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror

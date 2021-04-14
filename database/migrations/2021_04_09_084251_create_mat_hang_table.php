@@ -27,6 +27,7 @@ class CreateMatHangTable extends Migration
             $table->foreignId('loaimathang_id')->constrained('LOAIMATHANG', 'id');
             $table->foreignId('donvitinh_id')->constrained('DONVITINH', 'id');
             $table->foreignId('nhacungcap_id')->constrained('NHACUNGCAP', 'id');
+            $table->timestamps();
         });
     }
 
