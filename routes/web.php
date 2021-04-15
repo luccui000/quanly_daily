@@ -7,7 +7,9 @@ use App\Http\Livewire\KhachHang;
 use App\Http\Livewire\MatHang;
 use App\Http\Livewire\NhanVien;
 
-Route::view('/','welcome')->name('nguoidung.home');   
+Route::get('/',function() {
+    return redirect('/dangnhap');
+})->name('nguoidung.home');   
 Route::get('/dangnhap', DangNhap::class);
 
 

@@ -14,7 +14,7 @@ class MatHang extends Component
     public $modalTitle = "";
     public $showModal = false;
     public $isEdit = false; 
-    public MatHangModel $mathangs;
+    public MatHangModel $mathangs; 
 
     public $MaMH;
     public $TenMH;
@@ -40,6 +40,7 @@ class MatHang extends Component
     public function mount()
     {
         $this->mathangs = $this->makeBlankMatHang();  
+        $this->MaMH = strlen($this->MaMH) > 0 ? $this->MaMH : 'MH' . $this->getCodeGenerator();
     }
     public function create()
     {
@@ -63,7 +64,9 @@ class MatHang extends Component
             dd("Edit");
         } else {
             try {
-                dd($this->donvitinh_id);
+                // dd($this->nhacungcap_id);
+                $code = $this->getCodeGenerator();
+                $code = $code + 1;
                 $this->mathangs->create([
                     'MaMH' => $this->MaMH,
                     'TenMH' => $this->TenMH,
@@ -71,16 +74,16 @@ class MatHang extends Component
                     'BaoHanh' => $this->BaoHanh,
                     'GiaNhap' => $this->GiaNhap,
                     'GiaXuat' => $this->GiaXuat,
-                    'TrangThai' => $this->TrangThai,
+                    'TrangThai' => 1,
                     'nhacungcap_id' => $this->nhacungcap_id,
                     'loaimathang_id' => $this->loaimathang_id,
                     'donvitinh_id' => $this->donvitinh_id,
-                ]);
-                $code = $this->getCodeGenerator();
-                CodeGenerator::find(1)->update(['MaKhachHang' => ++$code]);
+                ]); 
+                CodeGenerator::find(1)->update(['MaMatHang' => $code]);
+                $this->MaMH = 'MH' . $this->getCodeGenerator();
                 $this->dispatchAlert('success', 'Thêm thành công mặt hàng', '');
             } catch(\Exception $e) {
-                $this->dispatchAlert('warning', 'Xảy ra lỗi' .$e->getMessage(), '');
+                $this->dispatchAlert('warning', 'Xảy ra lỗi' . $e->getMessage(), '');
             }
             $this->showModal = false;
         }
@@ -92,7 +95,7 @@ class MatHang extends Component
             'content' => $content,
             'type' =>  $type
         ]);
-    }
+    } 
     public function makeBlankMatHang()
     {
         $this->reset('MaMH', 'TenMH', 'ThongSo', 'BaoHanh', 'GiaNhap', 'GiaXuat', 'TrangThai', 'nhacungcap_id', 'donvitinh_id', 'loaimathang_id');
@@ -119,8 +122,7 @@ class MatHang extends Component
             ->paginate(env('PAGINATE_PAGE') ?? 10); 
         $nhacungcap = NhaCungCap::all();
         $donvitinh = DonViTinh::all();
-        $loaimathang = LoaiMatHang::all(); 
-        $this->MaMH = strlen($this->MaMH) > 0 ? $this->MaMH : 'MH' . $this->getCodeGenerator();
+        $loaimathang = LoaiMatHang::all();  
         return view('livewire.mat-hang', [
             'mathang' => $mathang,
             'nhacungcap' => $nhacungcap,

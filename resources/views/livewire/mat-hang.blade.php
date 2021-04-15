@@ -1,5 +1,7 @@
 <div>    
+    @json($loaimathang_id)
     @json($nhacungcap_id)
+    @json($donvitinh_id)
     <x-toolbar>
         <x-toolbar.search wire:model.debounce.500ms="search"></x-toolbar.search> 
         <x-toolbar.dropdown label="Bộ lọc">
@@ -56,9 +58,9 @@
                     <x-table.cell>{{  $item->TenMH }}</x-table.cell>
                     <x-table.cell>{{  $item->loaimathang->TenLoaiMH }}</x-table.cell>
                     <x-table.cell>{{  $item->nhacungcap->TenNCC }}</x-table.cell>
-                    <x-table.cell>{{  $item->donvitinh->TenDVT }}</x-table.cell>
-                    <x-table.cell>{{  $item->GiaNhap }}</x-table.cell>
-                    <x-table.cell>{{  $item->GiaXuat }}</x-table.cell> 
+                    <x-table.cell>{{  $item->donvitinh->TenDVT }}</x-table.cell> 
+                    <x-table.cell class="font-semibold">{{ money_format('%.0n', $item->GiaNhap) }}</x-table.cell>
+                    <x-table.cell class="font-semibold">{{ money_format('%.0n', $item->GiaXuat) }}</x-table.cell> 
                     <x-table.cell>
                         <x-button.link wire:click="edit(' ')" >Edit</x-button.link> 
                     </x-table.cell> 
@@ -94,7 +96,8 @@
                 <x-input.group label="Loại mặt hàng" for="loaimathang_id"> 
                     <div class="grid grid-cols-10 gap-1">
                         <div class="col-span-9">
-                            <x-input.select wire.model="loaimathang_id" > 
+                            <x-input.select wire:model="loaimathang_id" > 
+                                <option value="0">-- Chọn loại mặt hàng --</option> 
                                 @foreach ($loaimathang as $data) 
                                     <option value="{{ $data->id }}">{{ $data->TenLoaiMH }}</option> 
                                 @endforeach
@@ -105,10 +108,11 @@
                         </div>
                     </div>  
                 </x-input.group>
-                {{-- <x-input.group label="Nhà cung cấp" for="nhacungcap_id">
+                <x-input.group label="Nhà cung cấp" for="nhacungcap_id">
                     <div class="grid grid-cols-10 gap-1">
                         <div class="col-span-9">
-                            <x-input.select wire.model="nhacungcap_id" >
+                            <x-input.select wire:model="nhacungcap_id" >
+                                <option value="0">-- Chọn nhà cung cấp --</option> 
                                 @foreach ($nhacungcap as $data) 
                                     <option value="{{ $data->id }}">{{ $data->MaNCC }} - {{ $data->TenNCC }}</option> 
                                 @endforeach
@@ -118,19 +122,12 @@
                             <i class="fa fa-plus text-gray-600"></i>
                         </div>
                     </div> 
-                </x-input.group> --}}
-                <x-input.group label="Chức vụ" for="chucvu_id">
-                    <x-input.select  wire:model="nhacungcap_id">
-                        @foreach ($nhacungcap as $item)
-                            <option value="{{ $item->id }}">{{ $item->TenNCC }}</option>
-                        @endforeach
-                    </x-input.select>
-                    @error('nhacungcap_id') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
-                </x-input.group>
+                </x-input.group> 
                 <x-input.group label="Đơn vị tính" for="donvitinh_id">
                     <div class="grid grid-cols-10 gap-1">
                         <div class="col-span-9">
-                            <x-input.select wire.model="donvitinh_id" >
+                            <x-input.select wire:model="donvitinh_id" >
+                                <option value="0">-- Chọn đơn vị tính --</option> 
                                 @foreach ($donvitinh as $data) 
                                     <option value="{{ $data->id }}">{{ $data->TenDVT }} </option> 
                                 @endforeach 

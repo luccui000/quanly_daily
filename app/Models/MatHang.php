@@ -17,6 +17,9 @@ class MatHang extends Model
         'GiaNhap',
         'GiaXuat',
         'TrangThai',
+        'nhacungcap_id',
+        'loaimathang_id',
+        'donvitinh_id'
     ];
     public $timestamps = true;
     public function donvitinh()
