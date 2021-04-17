@@ -50,5 +50,10 @@
                 </x-table.cell> 
             @endforeach
         </x-slot>
-    </x-table>
+    </x-table>  
+    <form wire:submit.prevent="save">
+        <div wire:model="showModal" class="fixed top-0 inset-x-0 px-4 pt-6 z-50 sm:px-0 sm:flex sm:items-top sm:justify-center">
+            asdasd  
+        </div> 
+    </form> 
 </div>

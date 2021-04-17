@@ -7,9 +7,14 @@ use Livewire\Component;
 
 class PhieuNhapKho extends Component
 {
-    public function render()
+    public $showModal = false;
+
+    public function create()
     {
-        
+        $this->showModal = true;
+    }
+    public function render()
+    { 
         return view('livewire.phieu-nhap-kho', [
             'phieuhang' => PhieuHang::query()
                             ->with('nhacungcap')
