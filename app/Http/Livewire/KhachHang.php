@@ -63,7 +63,7 @@ class KhachHang extends Component
     {
         $this->validate(); 
         if($this->isEdit) {
-
+            
         } else {
             $MaKHCodeGenerator = CodeGenerator::find(1)->MaKhachHang;
             $strCode = '';

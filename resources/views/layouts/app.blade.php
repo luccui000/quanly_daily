@@ -148,7 +148,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
+                                    <a href="{{ route('dashboard.mathang') }}" class="nav-link"> 
                                     <i class="fas fa-fw fa fa-tags nav-icon"></i><p>Thiết lập giá</p>
                                     </a>
                                 </li>   
@@ -166,7 +166,7 @@
                                     </a>
                                 </li>  
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
+                                    <a href="{{ route('dashboard.phieunhapkho') }}" class="nav-link"> 
                                     <i class="fas fa-fw fas fa-dolly-flatbed nav-icon"></i><p>Nhập hàng</p>
                                     </a>
                                 </li>
@@ -198,8 +198,7 @@
             @yield('content')
         </div>
     </div> 
-    @livewireScripts 
-    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.1.0"></script>
+    @livewireScripts  
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
     <script>  
         window.addEventListener('swal.modal', event => { 

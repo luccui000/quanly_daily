@@ -1,28 +1,14 @@
-<div>    
-    @json($loaimathang_id)
-    @json($nhacungcap_id)
-    @json($donvitinh_id)
-    <x-toolbar>
-        <x-toolbar.search wire:model.debounce.500ms="search"></x-toolbar.search> 
-        <x-toolbar.dropdown label="Bộ lọc">
-            <x-dropdown.item wire:click="" label="" class="flex item-center space-x-3">
-                Mã NCC
-            </x-dropdown.item>
-            <x-dropdown.item wire:click="" class="flex item-center space-x-3">
-                Tên NCC
-            </x-dropdown.item> 
-        </x-toolbar.dropdown>  
-        <x-toolbar.dropdown label="Thêm thuộc tính ...">
-            <x-dropdown.item wire:click="" label="" class="flex item-center space-x-3">
-                <span>Thêm đơn vị tính</span>
-            </x-dropdown.item>
-            <x-dropdown.item wire:click="" class="flex item-center space-x-3">
-                <span>Thêm nhà cung cấp</span> 
-            </x-dropdown.item> 
-        </x-toolbar.dropdown> 
+ <div>        
+    <x-toolbar>  
+        <div class="py-2 flex justify-between">
+            <x-input.text wire:model.debounce.500ms="search" placeholder="Tìm kiếm ..."></x-input.text> 
+        </div> 
+        <div class=" flex justify-between mt-3 px-3">
+            <x-button.link wire:click="toggleFilterPrice" >Tìm theo mức giá</x-button.link> 
+        </div>   
         <x-toolbar.button>  
             <x-button.success wire:click="create" >Thêm mới</x-button.success>
-        </x-toolbar.button>   
+        </x-toolbar.button>    
         <x-toolbar.button> 
             <x-button.primary wire:click="export('csv')" >Xuất CSV</x-button.success>
         </x-toolbar.button>
@@ -30,9 +16,26 @@
             <x-button.primary class="bg-green-200"  wire:click="export('xlsx')" >Xuất XLSX</x-button.success>
         </x-toolbar.button>
         <x-toolbar.button> 
-            <x-button.danger wire:click="deleteSelected">Xóa chọn</x-button.primary>
+            <x-button.danger wire:click="deleteSelected">Xóa chọn</x-button.danger>
         </x-toolbar.button>
+        @if(count($selected) > 0)
+        <x-toolbar.button> 
+            <x-button.info wire:click="importProducts">Tiến hành nhập hàng</x-button.info>
+        </x-toolbar.button>
+        @endif
     </x-toolbar>
+    @if($showPriceFilter)
+    <div class="grid grid-cols-2 max-w-md space-x-4">
+        <x-input.group label="Mức giá thấp nhất" for="MucGiaThapNhap">
+            <x-input.money wire:model.debounce.200ms="MucGia.ThapNhat" id="MucGiaThapNhap" :error="$errors->first('MucGiaThapNhap')"></x-input.money>
+            @error('MucGiaThapNhap') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+        </x-input.group>
+        <x-input.group label="Mức giá cao nhất" for="MucGiaCaoNhat">
+            <x-input.money wire:model.debounce.200ms="MucGia.CaoNhat" id="MucGiaCaoNhat" :error="$errors->first('MucGiaCaoNhat')"></x-input.money>
+            @error('MucGiaCaoNhat') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+        </x-input.group>
+    </div>
+    @endif
     <x-table>    
         <x-slot name="head"> 
             <x-table.heading >
@@ -55,19 +58,22 @@
                     </x-table.cell > 
                     <x-table.cell>{{  $loop->iteration }}</x-table.cell>
                     <x-table.cell>{{  $item->MaMH }}</x-table.cell>
-                    <x-table.cell>{{  $item->TenMH }}</x-table.cell>
+                    <x-table.cell style="max-width: 100px;" title="{{  $item->TenMH }}" class="truncate">{{  $item->TenMH }}</x-table.cell>
                     <x-table.cell>{{  $item->loaimathang->TenLoaiMH }}</x-table.cell>
                     <x-table.cell>{{  $item->nhacungcap->TenNCC }}</x-table.cell>
                     <x-table.cell>{{  $item->donvitinh->TenDVT }}</x-table.cell> 
                     <x-table.cell class="font-semibold">{{ money_format('%.0n', $item->GiaNhap) }}</x-table.cell>
                     <x-table.cell class="font-semibold">{{ money_format('%.0n', $item->GiaXuat) }}</x-table.cell> 
                     <x-table.cell>
-                        <x-button.link wire:click="edit(' ')" >Edit</x-button.link> 
+                        <x-button.link wire:click="edit('{{ $item->id }}')" >Edit</x-button.link> 
                     </x-table.cell> 
                 </x-table.row>
             @endforeach
         </x-slot>  
     </x-table>  
+    <div class="mt-4">
+        {{ $mathang->links('paginate-link') }}
+    </div>
     <form wire:submit.prevent="save">
         <x-modal.dialog wire:model="showModal">
             <x-slot name="title">{{ $modalTitle }}</x-slot>
@@ -118,7 +124,7 @@
                                 @endforeach
                             </x-input>
                         </div>
-                        <div class="bg-gray-200 rounded p-0 flex justify-center items-center hover:bg-gray-300 hover:cursor-pointer disabled:opacity-25 transition ml-2" style="width: 50px;">
+                        <div wire:click="alert('1212')" class="bg-gray-200 rounded p-0 flex justify-center items-center hover:bg-gray-300 hover:cursor-pointer disabled:opacity-25 transition ml-2" style="width: 50px;">
                             <i class="fa fa-plus text-gray-600"></i>
                         </div>
                     </div> 
@@ -153,5 +159,5 @@
                 <x-button.success type="submit">Lưu</x-button.success>
             </x-slot>
         </x-modal.dialog>
-    </form>
+    </form>    
 </div>

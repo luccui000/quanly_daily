@@ -34,4 +34,8 @@ class MatHang extends Model
     {
         return $this->hasOne(NhaCungCap::class, 'id', 'nhacungcap_id');
     }
+    public function phieuhang()
+    {
+        return $this->belongsToMany(PhieuHang::class);
+    }
 }
