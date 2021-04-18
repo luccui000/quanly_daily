@@ -20,8 +20,4 @@ class KhachHang extends Model
         'SoTaiKhoan',
     ];
     public $timestamps = true;
-    public function setMaKhachHangAttribute()
-    {
-        $this->attributes['MaKH'] = 'KH001'.random_int(100, 2000); 
-    }
 }

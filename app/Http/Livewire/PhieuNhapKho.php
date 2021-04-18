@@ -9,8 +9,10 @@ class PhieuNhapKho extends Component
 {
     public $showModal = false;
 
+    public $searchProduct = "";
+    
     public function create()
-    {
+    { 
         $this->showModal = true;
     }
     public function render()

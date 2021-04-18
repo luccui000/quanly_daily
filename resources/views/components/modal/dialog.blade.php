@@ -11,7 +11,9 @@
         </div>
     </div>
 
-    <div class="px-6 py-4 bg-gray-100 text-right">
-        {{ $footer }}
-    </div>
+    @if(isset($footer))
+        <div class="px-6 py-4 bg-gray-100 text-right">
+            {{ $footer }}
+        </div> 
+    @endif
 </x-modal>
