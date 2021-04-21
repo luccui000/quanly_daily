@@ -2,11 +2,12 @@
 
 <x-modal :id="$id" :maxWidth="$maxWidth" {{ $attributes }}>
     <div class="px-6 py-4">
-        <div class="text-lg">
-            {{ $title }}
-        </div>
-
-        <div class="mt-4">
+        @if(isset($title))
+            <div class="text-lg">
+                {{ $title }}
+            </div>
+        @endif 
+        <div class="">
             {{ $content }}
         </div>
     </div>

@@ -34,12 +34,8 @@
     <script src="{{ URL::asset('plugins/jqvmap/jquery.vmap.min.js') }}"></script>
     <script src="{{ URL::asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
     <!-- jQuery Knob Chart -->
-    <script src="{{ URL::asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script> 
-    <!-- DataTables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css"/> 
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>  
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">  
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> 
+    <script src="{{ URL::asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script>  
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">    
 </head>
 <body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed" style="font-family: 'Open Sans Regular', sans-serif;">
     <!-- Navbar -->
@@ -209,6 +205,8 @@
             }) 
         }) 
     </script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> 
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
 
     @if(Session::has('flash_message_warning'))

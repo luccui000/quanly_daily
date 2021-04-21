@@ -106,7 +106,7 @@
                         <x-input.checkbox wire:click="setGioiTinh(0)" :checked="$GioiTinh === 0 ? true : null" label="Nữ" for="Nu"></x-input.checkbox>  
                     </x-input.group>
                     <x-input.group label="Ngày sinh" for="NgaySinh">
-                        <x-input.date wire:model="NgaySinh" id="NgaySinh" autocomplete="off"></x-input.date>
+                        <x-input.date wire:model="NgaySinh" id="NgaySinh" autocomplete="off" leadingAddOn="true"></x-input.date>
                         @error('NgaySinh') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror 
                     </x-input.group> 
                     <x-input.group label="Điện thoại" for="DienThoai"> 

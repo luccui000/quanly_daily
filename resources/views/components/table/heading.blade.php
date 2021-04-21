@@ -5,7 +5,7 @@
 ])
 
 <th
-    {{ $attributes->merge(['class' => 'px-6 py-3 bg-cool-gray-50'])->only('class') }}
+    {{ $attributes->merge(['class' => 'px-6 py-3 bg-gray-50'])->only('class') }}
 > 
     @unless ($sortable)
         <span class="text-left text-md leading-4 font-semibold text-gray-500 tracking-wider">{{ $slot }}</span>

@@ -41,6 +41,11 @@ class MatHang extends Component
 
     public Collection $MucGia;
 
+    protected $listenters = ['searchProduct' => 'change'];
+    public function change()
+    {
+        dd("Change");
+    }
     public function rules()
     {  
         return [ 
