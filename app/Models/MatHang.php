@@ -36,6 +36,6 @@ class MatHang extends Model
     }
     public function phieuhang()
     {
-        return $this->belongsToMany(PhieuHang::class);
+        return $this->belongsToMany(PhieuHang::class, 'PHIEUNHAP', 'mathang_id' ,'phieuhang_id');
     }
 }

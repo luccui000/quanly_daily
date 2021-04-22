@@ -47,11 +47,12 @@
                 <x-table.cell class="font-semibold">{{  money_format('%.0n', $item->TongThanhToan) }}</x-table.cell>     
                 <x-table.cell>{{  $item->TrangThai }}</x-table.cell>     
                 <x-table.cell>
-                    <x-button.link wire:click="edit('{{ $item->id }}')" >Edit</x-button.link> 
+                    <x-button.link wire:click="$emitTo('edit-phieu-nhap-kho', 'edit', {{ $item->id }})" >Edit</x-button.link> 
                 </x-table.cell> 
             @endforeach
         </x-slot>
-    </x-table>  
+    </x-table> 
+    @livewire('edit-phieu-nhap-kho') 
     <form wire:submit.prevent="save">
         <x-modal.dialog wire:model="showModal" maxWidth="full" > 
             <x-slot name="content">     
@@ -190,7 +191,7 @@
                                 <option value="2">Tiền mặt</option> 
                             </x-input.select> 
                         </x-input.group> 
-                        <div class="flex justify-end absolute bottom-16 space-x-4">
+                        <div class="flex float-right mt-12"> 
                             <x-button wire:click="$set('showModal', false)" type="button"><p class="text-gray-900">Hủy</p></x-button>
                             <x-button.success wire:click="$emit('searchProduct')" type="button">Hoàn thành</x-button.success>  
                         </div> 

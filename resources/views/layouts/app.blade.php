@@ -37,7 +37,7 @@
     <script src="{{ URL::asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script>  
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">    
 </head>
-<body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed" style="font-family: 'Open Sans Regular', sans-serif;">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed sidebar-collapse" style="font-family: 'Open Sans Regular', sans-serif;">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->

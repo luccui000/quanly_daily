@@ -14,4 +14,8 @@ class PhieuNhap extends Model
     {
         return $this->belongsToMany(MatHang::class);
     }
+    public function phieuhang() 
+    {
+        $this->belongsToMany(PhieuHang::class);
+    }
 }

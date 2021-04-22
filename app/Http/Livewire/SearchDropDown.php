@@ -10,12 +10,17 @@ class SearchDropDown extends Component
 {
     public $TimKiemMatHang = '';
     public Collection $mathang;
-
+    protected $listeners = ['refreshSeachProduct' => 'refresh'];
     public function mount()
     {
         $this->mathang = collect();
     }
 
+    public function refresh()
+    {
+        dd("oke");
+        $this->reset('TimKiemMatHang');
+    }
     public function render()
     { 
         if(strlen($this->TimKiemMatHang) > 1) {
@@ -27,8 +32,7 @@ class SearchDropDown extends Component
                                 ->take(5)->get();
         }
         return view('livewire.search-drop-down', [
-            'mathang' => $this->mathang,
-            'timkiem' => strlen($this->TimKiemMatHang)
+            'mathang' => $this->mathang, 
         ]);
     }
 }

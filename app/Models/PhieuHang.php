@@ -26,7 +26,7 @@ class PhieuHang extends Model
     ];
     public function mathang()
     {
-        return $this->belongsToMany(MatHang::class, 'PHIEUNHAP', 'mathang_id' ,'phieuhang_id');
+        return $this->belongsToMany(MatHang::class, 'PHIEUNHAP','phieuhang_id', 'mathang_id' );
     }
     public function getDateForHumansAttribute()
     {

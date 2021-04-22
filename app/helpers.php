@@ -1,5 +1,21 @@
 <?php
- 
+
+use App\Models\CodeGenerator;
+
+if(!function_exists('getCodeGenerator')) {
+    function getCodeGenerator($column)
+    {
+        $codegenerate = CodeGenerator::find(1)->$column; 
+        $strCode = '';
+        if($codegenerate < 10000) {
+            for($i = 0; $i < 4 - strlen($codegenerate); $i++) $strCode .= '0';
+            $strCode .= $codegenerate; 
+        } else {
+            $strCode = $codegenerate;
+        }
+        return $strCode;
+    }
+}
 if ( ! function_exists( 'money_format' ) ) {
 
     function money_format($format, $number)

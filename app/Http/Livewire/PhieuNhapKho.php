@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\CodeGenerator;
 use App\Models\MatHang;
 use App\Models\NhaCungCap;
 use App\Models\PhieuHang;
@@ -52,14 +53,21 @@ class PhieuNhapKho extends Component
             $this->giamgia[$item->id] = 0; 
             $this->thanhtien[$item->id] = 0;
         } 
+        $this->MaPH = getCodeGenerator('MaPhieuNhap');
+
         $this->nhacungcap = NhaCungCap::all(); 
     }
     public function ThemVaoNhapKho($id)
-    {   
-        // dd(in_array($id, $this->idMatHang));
+    {    
         if(!in_array($id, $this->idMatHang)) {
             array_push($this->idMatHang, $id);  
         }
+    }
+    public function refresh()
+    { 
+
+        $this->emit('search-drop-down', 'refreshSeachProduct');
+        return $this->reset('MoTa', 'TongTien', 'Tong_VAT', 'Tong_ChietKhau', 'TongThanhToan', 'HinhThucThanhToan', 'TrangThai');
     }
     public function create()
     { 
@@ -80,13 +88,11 @@ class PhieuNhapKho extends Component
         $phieuhang = PhieuHang::query()
                     ->with('nhacungcap')
                     ->with('nhanvien')
-                    ->with('kho')->get();
-        $term = '%'. $this->searchProduct .'%'; 
-        $this->tongtienhang = 0;   
-          
-
-        
-        $this->mathangs = MatHang::whereKey($this->idMatHang)->get();
+                    ->with('kho')->get(); 
+        $this->tongtienhang = 0;    
+        if(count($this->idMatHang) > 0) {
+            $this->mathangs = MatHang::whereKey($this->idMatHang)->get();
+        }
         
         $this->mathangs->map(function($item) {
             $thanhtienItem  = $this->soluong[$item->id] * $item->GiaNhap - ($this->soluong[$item->id] * $item->GiaNhap * ($this->giamgia[$item->id] / 100));
