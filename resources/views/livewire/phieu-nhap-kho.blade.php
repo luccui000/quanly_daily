@@ -33,22 +33,24 @@
             <x-table.heading></x-table.heading>  
         </x-slot>
         <x-slot name="body">   
-            @foreach ($phieuhang as $item)
-                <x-table.cell class="pr-0 w-5" > 
-                    <x-input.checkbox wire:model="selected" value="{{ $item->id }}"></x-input.checkbox>
-                </x-table.cell > 
-                <x-table.cell>{{  $loop->iteration }}</x-table.cell>
-                <x-table.cell>{{  $item->MaPH }}</x-table.cell>    
-                <x-table.cell>{{  $item->date_for_humans }}</x-table.cell>    
-                <x-table.cell>{{  $item->nhacungcap->TenNCC }}</x-table.cell>    
-                <x-table.cell>{{  $item->kho->TenKho }}</x-table.cell>    
-                <x-table.cell>{{  $item->nhanvien->HoTenNV }}</x-table.cell>    
-                <x-table.cell class="font-semibold">{{  money_format('%.0n', $item->Tong_ChietKhau) }}</x-table.cell>    
-                <x-table.cell class="font-semibold">{{  money_format('%.0n', $item->TongThanhToan) }}</x-table.cell>     
-                <x-table.cell>{{  $item->TrangThai }}</x-table.cell>     
-                <x-table.cell>
-                    <x-button.link wire:click="$emitTo('edit-phieu-nhap-kho', 'edit', {{ $item->id }})" >Edit</x-button.link> 
-                </x-table.cell> 
+            @foreach ($mathangIndex as $item)
+                <x-table.row wire:loading.class.defer="opacity-50" wire:key="">
+                    <x-table.cell class="pr-0 w-5" > 
+                        <x-input.checkbox wire:model="selected" value="{{ $item->id }}"></x-input.checkbox>
+                    </x-table.cell > 
+                    <x-table.cell>{{  $loop->iteration }}</x-table.cell>
+                    <x-table.cell>{{  $item->MaPH }}</x-table.cell>    
+                    <x-table.cell>{{  $item->date_for_humans }}</x-table.cell>    
+                    <x-table.cell>{{  $item->nhacungcap->TenNCC }}</x-table.cell>    
+                    <x-table.cell>{{  $item->kho->TenKho }}</x-table.cell>    
+                    <x-table.cell>{{  $item->nhanvien->HoTenNV }}</x-table.cell>    
+                    <x-table.cell class="font-semibold">{{  money_format('%.0n', $item->Tong_ChietKhau) }}</x-table.cell>    
+                    <x-table.cell class="font-semibold">{{  money_format('%.0n', $item->TongThanhToan) }}</x-table.cell>     
+                    <x-table.cell>{{  $item->TrangThai }}</x-table.cell>     
+                    <x-table.cell>
+                        <x-button.link wire:click="$emitTo('edit-phieu-nhap-kho', 'edit', {{ $item->id }})" >Edit</x-button.link> 
+                    </x-table.cell> 
+                </x-table.row>
             @endforeach
         </x-slot>
     </x-table> 
@@ -57,7 +59,10 @@
         <x-modal.dialog wire:model="showModal" maxWidth="full" > 
             <x-slot name="content">     
                  <div class="flex space-x-2 m-0" style="height: 900px;"> 
-                    {{-- Body --}}  
+                    {{-- Body --}}   
+                    @if ($errors)
+                        @json($errors)
+                    @endif
                     <div class="flex-grow h-full" style=" overflow: auto">
                         <div class="">
                             <div class="flex justify-between">
@@ -124,35 +129,32 @@
                         </div>
                     </div>
                     <div class="flex-none w-96 bg-gray-50 p-4 rounded-md space-y-2 relative"  style="height: 900px"> 
-                        <div 
-                            wire:model="NgayLap"
-                            class="w-24 block" 
-                            x-data="{ value: @entangle('NgayLap').defer, picker: undefined }"
-                            x-init="new Pikaday({ field: $refs.input,
-                            toString(date, format) { 
-                                const day = date.getDate();
-                                const month = date.getMonth() + 1;
-                                const year = date.getFullYear();
-                                return `${day}/${month}/${year}`;
-                            }, onOpen() { this.setDate($refs.input.value) } })"
-                            x-on:change="value = $event.target.value"
-                        >
-                            <input  
-                                x-ref="input"
-                                x-bind:value="value"
-                                class="p-1 bg-transparent border-b-1 w-20 border-gray-900 rounded-md absolute right-5 focus:border-2 focus:border-gray-600" > 
-                        </div> 
+                        <div class="relative mb-3">
+                            <h2 class="text-gray-800 mt-2 font-bold ">Nhân viên</h2>
+                            <p class="text-md border-b-2 border-gray-500 border-dashed cursor-pointer" style="position: absolute; top: -5px; left: 80px;">{{ auth()->user()->TenDangNhap ?? "" }}</p>
+                            <div 
+                                wire:model="NgayLap"
+                                class="w-24 block" 
+                                style="position: absolute; top: -5px; right: -25px"
+                                x-data="{ value: @entangle('NgayLap').defer, picker: undefined }"
+                                x-init="new Pikaday({ field: $refs.input,
+                                toString(date, format) { 
+                                    const day = date.getDate();
+                                    const month = date.getMonth() + 1;
+                                    const year = date.getFullYear();
+                                    return `${day}/${month}/${year}`;
+                                }, onOpen() { this.setDate($refs.input.value) } })"
+                                x-on:change="value = $event.target.value"
+                            >
+                                <input  
+                                    x-ref="input"
+                                    x-bind:value="value"
+                                    class="p-1 bg-transparent border-b-1 cursor-pointer w-20 border-gray-900 rounded-md absolute right-5 focus:border-2 focus:border-gray-600" > 
+                            </div> 
+                        </div>
                         <x-input.group label="Mã phiếu nhập" for="MaPN">
                             <x-input.text wire:model="MaPH" placeholder="Mã tạo tự động..."></x-input.text>
-                        </x-input.group>
-                        <x-input.group label="Nhân viên" for="NhanVien">
-                            <x-input.select wire:model="nhanvien_id">
-                                <option value="{{ auth()->user()->id }}" selected>{{ auth()->user()->TenDangNhap }}</option>
-                                <option value="">Nhân viên 1</option>
-                                <option value="">Nhân viên 2</option>
-                                <option value="">Nhân viên 3</option>
-                            </x-input.select>
-                        </x-input.group>
+                        </x-input.group> 
                         <x-input.group label="Nhà cung cấp" for="NhaCungCap">
                             <x-input.select wire:model="nhacungcap_id">
                                 @foreach ($nhacungcap as $ncc)
@@ -160,13 +162,28 @@
                                 @endforeach 
                             </x-input.select> 
                         </x-input.group>   
+                        <x-input.group label="Kho hàng" for="KhoHang">
+                            <x-input.select wire:model="kho_id">
+                                @foreach ($kho as $item)
+                                    <option value="{{ $item->id }}">{{ $item->TenKho }} - {{ $item->DiaChi }}</option> 
+                                @endforeach 
+                            </x-input.select> 
+                        </x-input.group> 
                         <div class="flex justify-between mt-3 mb-3">
                             <h2 class="text-gray-800 font-bold">Trạng thái</h2>
                             <p>Tạm tính</p>
                         </div>
                         <div class="flex justify-between mt-3 mb-3">
                             <h2 class="text-gray-800 font-bold">Tổng tiền hàng</h2>
-                            <p>{{ money_format('%.0n', $tongtienhang) }}</p>
+                            <p>{{ money_format('%.0n', $TongTienHang) }}</p>
+                        </div>
+                        <div class="flex justify-between mb-3"> 
+                            <h2 class="text-gray-800 mt-2 font-bold">Tổng VAT</h2>
+                            <x-input.select wire:model="Tong_VAT">
+                                <option value="0" selected>0%</option>  
+                                <option value="5" >5%</option>  
+                                <option value="10" >10%</option>  
+                            </x-input.select> 
                         </div>
                         <div class="flex justify-between mb-3"> 
                             <h2 class="text-gray-800 mt-2 font-bold">Giảm giá</h2>
@@ -180,7 +197,7 @@
                                     </span>
                                 </div> 
                             </div>
-                        </div> 
+                        </div>   
                         <div class="flex justify-between mt-3 mb-3">
                             <h2 class="text-gray-800 font-bold mt-1">Tiền trả nhà cung cấp</h2>
                             <p class="text-lg text-blue-400 font-semibold">{{ money_format('%.0n', $tongtientrancc) }}</p>
@@ -191,9 +208,12 @@
                                 <option value="2">Tiền mặt</option> 
                             </x-input.select> 
                         </x-input.group> 
+                        <x-input.group label="Mô tả" for="MoTa">
+                            <textarea class="p-2" wire:model="MoTa" cols="50" rows="5" placeholder="Mô tả... "></textarea>
+                        </x-input.group>
                         <div class="flex float-right mt-12"> 
                             <x-button wire:click="$set('showModal', false)" type="button"><p class="text-gray-900">Hủy</p></x-button>
-                            <x-button.success wire:click="$emit('searchProduct')" type="button">Hoàn thành</x-button.success>  
+                            <x-button.success wire:click="save" type="submit">Hoàn thành</x-button.success>  
                         </div> 
                     </div>
                  </div>

@@ -10,6 +10,13 @@ class PhieuNhap extends Model
     use HasFactory;
 
     public $table = 'PHIEUNHAP';
+    public $fillable = [
+        'SoLuong',
+        'DonGia',
+        'ThanhTien',
+        'PT_ChietKhau',
+        'PT_VAT',
+    ];
     public function mathang()
     {
         return $this->belongsToMany(MatHang::class);

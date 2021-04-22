@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PhieuHang extends Model
 {
     use HasFactory;
-    public $table = 'PHIEUHANG';
-    public $fillable = [
+    protected $table = 'PHIEUHANG';
+    protected $fillable = [
         'MaPH', 
         'NgayLap',
         'MoTa',
@@ -23,6 +24,9 @@ class PhieuHang extends Model
         'nhanvien_id',
         'kho_id',
         'nhacungcap_id',
+    ];
+    protected $casts = [
+        'NgayLap' => 'datetime:d/m/Y', // Change your format
     ];
     public function mathang()
     {
