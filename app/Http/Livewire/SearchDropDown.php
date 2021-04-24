@@ -11,14 +11,14 @@ class SearchDropDown extends Component
     public $TimKiemMatHang = '';
     public Collection $mathang;
     protected $listeners = ['refreshSeachProduct' => 'refresh'];
+    
     public function mount()
     {
         $this->mathang = collect();
     }
 
     public function refresh()
-    {
-        dd("oke");
+    { 
         $this->reset('TimKiemMatHang');
     }
     public function render()

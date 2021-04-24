@@ -6,7 +6,7 @@
                 @forelse ($mathang as $item)
                     <li class="border-b-2 border-gray-300 p-3 text-md text-gray-600 truncate cursor-pointer hover:bg-gray-50" 
                         wire:loading.class.defer="opacity-50" 
-                        wire:click="$emitTo('phieu-nhap-kho', 'ThemNhapKho', {{ $item->id }})"
+                        wire:click="$emitTo('phieu-nhap-kho.bang-them-mat-hang', 'ThemMatHang', {{ $item->id }})"
                         style="max-width: 300px;" 
                         title="{{  $item->TenMH }}">
                         {{ $item->TenMH }}  <span class="font-bold float-right">{{ $item->MaMH }}  </span> 

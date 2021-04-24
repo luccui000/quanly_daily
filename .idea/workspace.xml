@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd5656d0-37e4-48c3-94bc-e1e131d67721" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Livewire/PhieuNhapKho.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/PhieuNhapKho.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/SearchDropDown.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/SearchDropDown.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/livewire/phieu-nhap-kho.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/phieu-nhap-kho.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/search-drop-down.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/search-drop-down.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,47 +18,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-              <folding>
-                <element signature="e#11#38#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Livewire/PhieuNhapKho.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="11" column="25" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/livewire/phieu-nhap-kho.blade.php">
+        <entry file="file://$PROJECT_DIR$/vendor/livewire/livewire/src/HydrationMiddleware/SecureHydrationWithChecksum.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="56" column="50" lean-forward="true" selection-start-line="56" selection-start-column="50" selection-end-line="56" selection-end-column="50" />
-              <folding>
-                <element signature="n#style#0;n#a#0;n#div#0;n#x-slot#0;n#x-modal.dialog#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#x-slot#0;n#x-modal.dialog#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#x-input.text#0;n#div#0;n#div#0;n#x-slot#0;n#x-modal.dialog#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#x-slot#1;n#x-modal.dialog#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="360">
+              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/livewire/mat-hang.blade.php">
+        <entry file="file://$PROJECT_DIR$/vendor/livewire/livewire/src/ComponentChecksumManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="770">
-              <caret line="77" column="47" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="47" />
+            <state relative-caret-position="602">
+              <caret line="24" column="74" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -82,6 +55,7 @@
         <option value="$PROJECT_DIR$/resources/views/livewire/mat-hang.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Livewire/PhieuNhapKho.php" />
         <option value="$PROJECT_DIR$/resources/views/livewire/phieu-nhap-kho.blade.php" />
+        <option value="$PROJECT_DIR$/vendor/livewire/livewire/src/HydrationMiddleware/SecureHydrationWithChecksum.php" />
       </list>
     </option>
   </component>
@@ -221,7 +195,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -243,12 +216,43 @@
             <path>
               <item name="do-an-ba-mon" type="b2602c69:ProjectViewProjectNode" />
               <item name="do-an-ba-mon" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="do-an-ba-mon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="do-an-ba-mon" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="livewire" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="do-an-ba-mon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="do-an-ba-mon" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="livewire" type="462c0819:PsiDirectoryNode" />
+              <item name="livewire" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="do-an-ba-mon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="do-an-ba-mon" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="livewire" type="462c0819:PsiDirectoryNode" />
+              <item name="livewire" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="do-an-ba-mon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="do-an-ba-mon" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="livewire" type="462c0819:PsiDirectoryNode" />
+              <item name="livewire" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="HydrationMiddleware" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -294,17 +298,18 @@
       <workItem from="1618751166059" duration="211000" />
       <workItem from="1618751392894" duration="420000" />
       <workItem from="1618751900468" duration="731000" />
+      <workItem from="1619188982151" duration="1009000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5984000" />
+    <option name="totallyTimeSpent" value="6993000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19427083" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -365,9 +370,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/livewire/mat-hang.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2310">
+          <caret line="77" column="47" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/livewire/phieu-nhap-kho.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="662">
+          <caret line="58" column="6" selection-start-line="58" selection-start-column="6" selection-end-line="58" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Livewire/PhieuNhapKho.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
+        <state relative-caret-position="330">
           <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
           <folding>
             <element signature="e#11#38#0#PHP" expanded="true" />
@@ -375,30 +401,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Livewire/PhieuNhapKho.php">
+    <entry file="file://$PROJECT_DIR$/vendor/livewire/livewire/src/ComponentChecksumManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="25" />
+        <state relative-caret-position="602">
+          <caret line="24" column="74" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="74" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/livewire/mat-hang.blade.php">
+    <entry file="file://$PROJECT_DIR$/vendor/livewire/livewire/src/HydrationMiddleware/SecureHydrationWithChecksum.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="77" column="47" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/livewire/phieu-nhap-kho.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="56" column="50" lean-forward="true" selection-start-line="56" selection-start-column="50" selection-end-line="56" selection-end-column="50" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#x-slot#0;n#x-modal.dialog#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#x-slot#0;n#x-modal.dialog#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#x-input.text#0;n#div#0;n#div#0;n#x-slot#0;n#x-modal.dialog#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#x-slot#1;n#x-modal.dialog#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="360">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
         </state>
       </provider>
     </entry>
