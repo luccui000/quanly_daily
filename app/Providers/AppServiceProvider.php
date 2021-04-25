@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Database\Eloquent\Builder;
+use Stringable;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
+use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Builder;
+  
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $mySelf = $this;
         Builder::macro('search', function($field, $string) {
             return $string ? $this->where($field, 'like', '%'.$string.'%') : $this;
         }); 
@@ -44,5 +50,32 @@ class AppServiceProvider extends ServiceProvider
 
             return $values->implode("\n");
         });
+         
+        Builder::macro('layMa', function($column) use ($mySelf) {
+            $mySelf->kiemtraCotCoTonTaiHayKhong($column);
+            $codegenerate = $this->find(1)->$column;
+            $strCode = '';
+            if($codegenerate < 10000) {
+                for($i = 0; $i < 4 - strlen($codegenerate); $i++) $strCode .= '0';
+                $strCode .= $codegenerate; 
+            } else {
+                $strCode = $codegenerate;
+            }
+            return $strCode; 
+        });
+        Builder::macro('tangMa', function($column) use ($mySelf) {
+            $mySelf->kiemtraCotCoTonTaiHayKhong($column);
+            $prevMa = $this->find(1)->$column; 
+            $this->where('id', 1)->update([
+                $column => (int)$prevMa + 1
+            ]);  
+        });
+    }
+    public function kiemtraCotCoTonTaiHayKhong($column)
+    {
+        $codeGeneratorSchema = \DB::getSchemaBuilder()->getColumnListing('CODE_GENERATOR');
+        if(!in_array($column, $codeGeneratorSchema)) {
+            throw new InvalidArgumentException('Không tìm thấy thuộc tính '. $column);
+        } 
     }
 }
