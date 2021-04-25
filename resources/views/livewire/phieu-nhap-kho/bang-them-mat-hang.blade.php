@@ -76,7 +76,7 @@
                             </x-table.cell>  
                             <x-table.cell >  
                                 <div class="cursor-pointer font-bold" wire:click="boMatHang({{ $index }})">
-                                    <i class="fa fa-trash text-red-900"></i>
+                                    <i class="fa fa-trash text-gray-600"></i>
                                 </div>
                             </x-table.cell>  
                         </x-table.row> 

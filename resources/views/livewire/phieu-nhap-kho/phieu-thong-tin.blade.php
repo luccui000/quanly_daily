@@ -2,27 +2,91 @@
     <div class="relative mb-3">
         <h2 class="text-gray-800 mt-2 font-bold ">Nhân viên</h2>
         <p class="text-md border-b-2 border-gray-500 border-dashed cursor-pointer" '
-            style="position: absolute; top: -5px; left: 80px;">{{ auth()->user()->TenDangNhap ?? "" }}</p>
+            style="position: absolute; top: -8px; left: 90px;">{{ auth()->user()->TenDangNhap ?? "" }}</p> 
         <div 
             wire:model="NgayLap"
-            class="w-24 block" 
-            style="position: absolute; top: -5px; right: -25px"
-            x-data="{ value: @entangle('NgayLap').defer, picker: undefined }"
+            class="block" 
+            style="position: absolute; top: -5px; right: -25px;"
+            x-data="{ value: @entangle('NgayLap'), picker: undefined }"
             x-init="new Pikaday({ 
                 field: $refs.input,
                 toString(date, format) {  
                     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
                 }, onOpen() { 
                     this.setDate($refs.input.value) 
-                } 
+                }, 
+                firstDay: 1,
+                minDate: new Date(),
+                maxDate: new Date(2020, 12, 31),
+                yearRange: [2000,2020]
             })"
             x-on:change="value = $event.target.value"
         >
             <input  
+                style="width: 90px;"
                 x-ref="input"
                 x-bind:value="value"
                 class="p-1 bg-transparent border-b-1 cursor-pointer w-20 border-gray-900 rounded-md absolute right-5 focus:border-2 focus:border-gray-600" > 
-        </div> 
+        </div>  
+        <x-input.group label="Mã phiếu nhập" for="MaPN">
+            <x-input.text wire:model="MaPH" placeholder="Mã tạo tự động..."></x-input.text>
+        </x-input.group> 
+        <x-input.group label="Nhà cung cấp" for="NhaCungCap">
+            <x-input.select wire:model="nhacungcap_id">
+                @foreach ($nhacungcap as $ncc)
+                    <option value="{{ $ncc->id }}">{{ $ncc->TenNCC }}</option> 
+                @endforeach 
+            </x-input.select> 
+        </x-input.group>   
+        <x-input.group label="Kho hàng" for="KhoHang">
+            <x-input.select wire:model="kho_id">
+                @foreach ($kho as $item)
+                    <option value="{{ $item->id }}">{{ $item->TenKho }} - {{ $item->DiaChi }}</option> 
+                @endforeach 
+            </x-input.select> 
+        </x-input.group> 
+        <div class="flex justify-between mt-3 mb-3">
+            <h2 class="text-gray-800 font-bold">Trạng thái</h2>
+            <p>Tạm tính</p>
+        </div>
+        <div class="flex justify-between mt-3 mb-3">
+            <h2 class="text-gray-800 font-bold">Tổng tiền hàng</h2>
+            <p>{{ money_format('%.0n', $TongTienHang) }}</p>
+        </div>
+        <div class="flex justify-between mb-3"> 
+            <h2 class="text-gray-800 mt-2 font-bold">Tổng VAT</h2>
+            <x-input.select wire:model="TongVAT">
+                <option value="0" selected>0%</option>  
+                <option value="5" >5%</option>  
+                <option value="10" >10%</option>  
+            </x-input.select> 
+        </div>
+        <div class="flex justify-between mb-3"> 
+            <h2 class="text-gray-800 mt-2 font-bold">Tổng giảm giá</h2>
+            <div class="relative">
+                <div class="border-b-2 border-gray-400">
+                    <input type="number" min="0" max="100" step="5" wire:model="TongGiamGia" class="pl-3 text-grey-darker bg-transparent border-grey-lighter focus:outline-none rounded p-2" >
+                </div>
+                <div class="absolute right-7 top-2 flex items-center pointer-events-none">
+                    <span class="text-gray-500 sm:text-sm sm:leading-5" id="price-currency">
+                        %
+                    </span>
+                </div> 
+            </div>
+        </div>   
+        <div class="flex justify-between mt-3 mb-3">
+            <h2 class="text-gray-800 font-bold mt-1">Tiền trả nhà cung cấp</h2>
+            <p class="text-lg text-blue-400 font-semibold">{{ money_format('%.0n', $TongThanhToan) }}</p>
+        </div>
+        <x-input.group label="Hình thức thanh toán" for="HinhThucThanhToan">
+            <x-input.select wire:model="HinhThucThanhToan" >
+                <option value="1">Chuyển khoản</option> 
+                <option value="2">Tiền mặt</option> 
+            </x-input.select> 
+        </x-input.group> 
+        <x-input.group label="Mô tả" for="MoTa">
+            <textarea class="p-2" wire:model="MoTa" cols="50" rows="5" placeholder="Mô tả... "></textarea>
+        </x-input.group> 
     </div>
     
     <div class="flex float-right mt-12"> 

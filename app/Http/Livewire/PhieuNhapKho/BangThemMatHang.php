@@ -52,28 +52,21 @@ class BangThemMatHang extends Component
             'ThanhTien' => $this->danhsachMatHang[$index]['GiaNhap']
         ];
     }
-    public function ThemMatHang(MatHang $nhaphang)
+    public function ThemMatHang(MatHang $mathang)
     {  
-        if(in_array($nhaphang->id, $this->idMatHangDachon())) {
-            $index = array_search($nhaphang->id, $this->idMatHangDachon());
+        if(in_array($mathang->id, $this->idMatHangDachon())) {
+            $index = array_search($mathang->id, $this->idMatHangDachon());
             $this->danhsachNhapHang[$index]['SoLuong'] += 1; 
         } else {
-            $this->danhsachNhapHang[count($this->danhsachNhapHang)] = [
-                'id' => $nhaphang['id'],
-                'prevId' => $nhaphang['id'],
-                'MaMH' => $nhaphang->MaMH,
-                'TenMH' => $nhaphang->TenMH,
-                'TenDVT' => $nhaphang->donvitinh->TenDVT, 
-                'DonGia' => (float)$nhaphang->GiaNhap, 
-                'SoLuong' => 1, 
-                'GiamGia' => 0, 
-                'ThanhTien' => $nhaphang->GiaNhap
-            ];   
+            $this->danhsachNhapHang[count($this->danhsachNhapHang)] = $this->capnhatThongTinMatHangDaChon($mathang);   
         }
     }
     public function boMatHang($index)
     {
-
+        info($this->danhsachNhapHang);
+        unset($this->danhsachNhapHang[$index]);
+        array_values($this->danhsachNhapHang);
+        info($this->danhsachNhapHang);
     }
     private function idMatHangDachon()
     {
@@ -83,25 +76,29 @@ class BangThemMatHang extends Component
         }
         return $ids;
     }
+    public function capnhatThongTinMatHangDaChon($mathang)
+    {
+        return [
+            'id' => $mathang->id,
+            'prevId' => $mathang->id,
+            'MaMH' => $mathang->MaMH,
+            'TenMH' => $mathang->TenMH,
+            'TenDVT' => $mathang->donvitinh->TenDVT, 
+            'DonGia' => (float)$mathang->GiaNhap, 
+            'SoLuong' => 1, 
+            'GiamGia' => 0, 
+            'ThanhTien' => $mathang->GiaNhap
+        ];
+    }
     public function render()
     {      
         // $danhSachMatHang = MatHang::whereKey($this->danhSachIDMatHang)->with('donvitinh')->get();
         foreach($this->danhsachNhapHang as $index => $nhaphang) {  
             if($nhaphang['prevId'] != $nhaphang['id']) {
                 $mathang = MatHang::where('id', $nhaphang['id'])->with('donvitinh')->first();   
-                $this->danhsachNhapHang[$index] = [
-                    'id' => $nhaphang['id'],
-                    'prevId' => $nhaphang['id'],
-                    'MaMH' => $mathang->MaMH,
-                    'TenMH' => $mathang->TenMH,
-                    'TenDVT' => $mathang->donvitinh->TenDVT, 
-                    'DonGia' => (float)$mathang->GiaNhap, 
-                    'SoLuong' => 1, 
-                    'GiamGia' => 0, 
-                    'ThanhTien' => $mathang->GiaNhap
-                ]; 
+                $this->danhsachNhapHang[$index] = $this->capnhatThongTinMatHangDaChon($mathang); 
             }  
-        } 
+        }  
 
         return view('livewire.phieu-nhap-kho.bang-them-mat-hang');
     }
