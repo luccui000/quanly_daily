@@ -27,7 +27,15 @@ class PhieuHang extends Model
     ];
     protected $casts = [
         'NgayLap' => 'datetime:d/m/Y', // Change your format
-    ];
+    ]; 
+    public function getMauSacTrangThaiAttribute()
+    {
+        return [
+            '0' => 'red',
+            '1' => 'green',
+            '2' => 'red',
+        ][$this->TrangThai] ?? 'cool-gray';
+    }
     public function mathang()
     {
         return $this->belongsToMany(MatHang::class, 'PHIEUNHAP','phieuhang_id', 'mathang_id' );

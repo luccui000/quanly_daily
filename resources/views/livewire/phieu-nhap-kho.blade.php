@@ -7,10 +7,10 @@
             <x-button.success wire:click="$emitTo('phieu-nhap-kho.tao-moi', 'create')" >Thêm mới</x-button.success>
         </x-toolbar.button>    
         <x-toolbar.button> 
-            <x-button.primary wire:click="export('csv')" >Xuất CSV</x-button.success>
+            <x-button.primary wire:click="export('csv')" >Xuất CSV</x-button.primary>
         </x-toolbar.button>
         <x-toolbar.button> 
-            <x-button.primary class="bg-green-200"  wire:click="export('xlsx')" >Xuất XLSX</x-button.success>
+            <x-button.primary class="bg-green-200"  wire:click="export('xlsx')" >Xuất XLSX</x-button.primary>
         </x-toolbar.button>
         <x-toolbar.button> 
             <x-button.danger wire:click="deleteSelected">Xóa chọn</x-button.danger>
@@ -27,6 +27,7 @@
             <x-table.heading >Nhà cung cấp</x-table.heading>
             <x-table.heading >Kho</x-table.heading>
             <x-table.heading >Nhân viên lập</x-table.heading>
+            <x-table.heading >Tổng số lượng nhập</x-table.heading>
             <x-table.heading >Tổng giảm giá</x-table.heading>
             <x-table.heading >Tổng thanh toán</x-table.heading>
             <x-table.heading>Trạng thái</x-table.heading>  
@@ -42,11 +43,16 @@
                     <x-table.cell>{{  $phieuhang->MaPH }}</x-table.cell>    
                     <x-table.cell>{{  $phieuhang->date_for_humans }}</x-table.cell>    
                     <x-table.cell>{{  $phieuhang->nhacungcap->TenNCC }}</x-table.cell>    
+                    <x-table.cell>{{  $phieuhang->nhacungcap->TenNCC }}</x-table.cell>    
                     <x-table.cell>{{  $phieuhang->kho->TenKho }}</x-table.cell>    
                     <x-table.cell>{{  $phieuhang->nhanvien->HoTenNV }}</x-table.cell>    
                     <x-table.cell class="font-semibold">{{  money_format('%.0n', $phieuhang->Tong_ChietKhau) }}</x-table.cell>    
                     <x-table.cell class="font-semibold">{{  money_format('%.0n', $phieuhang->TongThanhToan) }}</x-table.cell>     
-                    <x-table.cell>{{  $phieuhang->TrangThai }}</x-table.cell>     
+                    <x-table.cell>
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $phieuhang->mau_sac_trang_thai }}-100 text-{{ $phieuhang->mau_sac_trang_thai }}-800">
+                            {{ $phieuhang->TrangThai == 1 ? 'Đã nhập hàng' : 'Bán hết' }}
+                        </span>  
+                    </x-table.cell>     
                     <x-table.cell>
                         <x-button.link wire:click="$emitTo('edit-phieu-nhap-kho', 'edit', {{ $phieuhang->id }})" >Edit</x-button.link> 
                     </x-table.cell> 

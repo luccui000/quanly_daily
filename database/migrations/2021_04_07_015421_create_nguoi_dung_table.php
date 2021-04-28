@@ -21,6 +21,8 @@ class CreateNguoiDungTable extends Migration
             $table->string('MatKhau', 255); 
             $table->dateTime('LanDangNhapCuoi');
             $table->integer('TrangThai')->default(1);
+
+            $table->foreignId('nhanvien_id')->nullable()->constrained('NHANVIEN', 'id');
             $table->timestamps();  
         });
     }

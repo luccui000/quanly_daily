@@ -18,7 +18,7 @@ class CreateDonViTinhTable extends Migration
 
             $table->string('MaDVT', 10)->unique(); 
             $table->string('TenDVT', 50);
-            $table->string('MoTa', 100);
+            $table->string('MoTa', 100)->nullable();
         });
     }
 

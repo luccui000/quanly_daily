@@ -15,7 +15,7 @@ class NguoiDung extends Authenticatable
     protected $table = 'NGUOIDUNG'; 
     
     public $fillable = [
-        'ID_ND',
+        'id',
         'TenDangNhap',
         'MatKhau',
         'LanDangNhapCuoi',
@@ -25,7 +25,10 @@ class NguoiDung extends Authenticatable
     protected $hidden = [
         'MatKhau'
     ];
-   
+    public function nhanvien()
+    {
+        return $this->hasMany(NhanVien::class, 'nhanvien_id', 'id');
+    }
     protected $guarded = ['id'];
     public function getMauSacTrangThaiAttribute()
     {

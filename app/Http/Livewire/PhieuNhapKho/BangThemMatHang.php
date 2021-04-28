@@ -10,48 +10,33 @@ use Livewire\Component;
 class BangThemMatHang extends Component
 {
     protected $listeners = ['ThemMatHang' => 'ThemMatHang'];
-   
-    public Collection $giamgia;
-    public Collection $thanhtien;
-
     
-    public $soluongMatHangTheoIndex = [];
-    public $giamgiaMatHangTheoIndex = [];
-    public $thanhtienMatHangTheoIndex = [];
-    public $danhSachIDMatHang = [];
-    public $tatcaMatHang = [];
+    public $ThanhTien = []; 
+       
     public $danhsachNhapHang = [];
-    public $danhsachMatHang = [];
-    public $donvitinh = [];
-    public $thongtinMatHang;
+    public $danhsachMatHang = [];  
+  
 
     public function mount()
-    {   
-        $this->giamgia = collect();
-        $this->thanhtien = collect();    
+    {        
         $this->danhsachMatHang = MatHang::with('donvitinh')->latest()->get();
-        $this->danhsachNhapHang = [
-            $this->mathangMoi(0) 
-        ]; 
+        $this->danhsachNhapHang = [ ]; 
     }
     public function themMoiMatHang($index)
     {
-        $this->danhsachNhapHang[] = $this->mathangMoi($index);
-    }
-    private function mathangMoi($index)
-    {
-        return [ 
-            'id' => $this->danhsachMatHang[$index]['id'] ,
-            'prevId' => $this->danhsachMatHang[$index]['id'] ,
-            'MaMH' => $this->danhsachMatHang[$index]['MaMH'], 
-            'TenMH' => $this->danhsachMatHang[$index]['TenMH'],  
-            'TenDVT' => $this->danhsachMatHang[$index]['donvitinh']['TenDVT'], 
-            'DonGia' => (float)$this->danhsachMatHang[$index]['GiaNhap'], 
+        $mathang = MatHang::with('donvitinh')->inRandomOrder()->first();
+        $this->danhsachNhapHang[] = [ 
+            'id' => $mathang->id,
+            'prevId' => $mathang->id,
+            'MaMH' => $mathang->MaMH,
+            'TenMH' => $mathang->TenMH,
+            'TenDVT' => $mathang->donvitinh->TenDVT,
+            'DonGia' => (float)$mathang->GiaNhap,
             'SoLuong' => 1, 
             'GiamGia' => 0, 
-            'ThanhTien' => $this->danhsachMatHang[$index]['GiaNhap']
-        ];
-    }
+            'ThanhTien' => $mathang->GiaNhap,
+        ];   
+    } 
     public function ThemMatHang(MatHang $mathang)
     {  
         if(in_array($mathang->id, $this->idMatHangDachon())) {
@@ -62,11 +47,11 @@ class BangThemMatHang extends Component
         }
     }
     public function boMatHang($index)
-    {
-        info($this->danhsachNhapHang);
+    { 
+        unset($this->ThanhTien[$index]);
+        $this->ThanhTien =  array_values($this->ThanhTien); 
         unset($this->danhsachNhapHang[$index]);
-        array_values($this->danhsachNhapHang);
-        info($this->danhsachNhapHang);
+        $this->danhsachNhapHang = array_values($this->danhsachNhapHang); 
     }
     private function idMatHangDachon()
     {
@@ -84,22 +69,35 @@ class BangThemMatHang extends Component
             'MaMH' => $mathang->MaMH,
             'TenMH' => $mathang->TenMH,
             'TenDVT' => $mathang->donvitinh->TenDVT, 
-            'DonGia' => (float)$mathang->GiaNhap, 
+            'DonGia' => $mathang->GiaNhap, 
             'SoLuong' => 1, 
             'GiamGia' => 0, 
             'ThanhTien' => $mathang->GiaNhap
         ];
+    } 
+    public function decrement($index) 
+    {
+        $this->danhsachNhapHang[$index]['SoLuong'] > 0 ? $this->danhsachNhapHang[$index]['SoLuong']-- : 0;
+    }
+    public function increment($index) 
+    {   
+        $this->danhsachNhapHang[$index]['SoLuong']++;
     }
     public function render()
     {      
-        // $danhSachMatHang = MatHang::whereKey($this->danhSachIDMatHang)->with('donvitinh')->get();
-        foreach($this->danhsachNhapHang as $index => $nhaphang) {  
-            if($nhaphang['prevId'] != $nhaphang['id']) {
-                $mathang = MatHang::where('id', $nhaphang['id'])->with('donvitinh')->first();   
-                $this->danhsachNhapHang[$index] = $this->capnhatThongTinMatHangDaChon($mathang); 
-            }  
-        }  
-
+        // $danhSachMatHang = MatHang::whereKey($this->danhSachIDMatHang)->with('donvitinh')->get();  
+        $TongTienHang = 0; 
+        foreach($this->danhsachNhapHang as $index => $nhaphang) {   
+            if($nhaphang['prevId'] != $nhaphang['id']) {   
+                $mathang = MatHang::where('id', $nhaphang['id'])->with('donvitinh')->first(); 
+                $nhaphang = $this->capnhatThongTinMatHangDaChon($mathang);   
+            }   
+            $GiaGoc =  $nhaphang['SoLuong'] * $nhaphang['DonGia'];
+            $nhaphang['ThanhTien'] = $GiaGoc - ($GiaGoc * $nhaphang['GiamGia'] / 100);
+            $this->danhsachNhapHang[$index] = $nhaphang;
+            $TongTienHang += $nhaphang['ThanhTien'];
+        }   
+        $this->emitTo('phieu-nhap-kho.phieu-thong-tin', 'capnhatTongTienHang', $TongTienHang);
         return view('livewire.phieu-nhap-kho.bang-them-mat-hang');
     }
 }

@@ -17,7 +17,7 @@ class CreateChucVuTable extends Migration
             $table->bigIncrements('id');
             
             $table->string('TenCV', 50);
-            $table->string('MoTaCV');
+            $table->string('MoTaCV')->nullable();
             $table->timestamps();
         });
     }

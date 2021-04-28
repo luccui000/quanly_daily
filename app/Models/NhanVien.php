@@ -28,7 +28,7 @@ class NhanVien extends Model
     public function chucvu()
     {
         return $this->hasOne(ChucVu::class, 'id', 'chucvu_id');
-    }
+    }  
     public function getColorChucVuAttribute()
     {
         return [

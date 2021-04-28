@@ -29,6 +29,7 @@ class PhieuNhapKho extends Component
     public $TongTienTraNCC = 0; 
     public float $TongVAT = 0;
     public $idMatHang = [];
+    public $phieuhangs = [];
 
     public function rules()
     {
@@ -48,19 +49,7 @@ class PhieuNhapKho extends Component
     }
     public function mount()
     {
-        abort_if(!auth()->user()->id, Response::HTTP_FORBIDDEN); 
-        $this->soluong = collect();
-        $this->giamgia = collect(); 
-        $this->thanhtien = collect();    
-        $this->phieuhang = PhieuHang::make(); 
-
-        foreach(MatHang::all() as $item) {
-            $this->soluong[$item->id] = 1;
-            $this->giamgia[$item->id] = 0; 
-            $this->thanhtien[$item->id] = 0;
-        } 
-        $this->MaPH = 'PH0001';// getCodeGenerator('MaPhieuNhap');
- 
+        $this->phieuhangs = PhieuHang::with(['nhacungcap', 'nhanvien', 'kho'])->get();   
     }
     public function ThemVaoNhapKho($id)
     {    
@@ -121,29 +110,8 @@ class PhieuNhapKho extends Component
         $this->emit('searchProduct');
     } 
     public function render()
-    {    
-        $phieuhangs = PhieuHang::with(['nhacungcap', 'nhanvien', 'kho'])->get();  
-        $this->TongTienHang = 0;    
-        // if(count($this->idMatHang) > 0) {
-        //     $this->mathangs = MatHang::whereKey($this->idMatHang)->get();
-        // }
-        
-        // $this->mathangs->map(function($item) {
-        //     $thanhtienItem  = $this->soluong[$item->id] * $item->GiaNhap - ($this->soluong[$item->id] * $item->GiaNhap * ($this->giamgia[$item->id] / 100));
-        //     $this->TongTienHang += $thanhtienItem; 
-        //     $this->thanhtien[$item->id] = $thanhtienItem; 
-        // });  
-
-        // Tiền trả nhà cung cấp = Tổng tiền hàng - Tổng tiền VAT - Tổng tiền giảm giá
-        // $TienVAT = $this->TongTienHang * $this->TongVAT / 100; 
-        // $TienGiamGia = $this->TongTienHang  * $this->tongGiamGia / 100;
-        
-        // $this->TongTienTraNCC = $this->tongGiamGia >= 0 ?  
-        //                             $this->TongTienHang + $TienVAT - $TienGiamGia
-        //                             : $this->TongTienHang;  
-        return view('livewire.phieu-nhap-kho', [
-            'phieuhangs' => $phieuhangs,  
-        ])->extends('layouts.app');
+    {           
+        return view('livewire.phieu-nhap-kho')->extends('layouts.app');
     }
     public function dispatchAlert($type, $title, $content = null)
     {

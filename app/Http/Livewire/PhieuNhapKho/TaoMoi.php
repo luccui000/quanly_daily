@@ -9,6 +9,7 @@ class TaoMoi extends Component
     protected $listeners = ['create' => 'create', 'close' => 'close'];
 
     public $showModal = true; 
+    public float $globalTongThanhToan = 0; 
 
     public function mount()
     {
