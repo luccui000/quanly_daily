@@ -152,11 +152,11 @@
                     </div>
                     <div class="flex justify-between mt-3 mb-3">
                         <h2 class="text-gray-800 font-bold">Tổng tiền hàng</h2>
-                        {{-- <p class="font-bold">{{ money_format('%.0n', $TongTienHang) }}</p> --}}
+                        <p class="font-bold">{{ money_format('%.0n', $TongTienHang) }}</p>
                     </div>
                     <div class="flex justify-between mb-3"> 
                         <h2 class="text-gray-800 mt-2 font-bold">Tổng VAT</h2>
-                        <x-input.select name="TongVAT">
+                        <x-input.select name="TongVAT" wire:model="PTVAT">
                             <option value="0" selected>0%</option>  
                             <option value="5" >5%</option>  
                             <option value="10" >10%</option>  
@@ -166,7 +166,7 @@
                         <h2 class="text-gray-800 mt-2 font-bold">Tổng giảm giá</h2>
                         <div class="relative">
                             <div class="border-b-2 border-gray-400">
-                                <input type="number" min="0" max="100" step="5"  class="pl-3 text-grey-darker bg-transparent border-grey-lighter focus:outline-none rounded p-2" >
+                                <input type="number" wire:model="PTGiamGia" min="0" max="100" step="5"  class="pl-3 text-grey-darker bg-transparent border-grey-lighter focus:outline-none rounded p-2" >
                             </div>
                             <div class="absolute right-7 top-2 flex items-center pointer-events-none">
                                 <span class="text-gray-500 sm:text-sm sm:leading-5" id="price-currency">
@@ -177,11 +177,20 @@
                     </div>   
                     <div class="flex justify-between mt-3 mb-3">
                         <h2 class="text-gray-800 font-bold mt-1">Tiền trả nhà cung cấp</h2>
-                        {{-- <p class="text-lg text-blue-400 font-semibold">{{ money_format('%.0n', $TongThanhToan) }}</p> --}}
+                        <p class="text-lg text-blue-400 font-semibold">{{ money_format('%.0n', $TongThanhToan) }}</p>
                     </div>
+                    @json($NgayLap)
+                    <div style="position: absolute; top: 10px; right: -10px;" >
+                        <input  
+                            name="NgayLap"  
+                            type="date"
+                            value="{{ $NgayLap }}"
+                            style="width: 100px; padding: 5px;" 
+                            class="p-1 bg-transparent border-b-1 cursor-pointer w-20 border-gray-900 rounded-md absolute right-5 focus:border-2 focus:border-gray-600" > 
+                    </div> 
                     <div class="mt-6 mb-6">
                         <hr>
-                    </div>
+                    </div> 
                     <x-input.group label="Hình thức thanh toán" for="HinhThucThanhToan">
                         <x-input.select name="HinhThucThanhToan" >
                             <option value="1">Chuyển khoản</option> 
@@ -191,6 +200,16 @@
                     <x-input.group label="Mô tả" for="MoTa">
                         <textarea class="p-2 border-2 border-gray-200 rounded-md " name="MoTa" cols="38" rows="5" placeholder="Mô tả... "></textarea>
                     </x-input.group> 
+                    <div class="flex float-right mt-12 space-x-2"> 
+                        <x-button wire:click="$set('showModal',false)" type="button"><p class="text-gray-900">Hủy</p></x-button>
+                        @if(count($danhsachBanHang) > 0)
+                            <x-button.success type="submit">Hoàn thành</x-button.success>  
+                        @else   
+                            <x-button.secondary type="button" wire:click="thongBaoChonHang">Hoàn thành</x-button.secondary>  
+                        @endif
+                        <input type="hidden" name="inPhieu" value="{{ $inPhieu }}">
+                        <x-button.primary type="button" wire:click="export('pdf')">In phiếu</x-button.primary>
+                    </div> 
                 </div>
             </form>   
         </x-slot>

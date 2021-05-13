@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhieuXuat;
 use Illuminate\Http\Request;
 
 class PhieuXuatController extends Controller
@@ -23,7 +24,7 @@ class PhieuXuatController extends Controller
      */
     public function create()
     {
-        //
+         
     }
 
     /**
@@ -34,7 +35,32 @@ class PhieuXuatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->input());
+        $phieuhang = PhieuXuat::create([
+            'MaPH' => $request->input('MaPH'),  
+            'MoTa' => $request->input('MoTa') ?? " ",
+            'TongTien' => $request->input('TongTien'),
+            'TongVAT' => $request->input('Tong_VAT'),
+            'TongChietKhau' => $request->input('Tong_ChietKhau'),
+            'TongThanhToan' => $request->input('TongThanhToan'),
+            'HinhThucThanhToan' => $request->input('HinhThucThanhToan'),
+            'TrangThai' => $request->input('TrangThai'), 
+
+            'nhanvien_id' => 1,
+            'kho_id' => $request->input('kho_id')
+        ]); 
+
+        foreach ($request->danhsachBanHang as $mathang) {
+            $phieuhang->mathang()->attach($mathang['id'],[
+                'SoLuong' => $mathang['SoLuong'],
+                'TienChietKhau' => $mathang['GiamGia'],
+                'DonGia' => $mathang['DonGia'],
+                'ThanhTien' => $mathang['ThanhTien'],
+                'TienVAT' => 0,
+                'LoaiPhieu' => 0
+            ]);
+        }
+        CodeGenerator::tangMa('MaPhieuNhap');
     }
 
     /**
