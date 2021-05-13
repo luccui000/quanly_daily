@@ -19,7 +19,7 @@ if(!function_exists('getCodeGenerator')) {
 if ( ! function_exists( 'money_format' ) ) {
 
     function money_format($format, $number)
-    {
+    { 
         $regex  = '/%((?:[\^!\-]|\+|\(|\=.)*)([0-9]+)?'.
                   '(?:#([0-9]+))?(?:\.([0-9]+))?([in%])/';
         if (setlocale(LC_MONETARY, 0) == 'C') {

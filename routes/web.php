@@ -22,5 +22,10 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'isLogin'], function() {
     Route::get('/phieunhapkho', PhieuNhapKho::class)->name('phieunhapkho'); 
     Route::post('/nhaphang', [App\Http\Controllers\NhapHangController::class, 'store'])->name('nhaphang.store');
     Route::get('pdf/{ext}', [App\Http\Controllers\NhapHangController::class, 'export'])->name('nhaphang.export');
+    Route::get('/phieuxuat', [App\Http\Controllers\PhieuXuatController::class, 'index'])->name('phieuxuat.index');
+    Route::post('/phieuxuat', [App\Http\Controllers\PhieuXuatController::class, 'store'])->name('phieuxuat.store');
 });
+
+
+Route::view('/pdf', 'pdf.hello');
  

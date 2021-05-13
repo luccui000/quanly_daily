@@ -38,7 +38,8 @@ class PhieuHang extends Model
     }
     public function mathang()
     {
-        return $this->belongsToMany(MatHang::class, 'PHIEUNHAP','phieuhang_id', 'mathang_id' );
+        return $this->belongsToMany(MatHang::class, 'CHITIET_PHIEUHANG','phieuhang_id', 'mathang_id' )
+                        ->withPivot(['SoLuong', 'DonGia', 'ThanhTien', 'TienChietKhau', 'TienVAT', 'LoaiPhieu']);
     }
     public function getDateForHumansAttribute()
     {

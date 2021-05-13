@@ -41,6 +41,14 @@ class PhieuThongTin extends Component
         $this->MaPH = CodeGenerator::layMa('MaPhieuNhap');
         // CodeGenerator::tangMa('MaPhieuaNhap');
     }
+    public function thongBaoChonHang()
+    {
+        $this->dispatchBrowserEvent('swal.modal', [
+            'title' => 'Vui lòng chọn một ít nhất 1 mặt hàng',
+            'content' => '',
+            'type' =>  'warning'
+        ]);
+    }
     public function export($ext) 
     { 
         return redirect()->route('dashboard.nhaphang.export', $ext);

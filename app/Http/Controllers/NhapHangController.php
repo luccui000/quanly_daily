@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Carbon\Carbon;
 use App\Models\PhieuHang;
 use Illuminate\Http\Request;
-use PDF;
+use App\Models\CodeGenerator; 
+use Illuminate\Support\Facades\Session;
 
 class NhapHangController extends Controller
 {
     public function store(Request $request)
-    {  
-
-        if(!$request->input('danhsachNhapHang')) {
+    {   
             
-        }  
-        // if(count($request->c)) 
- 
         $date_parts = explode('/', $request->input('NgayLap'));
         $phieuhang = PhieuHang::create([
             'MaPH' => $request->input('MaPH'), 
@@ -37,16 +34,18 @@ class NhapHangController extends Controller
         foreach ($request->danhsachNhapHang as $mathang) {
             $phieuhang->mathang()->attach($mathang['id'],[
                 'SoLuong' => $mathang['SoLuong'],
-                'PT_ChietKhau' => $mathang['GiamGia'],
+                'TienChietKhau' => $mathang['GiamGia'],
                 'DonGia' => $mathang['DonGia'],
                 'ThanhTien' => $mathang['ThanhTien'],
-                'PT_VAT' => 0
+                'TienVAT' => 0,
+                'LoaiPhieu' => 0
             ]);
         }
+        CodeGenerator::tangMa('MaPhieuNhap');
         return redirect()->route('dashboard.phieunhapkho');
     }
     public function export($ext)
-    {
+    { 
         $pdf = PDF::loadView('pdf.hello');
         return $pdf->download('test.pdf');
     }

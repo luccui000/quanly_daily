@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PhieuNhap extends Model
+class ChiTietPhieuHang extends Model
 {
     use HasFactory;
 
-    public $table = 'PHIEUNHAP';
+    public $table = 'CHITIET_PHIEUHANG';
+    
     public $fillable = [
+        'LoaiPhieu',
         'SoLuong',
         'DonGia',
         'ThanhTien',
-        'PT_ChietKhau',
-        'PT_VAT',
+        'TienChietKhau',
+        'TienVAT',
     ];
     public function mathang()
     {

@@ -30,6 +30,9 @@ class PhieuNhapKho extends Component
     public float $TongVAT = 0;
     public $idMatHang = [];
     public $phieuhangs = [];
+    public $showEditModal = false;
+    public $mathangEditing = [];
+    public PhieuHang $phieuhangEditing;
 
     public function rules()
     {
@@ -109,6 +112,18 @@ class PhieuNhapKho extends Component
     {
         $this->emit('searchProduct');
     } 
+    public function showEditPhieuNhapKhoModal(PhieuHang $id)
+    {
+        $this->phieuhangEditing = $id;
+        $this->mathangEditing = $id->mathang()->get();
+        $this->showEditModal = true;
+    }
+    public function increment($index) {
+        $this->phieuhangEditing->mathang()->get()[$index]->pivot->SoLuong++;
+    }
+    public function decrement($index) {
+        $this->phieuhangEditing->mathang()->get()[$index]->pivot->SoLuong--;
+    }
     public function render()
     {           
         return view('livewire.phieu-nhap-kho')->extends('layouts.app');

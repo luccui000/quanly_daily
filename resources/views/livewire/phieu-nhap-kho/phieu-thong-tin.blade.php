@@ -1,3 +1,7 @@
+@if(Session::has('message')) 
+    <p class="alert
+    {{ Session::get('alert-class', 'alert-info') }}">{{Session::get('message') }}</p> 
+@endif
 <div class="flex-none w-96 bg-gray-50 p-4 rounded-md space-y-2 relative"  style="height: 900px">   
     <div class="relative mb-3"> 
         <h2 class="text-gray-800 mt-2 font-bold ">Nhân viên</h2>
@@ -96,7 +100,7 @@
             </x-input.select> 
         </x-input.group> 
         <x-input.group label="Mô tả" for="MoTa">
-            <textarea class="p-2 border-2 border-gray-200 rounded-md " wire:model="MoTa" name="MoTa" cols="50" rows="5" placeholder="Mô tả... "></textarea>
+            <textarea class="p-2 border-2 border-gray-200 rounded-md " wire:model="MoTa" name="MoTa" cols="38" rows="5" placeholder="Mô tả... "></textarea>
         </x-input.group> 
     </div>
     <input type="hidden" name="TongTien" value="{{ $TongTienHang }}">
@@ -105,7 +109,11 @@
     <input type="hidden" name="TrangThai" value="1">
     <div class="flex float-right mt-12 space-x-2"> 
         <x-button wire:click="$emitTo('phieu-nhap-kho.tao-moi', 'close', false)" type="button"><p class="text-gray-900">Hủy</p></x-button>
-        <x-button.success type="submit">Hoàn thành</x-button.success>  
+        @if($TongTienHang > 0)
+            <x-button.success  type="submit">Hoàn thành</x-button.success>  
+        @else   
+            <x-button.secondary type="button" wire:click="thongBaoChonHang">Hoàn thành</x-button.secondary>  
+        @endif
         <x-button.primary type="button" wire:click="export('pdf')">In phiếu</x-button.primary>
     </div> 
 </div> 

@@ -36,7 +36,7 @@ class MatHang extends Model
     }
     public function phieuhang()
     {
-        return $this->belongsToMany(PhieuHang::class, 'PHIEUNHAP', 'mathang_id' ,'phieuhang_id')
-                        ->withPivot(['SoLuong', 'DonGia', 'ThanhTien', 'PT_ChietKhau', 'PT_VAT']);
+        return $this->belongsToMany(PhieuHang::class, 'CHITIET_PHIEUHANG', 'mathang_id' ,'phieuhang_id')
+                        ->withPivot(['SoLuong', 'DonGia', 'ThanhTien', 'TienChietKhau', 'TienVAT', 'LoaiPhieu']);
     }
 }

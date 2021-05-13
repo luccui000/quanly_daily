@@ -8,8 +8,8 @@
                     </svg>
                 </a>
                 <div class=" inline flex space-between space-x-2" style="width: 500px;">
-                    <h2 class="flex-none text-md font-semibold mt-3 uppercase">Nhập hàng</h2>
-                    @livewire('search-drop-down')
+                    <h2 class="flex-none text-md font-semibold mt-3 uppercase">Nhập hàng</h2> 
+                    @livewire('search-drop-down', ['loaiphieu' => 'phieunhap'])
                 </div>  
             </div>
             <div class=""> 

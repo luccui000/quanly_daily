@@ -36,6 +36,7 @@
     <!-- jQuery Knob Chart -->
     <script src="{{ URL::asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script>  
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">    
+    @stack('styles')
 </head>
 <body class="sidebar-mini layout-fixed control-sidebar-slide-open layout-navbar-fixed sidebar-collapse" style="font-family: 'Open Sans Regular', sans-serif;">
     <!-- Navbar -->
@@ -164,6 +165,11 @@
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.phieunhapkho') }}" class="nav-link"> 
                                     <i class="fas fa-fw fas fa-dolly-flatbed nav-icon"></i><p>Nhập hàng</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.phieuxuat.index') }}" class="nav-link"> 
+                                    <i class="fas fa-balance-scale nav-icon"></i><p>Xuất hàng</p>
                                     </a>
                                 </li>
                             </ul>

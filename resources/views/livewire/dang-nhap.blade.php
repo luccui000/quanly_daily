@@ -8,7 +8,7 @@
         @error('MatKhau') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
     </x-input.group>
     <x-input.group for="" label="." >
-        <x-button.success type="submit" class="w-36">Đăng nhập</x-button.success>
+        <x-button.primary type="submit" class="w-36">Đăng nhập</x-button.primary>
     </x-input.group>  
 </form>
 <div class="grid grid-cols-5 gap-4 p-2"> 

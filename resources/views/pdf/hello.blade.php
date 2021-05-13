@@ -1,187 +1,176 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>A simple, clean, and responsive HTML invoice template</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>A simple, clean, and responsive HTML invoice template</title>
 
-		<style>
-			.invoice-box {
-				max-width: 800px;
-				margin: auto;
-				padding: 30px;
-				border: 1px solid #eee;
-				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-				font-size: 16px;
-				line-height: 24px;
-				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-				color: #555;
-			}
+        <style>
+            body {
+                font-family: 'DejaVu Sans'
+            }
+            .invoice-box {
+                max-width: 100%;
+                margin: auto;
+                padding: 30px;
+                border: 1px solid #eee;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+                font-size: 16px;
+                line-height: 24px; 
+                color: #555;
+            }
 
-			.invoice-box table {
-				width: 100%;
-				line-height: inherit;
-				text-align: left;
-			}
+            .invoice-box table  {
+                width: 100%;
+                line-height: inherit;
+                text-align: left;
+            }
+ 
+ 
+            .invoice-box h2 {
+                text-align: center;
+                text-transform: uppercase;
+            } 
+            .main_table thead tr {
+                background-color: #ccc;
+                padding: 0;  
+            }
+            .main_table thead tr th:nth-child(1) {
+                border-top-left-radius: 4px;
+                padding-left: 4px;
+            } 
+            .main_table thead tr th:nth-child(6) { 
+                border-top-right-radius: 4px;
+                text-align: right;
+                padding-right: 4px;
+            }
+        </style>
+    </head>
 
-			.invoice-box table td {
-				padding: 5px;
-				vertical-align: top;
-			}
-
-			.invoice-box table tr td:nth-child(2) {
-				text-align: right;
-			}
-
-			.invoice-box table tr.top table td {
-				padding-bottom: 20px;
-			}
-
-			.invoice-box table tr.top table td.title {
-				font-size: 45px;
-				line-height: 45px;
-				color: #333;
-			}
-
-			.invoice-box table tr.information table td {
-				padding-bottom: 40px;
-			}
-
-			.invoice-box table tr.heading td {
-				background: #eee;
-				border-bottom: 1px solid #ddd;
-				font-weight: bold;
-			}
-
-			.invoice-box table tr.details td {
-				padding-bottom: 20px;
-			}
-
-			.invoice-box table tr.item td {
-				border-bottom: 1px solid #eee;
-			}
-
-			.invoice-box table tr.item.last td {
-				border-bottom: none;
-			}
-
-			.invoice-box table tr.total td:nth-child(2) {
-				border-top: 2px solid #eee;
-				font-weight: bold;
-			}
-
-			@media only screen and (max-width: 600px) {
-				.invoice-box table tr.top table td {
-					width: 100%;
-					display: block;
-					text-align: center;
-				}
-
-				.invoice-box table tr.information table td {
-					width: 100%;
-					display: block;
-					text-align: center;
-				}
-			}
-
-			/** RTL **/
-			.rtl {
-				direction: rtl;
-				font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-			}
-
-			.rtl table {
-				text-align: right;
-			}
-
-			.rtl table tr td:nth-child(2) {
-				text-align: left;
-			}
-		</style>
-	</head>
-
-	<body>
-		<div class="invoice-box">
-			<table cellpadding="0" cellspacing="0">
-				<tr class="top">
-					<td colspan="2">
-						<table>
-							<tr>
-								<td class="title">
-									<img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" />
-								</td>
-
-								<td>
-									Invoice #: 123<br />
-									Created: January 1, 2015<br />
-									Due: February 1, 2015
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-
-				<tr class="information">
-					<td colspan="2">
-						<table>
-							<tr>
-								<td>
-									Sparksuite, Inc.<br />
-									12345 Sunny Road<br />
-									Sunnyville, CA 12345
-								</td>
-
-								<td>
-									Acme Corp.<br />
-									John Doe<br />
-									john@example.com
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-
-				<tr class="heading">
-					<td>Payment Method</td>
-
-					<td>Check #</td>
-				</tr>
-
-				<tr class="details">
-					<td>Check</td>
-
-					<td>1000</td>
-				</tr>
-
-				<tr class="heading">
-					<td>Item</td>
-
-					<td>Price</td>
-				</tr>
-
-				<tr class="item">
-					<td>Website design</td>
-
-					<td>$300.00</td>
-				</tr>
-
-				<tr class="item">
-					<td>Hosting (3 months)</td>
-
-					<td>$75.00</td>
-				</tr>
-
-				<tr class="item last">
-					<td>Domain name (1 year)</td>
-
-					<td>$10.00</td>
-				</tr>
-
-				<tr class="total">
-					<td></td>
-
-					<td>Total: $385.00</td>
-				</tr>
-			</table>
-		</div>
-	</body>
+    <body>
+        <div class="invoice-box">
+            <h2>Phiếu nhập kho</h2> 
+            <table>
+                <tbody>
+                    <td style="float: right; text-align: right;">
+                        Mã PN #: 123<br />
+                        Ngày lập: 23/01/2000<br /> 
+                        Nhân viên lập: Lực Cui<br /> 
+                    </td>
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="max-width: 70px;">Nhà cung cấp</td>
+                        <td style="border-bottom: 1px dashed #ccc">Công ty cổ phần Hoàng Anh Gia Lai</td>
+                    </tr>
+                    <tr>
+                        <td style="max-width: 70px">Địa chỉ: </td>
+                        <td style="border-bottom: 1px dashed #ccc"> Tầng 8, Tòa nhà Sannam, số 78 Duy Tân, Dịch Vọng Hậu, Cầu Giấy, Hà Nội</td>
+                    </tr>
+                    <tr>
+                        <td style="max-width: 70px">Số điện thoại: </td>
+                        <td style="border-bottom: 1px dashed #ccc">024366880205</td>
+                    </tr>
+                </tbody> 
+            </table> 
+            <table style="margin-top: 20px; border-spacing: 0; padding: 1px;" class="main_table" > 
+                <thead>
+                    <tr>
+                        <th >Mã MH</th>
+                        <th >Tên MH</th>
+                        <th >Số lượng</th>
+                        <th >Đơn giá</th> 
+                        <th >Giảm giá</th> 
+                        <th>Thành tiền</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>  
+                    <tr>
+                        <td>001</td>
+                        <td style="float: left; width: 150px">Xiaomi</td>
+                        <td>1</td>
+                        <td>3.000.000đ</td>  
+                        <td>0đ</td>  
+                        <td style="float: right;">3.000.000đ</td>
+                    </tr>
+                    <tr>
+                        <td>001</td>
+                        <td style="float: left; width: 150px">Lorem ipsum dolor sit amet,</td>
+                        <td>1</td>
+                        <td>3.000.000đ</td>  
+                        <td>0đ</td>  
+                        <td style="float: right;">3.000.000đ</td>
+                    </tr>
+                    <tr>
+                        <td>001</td>
+                        <td style="float: left; width: 150px">Xiaomi</td>
+                        <td>1</td>
+                        <td>3.000.000đ</td>  
+                        <td>0đ</td>  
+                        <td style="float: right;">3.000.000đ</td>
+                    </tr>
+                    <tr>
+                        <td>001</td>
+                        <td style="float: left; width: 150px">Xiaomi</td>
+                        <td>1</td>
+                        <td>3.000.000đ</td>  
+                        <td>0đ</td>  
+                        <td style="float: right;">3.000.000đ</td>
+                    </tr>
+                    <tr>
+                        <td>001</td>
+                        <td style="float: left; width: 150px">Xiaomi</td>
+                        <td>1</td>
+                        <td>3.000.000đ</td>  
+                        <td>0đ</td>  
+                        <td style="float: right;">3.000.000đ</td>
+                    </tr> 
+                </tbody>
+            </table>
+            <table style="margin-top: 10px;">
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td style="border-top: 1px solid #ccc"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 300px;"></td>
+                        <td>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Tổng VAT</td>
+                                        <td style="text-align: right;">0đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tổng VAT</td>
+                                        <td style="text-align: right;">1.000.000đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tổng thanh toán</td>
+                                        <td style="text-align: right;">10.000.000đ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table style="text-align: right; margin-top: 20px;">
+                                <tbody>
+                                    <tr>
+                                        <td>Nguời lập phiếu</td>
+                                    </tr>
+                                    <tr >
+                                        <td style="height: 40px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td > Nguyễn Văn Hạnh</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>
