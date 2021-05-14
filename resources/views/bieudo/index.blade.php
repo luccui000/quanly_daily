@@ -26,7 +26,7 @@
                     <div class="card-block">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h4 class="mb-0" style="font-size: large">{{ __('865')}}</h4>
+                                <h4 class="mb-0" style="font-size: large">{{ __('1')}}</h4>
                                 <p class="mb-0">{{ __('Đặt hàng')}}</p>
                             </div>
                             <div class="col-4 text-right">
@@ -42,7 +42,7 @@
                     <div class="card-block">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h4 class="mb-0" style="font-size: large">{{ __('865')}}</h4>
+                                <h4 class="mb-0" style="font-size: large">{{ __('33')}}</h4>
                                 <p class="mb-0">{{ __('Khách Hàng')}}</p>
                             </div>
                             <div class="col-4 text-right">
@@ -58,7 +58,7 @@
                     <div class="card-block">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h4 class="mb-0" style="font-size: large">{{ __(money_format('%.0n', 90000000))}}</h4>
+                                <h4 class="mb-0" style="font-size: large">{{ __(money_format('%.0n', 945000))}}</h4>
                                 <p class="mb-0">{{ __('Tổng doanh thu')}}</p>
                             </div>
                             <div class="col-4 text-right">

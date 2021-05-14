@@ -13,11 +13,15 @@ class BieuDoCuoiNgay extends Component
     public $types = []; 
     public $colors = [
         '1' => '#cccccc',
-        '2' => '#fc8181'
+        '2' => '#fc8181',
+        '3' => '#56403E',
+        '4' => '#FCFCFC',
     ];
     public $loaiMatHang = [
         '1' => 'Điện thoại',
-        '2' => 'Máy tính'
+        '2' => 'Máy tính',
+        '3' => 'Phụ kiện',
+        '4' => 'Thiết bị văn phòng',
     ];
     public $firstRun = true;
     public $showDataLabels = false;
@@ -25,6 +29,7 @@ class BieuDoCuoiNgay extends Component
     public function mount()
     {
         $this->types = LoaiMatHang::select('id')->get(); 
+        
     }
     public function handleOnPointClick($point)
     {

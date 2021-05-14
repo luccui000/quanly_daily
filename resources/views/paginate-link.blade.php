@@ -8,8 +8,7 @@
         @endif
         <!-- prev end -->
 
-        <!-- numbers -->
-        @json($elements)
+        <!-- numbers --> 
         @foreach ($elements as $element)
         <div class="flex">
             @if (is_array($element))

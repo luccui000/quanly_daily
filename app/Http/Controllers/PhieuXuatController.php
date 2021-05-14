@@ -14,7 +14,9 @@ class PhieuXuatController extends Controller
      */
     public function index()
     {
-        return view('phieuxuat.index');
+        return view('phieuxuat.index', [
+            'phieuxuat' => PhieuXuat::with(['nhanvien', 'kho'])->get()
+        ]);
     }
 
     /**

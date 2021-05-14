@@ -22,8 +22,7 @@ class PhieuXuat extends Model
         'nhanvien_id',
         'kho_id', 
     ];
-    const CREATED_AT = 'NgayLap';
-    const UPDATED_AT = 'NgaySuaDoi';
+     
     public function nhanvien() 
     {
         return $this->hasOne(NhanVien::class, 'id', 'nhanvien_id');
@@ -37,4 +36,12 @@ class PhieuXuat extends Model
         return $this->belongsToMany(MatHang::class, 'CHITIET_PHIEUHANG','phieuhang_id', 'mathang_id' )
                         ->withPivot(['SoLuong', 'DonGia', 'ThanhTien', 'TienChietKhau', 'TienVAT', 'LoaiPhieu']);
     } 
+    public function getNgayLapAttribute()
+    {
+        return date_format(date_create($this->created_at), 'd/m/Y');
+    }
+    public function getNgaySuaAttribute()
+    {
+        return date_format(date_create($this->updated_at), 'd/m/Y');
+    }
 }
