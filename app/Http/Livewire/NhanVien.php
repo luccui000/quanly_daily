@@ -115,8 +115,7 @@ class NhanVien extends Component
             'Email' => $this->Email,
             'TrangThai' => $this->TrangThai,
             'chucvu_id' => $this->chucvu_id
-        ]); 
-        dd($items);
+        ]);  
         $this->showModal = false;
         $this->dispatchAlert('success', 'Tạo nhân viên thành công');
     }

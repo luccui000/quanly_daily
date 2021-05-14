@@ -9,10 +9,7 @@
     }"
     x-init="currency = formatCurrency($refs.data.value)"
     class="flex rounded-md" 
-    >
-    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <span class="text-gray-500 sm:text-sm sm:leading-5">đ</span>
-    </div>
+    > 
 
     <input  
         x-ref="data"

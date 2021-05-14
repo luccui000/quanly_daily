@@ -57,20 +57,19 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown"> 
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
-                </a>
+                    <i class="fa fa-bell" style="color: #000"></i> 
+                </a> 
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header">15 Notifications</span>
+                    <span class="dropdown-item dropdown-header">15 Thông báo</span>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
+                    <i class="fas fa-envelope mr-2"></i> 4 tin nhắn mới
+                    <span class="float-right text-muted text-sm">3 phút trước</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    <a href="#" class="dropdown-item dropdown-footer">Xem tất cả thông báo</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -172,6 +171,11 @@
                                     <i class="fas fa-balance-scale nav-icon"></i><p>Xuất hàng</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.phieuchi.index') }}" class="nav-link"> 
+                                    <i class="fas fa-plus nav-icon"></i><p>Tạo phiếu chi</p>
+                                    </a>
+                                </li> 
                             </ul>
                         </li> 
                         <li class="nav-item menu-open">
@@ -181,7 +185,12 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
+                                    <a href="{{ route('bieudo') }}" class="nav-link"> 
+                                    <i class="fas fa-plus nav-icon"></i><p>Tạo báo cáo</p>
+                                    </a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a href="{{ route('bieudo') }}" class="nav-link"> 
                                     <i class="fas fa-chart-pie nav-icon"></i><p>Cuối ngày</p>
                                     </a>
                                 </li>  
@@ -195,34 +204,28 @@
                     </ul>
                 </nav>
             </div>
-        </aside>
+        </aside> 
         <div class="content-wrapper" style="min-height: 507.398px;">  
             @yield('content')
-        </div>
+        </div>   
     </div> 
     @livewireScripts  
+    @livewireChartsScripts
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
     <script>  
         window.addEventListener('swal.modal', event => { 
             Swal.fire({
                 title: event.detail.title,   
-                content: event.detail.content,   
+                content: event.detail.content ?? "",   
                 icon: event.detail.type,   
             }) 
         }) 
     </script>
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> 
-    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script> 
 
-    @if(Session::has('flash_message_warning'))
-            <message message="{{ Session::get('flash_message_warning') }}" type="warning"></message>
-    @endif
-    @if(Session::has('thongbao'))
-        <message message="{{ Session::get('flash_message') }}" type="success"></message>
-    @endif 
     @stack('scripts')
-
     
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ URL::asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>

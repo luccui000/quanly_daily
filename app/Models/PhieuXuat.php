@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PhieuXuat extends Model
 {
     use HasFactory;
+    public $table = 'PHIEUXUAT';
+    
     public $fillable = [  
         'MoTa',
         'TongTien',
@@ -34,5 +36,5 @@ class PhieuXuat extends Model
     {
         return $this->belongsToMany(MatHang::class, 'CHITIET_PHIEUHANG','phieuhang_id', 'mathang_id' )
                         ->withPivot(['SoLuong', 'DonGia', 'ThanhTien', 'TienChietKhau', 'TienVAT', 'LoaiPhieu']);
-    }
+    } 
 }

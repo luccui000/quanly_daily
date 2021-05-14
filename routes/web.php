@@ -24,8 +24,12 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'isLogin'], function() {
     Route::get('pdf/{ext}', [App\Http\Controllers\NhapHangController::class, 'export'])->name('nhaphang.export');
     Route::get('/phieuxuat', [App\Http\Controllers\PhieuXuatController::class, 'index'])->name('phieuxuat.index');
     Route::post('/phieuxuat', [App\Http\Controllers\PhieuXuatController::class, 'store'])->name('phieuxuat.store');
+    Route::get('/phieuchi', [App\Http\Controllers\PhieuChiController::class, 'index'])->name('phieuchi.index');
+    Route::post('/phieuchi', [App\Http\Controllers\PhieuChiController::class, 'store'])->name('phieuchi.store');
+
 });
 
 
 Route::view('/pdf', 'pdf.hello');
+Route::get('/bieudo', [App\Http\Controllers\BieuDoController::class, 'index'])->name('bieudo');
  

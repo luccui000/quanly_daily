@@ -9,6 +9,7 @@
         <!-- prev end -->
 
         <!-- numbers -->
+        @json($elements)
         @foreach ($elements as $element)
         <div class="flex">
             @if (is_array($element))
