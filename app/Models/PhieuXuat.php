@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\KhachHang;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,7 @@ class PhieuXuat extends Model
         'TrangThai', 
 
         'nhanvien_id',
+        'khachhang_id',
         'kho_id', 
     ];
      
@@ -31,9 +33,13 @@ class PhieuXuat extends Model
     {
         return $this->hasOne(Kho::class, 'id', 'kho_id');
     }
+    public function khachhang()
+    {
+        return $this->hasOne(KhachHang::class, 'id', 'khachhang_id');
+    }
     public function mathang()
     {
-        return $this->belongsToMany(MatHang::class, 'CHITIET_PHIEUHANG','phieuhang_id', 'mathang_id' )
+        return $this->belongsToMany(MatHang::class, 'CHITIET_PHIEUXUAT','phieuxuat_id', 'mathang_id' )
                         ->withPivot(['SoLuong', 'DonGia', 'ThanhTien', 'TienChietKhau', 'TienVAT', 'LoaiPhieu']);
     } 
     public function getNgayLapAttribute()
@@ -43,5 +49,13 @@ class PhieuXuat extends Model
     public function getNgaySuaAttribute()
     {
         return date_format(date_create($this->updated_at), 'd/m/Y');
+    }
+    public function getMauSacTrangThaiAttribute()
+    {
+        return [
+            '0' => 'red', 
+            '1' => 'green',
+            '2' => 'indigo'
+        ][$this->TrangThai] ?? 'cool-gray';
     }
 }

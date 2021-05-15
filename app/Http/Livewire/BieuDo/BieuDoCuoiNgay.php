@@ -4,6 +4,7 @@ namespace App\Http\Livewire\BieuDo;
 
 use App\Models\LoaiMatHang;
 use App\Models\MatHang;
+use App\Models\PhieuXuat;
 use Livewire\Component;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
@@ -55,12 +56,13 @@ class BieuDoCuoiNgay extends Component
                 ->setColumnWidth(90)
                 ->withGrid()
             );  
-        $lineChartModel = $expenses
-            ->reduce(function ($lineChartModel, $data) use ($expenses) {
-                $index = $expenses->search($data); 
-                $amountSum = $expenses->take($index + 1)->sum('GiaNhap'); 
+        $phieuxuat = PhieuXuat::all();
+        $lineChartModel = $phieuxuat
+            ->reduce(function ($lineChartModel, $data) use ($phieuxuat) {
+                $index = $phieuxuat->search($data); 
+                $amountSum = $phieuxuat->take($index + 1)->sum('TongThanhToan'); 
 
-                return $lineChartModel->addPoint($index, $data->GiaNhap, ['id' => $data->id]);
+                return $lineChartModel->addPoint($index, $data->TongThanhToan, ['id' => $data->id]);
             }, LivewireCharts::lineChartModel()
                 ->setTitle('Biến động bán hàng')
                 ->setAnimated($this->firstRun)

@@ -24,6 +24,7 @@ class CreatePhieuXuatTable extends Migration
             $table->integer('TrangThai');
             $table->timestamps();
 
+            $table->foreignId('khachhang_id')->constrained('KHACHHANG', 'id');
             $table->foreignId('nhanvien_id')->constrained('NHANVIEN', 'id');
             $table->foreignId('kho_id')->constrained('KHO', 'id'); 
         });

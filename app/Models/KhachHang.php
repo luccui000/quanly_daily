@@ -20,4 +20,8 @@ class KhachHang extends Model
         'SoTaiKhoan',
     ];
     public $timestamps = true;
+    public function phieuxuat()
+    {
+        return $this->belongsTo(PhieuXuat::class);
+    }
 }

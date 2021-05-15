@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NguoiDung;
 use App\Models\PhieuXuat;
 use Illuminate\Http\Request;
+use App\Models\CodeGenerator;
 
 class PhieuXuatController extends Controller
 {
@@ -15,7 +17,7 @@ class PhieuXuatController extends Controller
     public function index()
     {
         return view('phieuxuat.index', [
-            'phieuxuat' => PhieuXuat::with(['nhanvien', 'kho'])->get()
+            'phieuxuat' => PhieuXuat::with(['nhanvien', 'kho', 'khachhang'])->get()
         ]);
     }
 
@@ -37,32 +39,36 @@ class PhieuXuatController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->input());
-        $phieuhang = PhieuXuat::create([
+        $nhanvienId = optional(optional(NguoiDung::where('id', $request->input('nhanvien_id')))->first())->nhanvien_id;
+        
+        // dd($request->input());
+        $phieuxuat = PhieuXuat::create([
             'MaPH' => $request->input('MaPH'),  
             'MoTa' => $request->input('MoTa') ?? " ",
-            'TongTien' => $request->input('TongTien'),
-            'TongVAT' => $request->input('Tong_VAT'),
-            'TongChietKhau' => $request->input('Tong_ChietKhau'),
+            'TongTien' => $request->input('TongTienHang'),
+            'TongVAT' => $request->input('TongVAT'),
+            'TongChietKhau' => $request->input('TongChietKhau'),
             'TongThanhToan' => $request->input('TongThanhToan'),
             'HinhThucThanhToan' => $request->input('HinhThucThanhToan'),
-            'TrangThai' => $request->input('TrangThai'), 
+            'TrangThai' => 1, 
 
-            'nhanvien_id' => 1,
-            'kho_id' => $request->input('kho_id')
+            'nhanvien_id' => $nhanvienId,
+            'kho_id' => $request->input('kho_id'),
+            'khachhang_id' => $request->input('khachhang_id')
         ]); 
 
         foreach ($request->danhsachBanHang as $mathang) {
-            $phieuhang->mathang()->attach($mathang['id'],[
+            $phieuxuat->mathang()->attach($mathang['id'],[
                 'SoLuong' => $mathang['SoLuong'],
                 'TienChietKhau' => $mathang['GiamGia'],
                 'DonGia' => $mathang['DonGia'],
                 'ThanhTien' => $mathang['ThanhTien'],
                 'TienVAT' => 0,
-                'LoaiPhieu' => 0
+                'LoaiPhieu' => 1
             ]);
         }
         CodeGenerator::tangMa('MaPhieuNhap');
+        return redirect()->route('dashboard.phieuchi.index');
     }
 
     /**

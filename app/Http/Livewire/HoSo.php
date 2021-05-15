@@ -4,13 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Exports\NguoiDungExport;
 use App\Models\NguoiDung;
+use App\Models\NhanVien;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\Hash;  
-use Maatwebsite\Excel\Facades\Excel; 
+use Illuminate\Support\Facades\Hash;   
 
 class HoSo extends Component
 {
@@ -28,10 +28,13 @@ class HoSo extends Component
     public $TrangThai = 1;
     public $isEdit = false;
     public Collection $selectedNguoidung;
+    public $nhanvien = [];
+    public $nhanvien_id;
 
     public function mount()
     {  
         $this->editing = $this->makeBlankNguoiDung(); 
+        $this->nhanvien = NhanVien::select('id', 'HoTenNV')->get(); 
     }
     public function rules()
     {
@@ -39,6 +42,7 @@ class HoSo extends Component
             'TenDangNhap' => 'required|unique:NGUOIDUNG|min:6|max:30',
             'MatKhau' => 'required|min:6|max:30', 
             'TrangThai' => 'in:0,1',
+            'nhanvien_id' => 'unique:App\Models\NguoiDung,nhanvien_id'
         ];
     }
     public function sortBy($field)
@@ -80,7 +84,8 @@ class HoSo extends Component
                 'TenDangNhap' => $this->TenDangNhap,
                 'MatKhau' => Hash::make($this->MatKhau),
                 'LanDangNhapCuoi' => now(),
-                'TrangThai' => $this->TrangThai
+                'TrangThai' => $this->TrangThai,
+                'nhanvien_id' => $this->nhanvien_id
             ]);
         }
         $this->showEditModal = false;

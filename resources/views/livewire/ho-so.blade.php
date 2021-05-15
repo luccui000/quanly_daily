@@ -77,6 +77,14 @@
                     <x-input.group label="Mật khẩu" for="MatKhau">
                         <x-input.text type="password" id="MatKhau" wire:model.lazy="MatKhau" :error="$errors->first('MatKhau')"></x-input.text>
                         @error('MatKhau') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
+                    </x-input.group>  
+                    <x-input.group label="Tài khoản của nhân viên" for="nhanvien_id">
+                        <x-input.select id="nhanvien_id" wire:model="nhanvien_id" :error="$errors->first('nhanvien_id')">
+                            @foreach ($nhanvien as $nv)
+                                <option value="{{ $nv->id }}">{{ $nv->HoTenNV }}</option>
+                            @endforeach
+                        </x-input.select>
+                        @error('nhanvien_id') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                     </x-input.group>
                     <x-input.group label="Trạng thái" for="TrangThai">
                         <x-input.select id="TrangThai" wire:model="TrangThai" :error="$errors->first('TrangThai')">

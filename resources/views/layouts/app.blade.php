@@ -155,12 +155,7 @@
                                 <i class="nav-icon fas fa-money-check-alt"></i>
                                 <p>Giao dịch<i class="right fas fa-angle-left"></i></p>
                             </a>
-                            <ul class="nav nav-treeview" style="display: block;">
-                                <li class="nav-item">
-                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
-                                    <i class="fa-fw fas fa-file-invoice-dollar nav-icon"></i><p>Hóa đơn</p>
-                                    </a>
-                                </li>  
+                            <ul class="nav nav-treeview" style="display: block;"> 
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.phieunhapkho') }}" class="nav-link"> 
                                     <i class="fas fa-fw fas fa-dolly-flatbed nav-icon"></i><p>Nhập hàng</p>
@@ -168,7 +163,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.phieuxuat.index') }}" class="nav-link"> 
-                                    <i class="fas fa-balance-scale nav-icon"></i><p>Xuất hàng</p>
+                                    <i class="fa-fw fas fa-file-invoice-dollar nav-icon"></i><p>Xuất hàng</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -185,23 +180,25 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item">
-                                    <a href="{{ route('bieudo') }}" class="nav-link"> 
-                                    <i class="fas fa-plus nav-icon"></i><p>Tạo báo cáo</p>
+                                    <a href="{{ route('dashboard.baocao') }}" class="nav-link">  
+                                    <i class="fas fa-tasks nav-icon"></i><p>Tạo báo cáo</p>
                                     </a>
                                 </li> 
                                 <li class="nav-item">
                                     <a href="{{ route('bieudo') }}" class="nav-link"> 
                                     <i class="fas fa-chart-pie nav-icon"></i><p>Cuối ngày</p>
                                     </a>
-                                </li>  
-                                <li class="nav-item">
-                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link"> 
-                                    <i class="fas fa-fw fas fa-dolly-flatbed nav-icon"></i><p>Nhập hàng</p>
-                                    </a>
-                                </li>
+                                </li>   
                             </ul>
                         </li>  
-                    </ul>
+                        <li class="nav-item menu-open">
+                            <a href="{{ route('auth.dangxuat') }}" class="nav-link"> 
+                                <i class="fa fa-sign-in-alt nav-icon"></i>
+                                <p> Đăng xuất<i class="right fas"></i></p>
+                            </a>
+                           
+                        </li>   
+                    </ul> 
                 </nav>
             </div>
         </aside> 

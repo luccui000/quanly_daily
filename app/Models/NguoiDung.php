@@ -14,12 +14,12 @@ class NguoiDung extends Authenticatable
     use HasFactory; 
     protected $table = 'NGUOIDUNG'; 
     
-    public $fillable = [
-        'id',
+    public $fillable = [ 
         'TenDangNhap',
         'MatKhau',
         'LanDangNhapCuoi',
-        'TrangThai'
+        'TrangThai',
+        'nhanvien_id'
     ];
     public $timestamps = true;
     protected $hidden = [
@@ -27,7 +27,7 @@ class NguoiDung extends Authenticatable
     ];
     public function nhanvien()
     {
-        return $this->hasMany(NhanVien::class, 'nhanvien_id', 'id');
+        return $this->hasOne(NhanVien::class, 'id', 'nhanvien_id');
     }
     protected $guarded = ['id'];
     public function getMauSacTrangThaiAttribute()

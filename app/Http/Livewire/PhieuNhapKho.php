@@ -53,6 +53,7 @@ class PhieuNhapKho extends Component
     public function mount()
     {
         $this->phieuhangs = PhieuHang::with(['nhacungcap', 'nhanvien', 'kho'])->get();   
+        abort_if(!auth()->user()->nhanvien_id, Response::HTTP_UNAUTHORIZED);
     }
     public function ThemVaoNhapKho($id)
     {    
@@ -73,6 +74,7 @@ class PhieuNhapKho extends Component
 
     public function save()
     {
+        
         if(count($this->idMatHang) == 0)
             $this->dispatchAlert('warning', 'Vui lòng chọn mặt hàng'); 
         else { 
@@ -104,6 +106,7 @@ class PhieuNhapKho extends Component
         $phieuhang->HinhThucThanhToan = $this->HinhThucThanhToan;
         $phieuhang->TrangThai = 1;
 
+        
         $phieuhang->nhanvien_id = $this->nhanvien_id;
         $phieuhang->kho_id = $this->kho_id;
         $phieuhang->nhacungcap_id = $this->nhacungcap_id; 

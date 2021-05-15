@@ -156,7 +156,7 @@
                     </div>
                     <div class="flex justify-between mb-3"> 
                         <h2 class="text-gray-800 mt-2 font-bold">Tổng VAT</h2>
-                        <x-input.select name="TongVAT" wire:model="PTVAT">
+                        <x-input.select wire:model="PTVAT">
                             <option value="0" selected>0%</option>  
                             <option value="5" >5%</option>  
                             <option value="10" >10%</option>  
@@ -176,10 +176,9 @@
                         </div>
                     </div>   
                     <div class="flex justify-between mt-3 mb-3">
-                        <h2 class="text-gray-800 font-bold mt-1">Tiền trả nhà cung cấp</h2>
+                        <h2 class="text-gray-800 font-bold mt-1">Tiền khách cần phải trả</h2>
                         <p class="text-lg text-blue-400 font-semibold">{{ money_format('%.0n', $TongThanhToan) }}</p>
-                    </div>
-                    @json($NgayLap)
+                    </div> 
                     <div style="position: absolute; top: 10px; right: -10px;" >
                         <input  
                             name="NgayLap"  
@@ -199,7 +198,12 @@
                     </x-input.group> 
                     <x-input.group label="Mô tả" for="MoTa">
                         <textarea class="p-2 border-2 border-gray-200 rounded-md " name="MoTa" cols="38" rows="5" placeholder="Mô tả... "></textarea>
-                    </x-input.group> 
+                    </x-input.group>  
+                    <input type="hidden" name="TongTienHang" value="{{ $TongTienHang }}">
+                    <input type="hidden" name="TongThanhToan" value="{{ $TongThanhToan }}">
+                    <input type="hidden" name="TongChietKhau" value="{{ $TongTienHang * $PTGiamGia / 100 }}">
+                    <input type="hidden" name="TongVAT" value="{{ $TongTienHang * $PTGiamGia / 100 }}"> 
+                    
                     <div class="flex float-right mt-12 space-x-2"> 
                         <x-button wire:click="$set('showModal',false)" type="button"><p class="text-gray-900">Hủy</p></x-button>
                         @if(count($danhsachBanHang) > 0)
