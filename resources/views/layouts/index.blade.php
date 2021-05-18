@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Index</title>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script> 
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+        @livewireStyles
+    </head>
+    <body>  
+        <div class="mx-auto"> 
+            @yield('content')
+        </div> 
+        @livewireScripts 
+        <script>
+            window.livewire.on('postAdded', postId => {
+                alert('A post was added with the id of: ' + postId);
+            }) 
+          </script>
+        <script src="https://momentjs.com/downloads/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    </body>
+</html>

@@ -14,9 +14,13 @@
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
-                        <li class="mx-2 w-10 px-2 py-1 text-center rounded border shadow-sm bg-indigo-500 text-white cursor-pointer" wire:click="gotoPage({{$page}})">{{$page}}</li>
+                        <li class="mx-2 w-10 px-2 py-1 text-center rounded border shadow-sm bg-green-600 text-white cursor-pointer" 
+                            wire:click="gotoPage({{$page}})">{{$page}}
+                        </li>
                     @else
-                        <li class="mx-2 w-10 px-2 py-1 text-center rounded border shadow-sm bg-white cursor-pointer" wire:click="gotoPage({{$page}})">{{$page}}</li>
+                        <li class="mx-2 w-10 px-2 py-1 text-center rounded border shadow-sm bg-white cursor-pointer" 
+                            wire:click="gotoPage({{$page}})">{{$page}}
+                        </li>
                     @endif
                 @endforeach
             @endif

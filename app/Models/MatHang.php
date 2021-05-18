@@ -13,6 +13,7 @@ class MatHang extends Model
         'MaMH',
         'TenMH',
         'ThongSo',
+        'HinhAnh',
         'BaoHanh',
         'GiaNhap',
         'GiaXuat',
