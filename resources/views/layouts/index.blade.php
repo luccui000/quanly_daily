@@ -11,6 +11,16 @@
             crossorigin="anonymous"></script> 
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
         @livewireStyles
+        <style>
+            .truncate-2-lines {
+                max-height: 3.6em; /* double the size of line-height */
+                line-height: 1.8em;
+                display: block;
+                text-overflow: ellipsis;
+                word-wrap: break-word;
+                overflow: hidden;
+            }
+        </style>
     </head>
     <body>  
         <div class="mx-auto"> 
@@ -21,8 +31,7 @@
             window.livewire.on('postAdded', postId => {
                 alert('A post was added with the id of: ' + postId);
             }) 
-          </script>
-        <script src="https://momentjs.com/downloads/moment.min.js"></script>
+          </script> 
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     </body>
 </html>

@@ -44,6 +44,10 @@ return [
         //     'driver' => 'session',
         //     'provider' => 'NGUOIDUNG',
         // ],
+        'khachhangs' => [
+            'driver' => 'session',
+            'provider' => 'khachhangs',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -76,6 +80,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\NguoiDung::class,
+        ],
+        'khachhangs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

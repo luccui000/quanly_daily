@@ -1,19 +1,23 @@
 <?php
  
-use App\Http\Livewire\HoSo;
-use App\Http\Livewire\DangNhap;
-use App\Http\Livewire\KhachHang;
-use App\Http\Livewire\MatHang;
-use App\Http\Livewire\NhanVien;
-use App\Http\Livewire\PhieuNhapKho; 
-use App\Http\Livewire\BaoCao;
-use App\Models\NguoiDung;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use App\Models\NguoiDung;
+use App\Http\Livewire\HoSo;
+use App\Http\Livewire\BaoCao; 
+use App\Http\Livewire\MatHang;
+use App\Http\Livewire\DangNhap;
+use App\Http\Livewire\NhanVien;
+use App\Http\Livewire\KhachHang;
+use App\Http\Livewire\PhieuNhapKho;
+use App\Http\Livewire\TrangChu\DangKy;
+use Illuminate\Support\Facades\Auth; 
+use App\Http\Livewire\TrangChu\TrangChu;
+use App\Http\Livewire\TrangChu\GioHang;
 
-Route::get('/',function() {
-    return redirect('/dangnhap');
-})->name('nguoidung.home');   
+
+Route::get('/', TrangChu::class)->name('trangchu');
+Route::get('/xemgiohang', GioHang::class)->name('trangchu.xemgiohang');
+Route::get('/dangky', DangKy::class)->name('trangchu.dangky');
 Route::get('/dangnhap', DangNhap::class)->name('auth.dangnhap');
 Route::get('/dangxuat', function() {
     $userId = Auth::user()->id;
@@ -24,7 +28,7 @@ Route::get('/dangxuat', function() {
 
 
 
-Route::group(['as' => 'dashboard.', 'middleware' => 'isLogin'], function() {
+Route::group(['as' => 'dashboard.', 'middleware' => 'isLogin'], function() { 
     Route::get('/hoso', HoSo::class)->name('hoso');
     Route::get('/nhanvien', NhanVien::class)->name('nhanvien');
     Route::get('/khachhang', KhachHang::class)->name('khachhang'); 
@@ -44,3 +48,6 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'isLogin'], function() {
 Route::view('/pdf', 'pdf.hello');
 Route::get('/bieudo', [App\Http\Controllers\BieuDoController::class, 'index'])->name('bieudo');
  
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

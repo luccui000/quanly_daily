@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\TrangChu;
 
 use App\Facades\GioHang;
+use App\Models\LoaiMatHang;
 use App\Models\MatHang;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,13 +15,22 @@ class TrangChu extends Component
     public $search = '';
     public $danhsachMatHang = [];
     public $matHangIds = [];
-     
+    public $loaiMatHang = [];
+    public $loaiMatHangId = 0;
+
     public function mount()
     {
-        if(count(request()->session()->get('giohang')) > 0) {
-            $this->danhsachMatHang = request()->session()->get('giohang');  
-            $this->matHangIds = $this->danhsachMatHangIds();
+        if(request()->session()->get('giohang') == null) {
+            $this->danhsachMatHang = [];
+            $this->matHangIds = [];
+        } else {
+            if(count(request()->session()->get('giohang')) > 0) {
+                $this->danhsachMatHang = request()->session()->get('giohang');  
+                $this->matHangIds = $this->danhsachMatHangIds();
+            }
         }
+        $lmh = LoaiMatHang::all();
+        $this->loaiMatHang = $lmh->toArray(); 
     }
     public function themVaoGioHang($mathangId)
     {   
@@ -53,12 +63,17 @@ class TrangChu extends Component
     {
         return array_column($this->danhsachMatHang, 'mathang');
     }
+    public function phanloai($id)
+    {  
+        $this->loaiMatHangId = $id;
+    }
     public function render()
     {
         return view('livewire.trang-chu.trang-chu', [
             'mathangs' => MatHang::query()
+                            ->latest()
                             ->when($this->search, fn($query, $search) => $query->where('TenMH', 'like', '%'.$search.'%')
-                                ->orWhere('ThongSo', 'like', '%'.$search.'%'))
+                                ->orWhere('ThongSo', 'like', '%'.$search.'%')) 
                             ->paginate(15)
         ])->extends('layouts.index');
     }

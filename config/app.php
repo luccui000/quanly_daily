@@ -173,9 +173,12 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class, 
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
+        App\Providers\JetstreamServiceProvider::class, 
         Barryvdh\DomPDF\ServiceProvider::class, 
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        App\Providers\GioHangFacadeServiceProvider::class,
     ],
 
     /*
@@ -229,7 +232,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class, 
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class, 
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Giohang' => App\Facades\GioHang::class, 
     ],
 
 ];

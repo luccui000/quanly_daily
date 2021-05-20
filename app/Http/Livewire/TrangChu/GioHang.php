@@ -4,6 +4,7 @@ namespace App\Http\Livewire\TrangChu;
 
 use App\Facades\GioHang as GioHangFacade;
 use App\Models\MatHang;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class GioHang extends Component
@@ -22,12 +23,19 @@ class GioHang extends Component
     } 
     public function render()
     {
-        $tienHang = 0;
-        $tienHang = array_map(function($item) use ($tienHang) {
-            return $tienHang += $item->GiaXuat * $this->danhsachSoLuong[1];
-        }, (array)$this->danhsachGioHang);
+        $tienHang = 0;  
+        $data = $this->danhsachGioHang->toArray();
+        if(count($this->danhsachGioHang) > 0) {
+            foreach($data as $index => $item) {
+                $tienHang += $item['GiaXuat'] * $this->danhsachSoLuong[$index];
+            } 
+        } 
         return view('livewire.trang-chu.gio-hang', compact('tienHang'))
                 ->extends('layouts.index');
+    }
+    public function thanhtoan()
+    {
+        dd(Auth::user());
     }
     public function capNhatGioHang()
     {
