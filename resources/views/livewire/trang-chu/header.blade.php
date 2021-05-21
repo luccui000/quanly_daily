@@ -22,8 +22,8 @@
             </a>
           </div>
           <div>
-              <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-gray-600 border-gray-200 hover:border-transperent hover:text-white hover:bg-green-400 mt-4 lg:mt-0">Đăng nhập</a>
-            <a href="{{ route('trangchu.dangky') }}" class="inline-block text-sm px-4 py-2 leading-none border rounded border-transperent text-white bg-green-400 hover:bg-green-300 mt-4 lg:mt-0">Đăng ký</a>
+              <a href="{{ route('khachhang.dangnhap') }}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-gray-600 border-gray-200 hover:border-transperent hover:text-white hover:bg-green-400 mt-4 lg:mt-0">Đăng nhập</a>
+            <a href="{{ route('khachhang.dangky') }}" class="inline-block text-sm px-4 py-2 leading-none border rounded border-transperent text-white bg-green-400 hover:bg-green-300 mt-4 lg:mt-0">Đăng ký</a>
           </div>
         </div>
     </nav>

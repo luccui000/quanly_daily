@@ -1,5 +1,6 @@
 <?php
- 
+
+use App\Http\Controllers\KhachHangController;
 use Carbon\Carbon;
 use App\Models\NguoiDung;
 use App\Http\Livewire\HoSo;
@@ -17,18 +18,21 @@ use App\Http\Livewire\TrangChu\GioHang;
 
 Route::get('/', TrangChu::class)->name('trangchu');
 Route::get('/xemgiohang', GioHang::class)->name('trangchu.xemgiohang');
-Route::get('/dangky', DangKy::class)->name('trangchu.dangky');
-Route::get('/dangnhap', DangNhap::class)->name('auth.dangnhap');
-Route::get('/dangxuat', function() {
-    $userId = Auth::user()->id;
-    NguoiDung::where('id', $userId)->update(['LanDangNhapCuoi' => Carbon::now(), 'TrangThai' => 0]); 
-    Auth::logout();
-    return redirect()->route('auth.dangnhap');
-})->name('auth.dangxuat');
+Route::get('/dangky', [App\Http\Controllers\KhachHangController::class, 'dangky'])->name('khachhang.dangky');
+Route::post('/dangky', [App\Http\Controllers\KhachHangController::class, 'store'])->name('khachhang.store');
+Route::get('/dangnhap', [App\Http\Controllers\KhachHangController::class, 'dangnhap'])->name('khachhang.dangnhap'); 
+Route::post('/dangnhap', [App\Http\Controllers\KhachHangController::class, 'auth'])->name('khachhang.auth'); 
 
 
 
 Route::group(['as' => 'dashboard.', 'middleware' => 'isLogin'], function() { 
+    Route::get('dashboard/dangnhap', DangNhap::class)->name('auth.dangnhap');
+    Route::get('dashboard/dangxuat', function() {
+        $userId = Auth::user()->id;
+        NguoiDung::where('id', $userId)->update(['LanDangNhapCuoi' => Carbon::now(), 'TrangThai' => 0]); 
+        Auth::logout();
+        return redirect()->route('auth.dangnhap');
+    })->name('auth.dangxuat');
     Route::get('/hoso', HoSo::class)->name('hoso');
     Route::get('/nhanvien', NhanVien::class)->name('nhanvien');
     Route::get('/khachhang', KhachHang::class)->name('khachhang'); 
@@ -40,8 +44,7 @@ Route::group(['as' => 'dashboard.', 'middleware' => 'isLogin'], function() {
     Route::get('/phieuxuat', [App\Http\Controllers\PhieuXuatController::class, 'index'])->name('phieuxuat.index');
     Route::post('/phieuxuat', [App\Http\Controllers\PhieuXuatController::class, 'store'])->name('phieuxuat.store');
     Route::get('/phieuchi', [App\Http\Controllers\PhieuChiController::class, 'index'])->name('phieuchi.index');
-    Route::post('/phieuchi', [App\Http\Controllers\PhieuChiController::class, 'store'])->name('phieuchi.store');
-
+    Route::post('/phieuchi', [App\Http\Controllers\PhieuChiController::class, 'store'])->name('phieuchi.store'); 
 });
 
 

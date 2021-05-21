@@ -40,8 +40,8 @@ class GioHang extends Component
     public function capNhatGioHang()
     {
         $mathang = request()->session()->get('giohang');
-        $mathangIds = array_column($mathang, 'mathang');
-        $this->danhsachSoLuong = array_column($mathang, 'soluong');
+        $mathangIds = array_column($mathang ?? [], 'mathang');
+        $this->danhsachSoLuong = array_column($mathang  ?? [], 'soluong');
         $this->danhsachGioHang = MatHang::whereKey($mathangIds)->get();
     }
 }

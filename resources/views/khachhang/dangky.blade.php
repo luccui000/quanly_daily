@@ -1,4 +1,5 @@
-<div>
+@extends('layouts.index')
+@section('content')
     @livewire('trang-chu.header')
     <div class="max-w-md mx-auto rounded-lg md:max-w-7xl">
         <div class="col-span-2 p-10"> 
@@ -128,4 +129,4 @@
             </div>
         </div>
     </div>
-</div>
+@endsection

@@ -83,7 +83,7 @@ return [
         ],
         'khachhangs' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\KhachHang::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

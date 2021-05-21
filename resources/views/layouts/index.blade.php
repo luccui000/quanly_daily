@@ -26,12 +26,7 @@
         <div class="mx-auto"> 
             @yield('content')
         </div> 
-        @livewireScripts 
-        <script>
-            window.livewire.on('postAdded', postId => {
-                alert('A post was added with the id of: ' + postId);
-            }) 
-          </script> 
+        @livewireScripts  
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     </body>
 </html>
