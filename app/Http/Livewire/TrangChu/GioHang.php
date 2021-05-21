@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\TrangChu;
 
-use App\Facades\GioHang as GioHangFacade;
 use App\Models\MatHang;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\PhieuXuat;
+use Illuminate\Support\Facades\Auth;
+use App\Facades\GioHang as GioHangFacade;
+use Illuminate\Support\Facades\Session;
 
 class GioHang extends Component
 {
@@ -14,7 +16,7 @@ class GioHang extends Component
     protected $listeners = ['themMoi' => 'capNhatGioHang'];
       
     public function mount()
-    {
+    { 
         $this->capNhatGioHang();
     }
     public function xoaHang($idMh)
@@ -34,9 +36,51 @@ class GioHang extends Component
                 ->extends('layouts.index');
     }
     public function thanhtoan()
-    {
-        dd(Auth::user());
-    }
+    {  
+        $khachhang = Auth::guard('khachhangs')->user();
+        if($khachhang == null) {
+            return redirect()->route('khachhang.dangnhap');
+        }
+        $diachiKhachHang = $khachhang->DiaChi;
+        $dienthoaiKhachHang = $khachhang->DienThoai;
+        if($diachiKhachHang == "" || $dienthoaiKhachHang == "") {
+            dd('Vui long cap nhat thong tin');
+        }
+        $khachhangId = $khachhang->id;
+        $tongTienHang = 0;
+        $tongGiamGia = 0;
+        $tongVAT = 0;
+        foreach($this->danhsachGioHang as $index => $giohang) {
+            $tongTienHang += $giohang['GiaXuat'] * (+$this->danhsachSoLuong[$index]); 
+        } 
+        // $phieuxuat = PhieuXuat::create([  
+        //     'MoTa' => " ",
+        //     'TongTien' => $tongTienHang,
+        //     'TongVAT' => $tongVAT,
+        //     'TongChietKhau' => $tongGiamGia,
+        //     'TongThanhToan' => $tongTienHang + $tongVAT - $tongGiamGia,
+        //     'HinhThucThanhToan' => 1,
+        //     'TrangThai' => 0, 
+        //     'nhanvien_id' => 1,
+        //     'kho_id' => 1,
+        //     'khachhang_id' => $khachhangId
+        // ]); 
+
+        // foreach ($this->danhsachGioHang as $index => $mathang) {
+        //     $dongiaMatHang = MatHang::where('id', $mathang['id'])->first()->GiaXuat;
+        //     $phieuxuat->mathang()->attach($mathang['id'], [
+        //         'SoLuong' => $this->danhsachSoLuong[$index],
+        //         'DonGia' => $dongiaMatHang,
+        //         'TienChietKhau' => 0,
+        //         'TienVAT' => 0,
+        //         'ThanhTien' => $dongiaMatHang * (+$this->danhsachSoLuong[$index]),
+        //         'LoaiPhieu' => 1
+        //     ]);
+        // }
+        // request()->session()->put('giohang', []);
+        // session()->f 
+        Session::flash('success', 'Task was successful!');
+    } 
     public function capNhatGioHang()
     {
         $mathang = request()->session()->get('giohang');
