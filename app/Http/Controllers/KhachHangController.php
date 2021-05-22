@@ -28,26 +28,25 @@ class KhachHangController extends Controller
     }
     public function auth()
     {
-        $khachHang = KhachHang::where('Email', request('Email'))->orWhere('DienThoai', request('Email'))->first();
-
-        // TODO
-        if($khachHang != null) {
-            $email = request('Email'); 
-            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        $khachHang = KhachHang::where('Email', request('Email'))->orWhere('DienThoai', request('Email'))->first(); 
+        if($khachHang) {  
+            $email = filter_var(request('Email'), FILTER_SANITIZE_EMAIL);
             // Validate e-mail
-            $credential = [];
+            $credential = []; 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $credential = ['Email' => request('Email'), 'MatKhau' => request('MatKhau')];
             } else {
                 $credential = ['DienThoai' => request('Email'), 'MatKhau' => request('MatKhau')];
-            }  
-            if(Auth::attempt($credential)) {
-                dd('dang nhap thanh cong');
-            } else {
-                dd('that bai');
-            }
+            }   
+            if (Hash::check($credential['MatKhau'], $khachHang->MatKhau)) {   
+                $data = request()->session()->get('giohang') ?? [];
+                Auth::guard('khachhangs')->login($khachHang);  
+                if($data) request()->session()->put('giohang', $data);
+                return redirect()->back(); 
+            }  else {
+                return redirect()->back()->withErrors( ['Email' => 'Email không đúng', 'MatKhau' => 'MK không đúng']);
+            } 
         }
-        return redirect()->back()->withErrors( ['Email' => 'Email khong dung', 'MatKhau' => 'MK khong dung']);
     }
     /**
      * Show the form for creating a new resource.
