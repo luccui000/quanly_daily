@@ -17,7 +17,6 @@ class checkAuth
      */
     public function handle(Request $request, Closure $next)
     { 
-        dd(Auth::user());
         if(Auth::check() && Auth::user()) {
             return $next($request);
         } 
