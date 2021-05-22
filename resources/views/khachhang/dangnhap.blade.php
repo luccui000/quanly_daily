@@ -10,7 +10,7 @@
                 ></div> 
                 <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
                     <h3 class="pt-4 text-2xl text-center">Tạo tài khoản mới</h3> 
-                    <form action="{{ route('khachhang.auth') }}" method="POST" class="px-8 pt-6 pb-8 mb-4 bg-white rounded"> 
+                    <form action="{{ route('khachhang.xacthuc') }}" method="POST" class="px-8 pt-6 pb-8 mb-4 bg-white rounded"> 
                         @csrf 
                         <div class="mb-2">
                             <label class="block mb-2 text-sm font-bold text-gray-700" for="Email">

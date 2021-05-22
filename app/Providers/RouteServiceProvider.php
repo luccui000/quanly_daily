@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\MyApp;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -47,7 +48,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware('web')
+            Route::prefix(MyApp::SYS_PREFIX)
+                ->middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/dashboard.php'));
         });

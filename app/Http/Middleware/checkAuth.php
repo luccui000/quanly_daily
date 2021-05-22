@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\MyApp;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,12 @@ class checkAuth
      */
     public function handle(Request $request, Closure $next)
     { 
-        if(Auth::check() && Auth::user()) {
-            return $next($request);
-        } 
-        return redirect('/dangnhap');
+        if(request()->segment(1) == MyApp::SYS_PREFIX) {  
+            if(Auth::check() && Auth::user()) {
+                return $next($request);
+            }    
+            return redirect()->route('auth.dangnhap');
+        }
+        return $next($request);
     }
 }

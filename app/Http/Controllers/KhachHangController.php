@@ -26,7 +26,7 @@ class KhachHangController extends Controller
     {
         return view('khachhang.dangnhap');
     }
-    public function auth()
+    public function xacthuc()
     {
         $khachHang = KhachHang::where('Email', request('Email'))->orWhere('DienThoai', request('Email'))->first(); 
         if($khachHang) {  

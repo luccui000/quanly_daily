@@ -40,10 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        // 'web' => [
-        //     'driver' => 'session',
-        //     'provider' => 'NGUOIDUNG',
-        // ],
+        'users' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
         'khachhangs' => [
             'driver' => 'session',
             'provider' => 'khachhangs',

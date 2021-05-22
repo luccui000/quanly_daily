@@ -47,10 +47,10 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('dashboard.hoso') }}" class="nav-link">Trang chủ</a>
+                <a href="#" class="nav-link">Trang chủ</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('dashboard.hoso') }}" class="nav-link">Tìm kiếm</a>
+                <a href="#" class="nav-link">Tìm kiếm</a>
             </li> 
         </ul>
 
@@ -101,7 +101,7 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item ">
-                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="fab fa-slideshare nav-icon"></i><p>Hồ sơ người dùng</p>
                                     </a>
                                 </li> 

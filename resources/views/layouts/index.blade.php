@@ -13,7 +13,7 @@
         @livewireStyles
         <style>
             .truncate-2-lines {
-                max-height: 3.6em; /* double the size of line-height */
+                max-height: 3.6em; 
                 line-height: 1.8em;
                 display: block;
                 text-overflow: ellipsis;
@@ -28,5 +28,15 @@
         </div> 
         @livewireScripts  
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
+        <script>  
+            window.addEventListener('swal.modal', event => { 
+                Swal.fire({
+                    title: event.detail.title,   
+                    content: event.detail.content ?? "",   
+                    icon: event.detail.type,   
+                }) 
+            }) 
+        </script>
     </body>
 </html>

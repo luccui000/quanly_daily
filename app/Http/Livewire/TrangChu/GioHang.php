@@ -80,8 +80,7 @@ class GioHang extends Component
         // session()->f 
         $this->dispatchBrowserEvent('swal.modal', [
             'type' => 'success',
-            'title' => 'oke',
-            'content' => ''
+            'title' => 'Đặt hàng thành công'
         ]);
     }
     public function capNhatGioHang()
