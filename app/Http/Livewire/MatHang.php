@@ -120,11 +120,10 @@ class MatHang extends Component
                 // dd($this->nhacungcap_id);
                 $code = $this->getCodeGenerator();
                 $code = $code + 1;
-                $mathang = new MatHangModel();
-                $mathang->MaMH = $this->MaMH;
+                $mathang = new MatHangModel(); 
                 $this->store($mathang);
                 $mathang->save(); 
-                CodeGenerator::find(1)->update(['MaMatHang' => $code]);
+                CodeGenerator::find(1)->update(['ma_m_h' => 12321]);
                 $this->MaMH = 'MH' . $this->getCodeGenerator();
                 $this->dispatchAlert('success', 'Thêm thành công mặt hàng', '');
             } catch(\Exception $e) {
@@ -135,6 +134,7 @@ class MatHang extends Component
     }
     private function store(MatHangModel $mathang)
     {  
+        $mathang->MaMH = $this->MaMH;
         $mathang->TenMH = $this->TenMH;
         $mathang->ThongSo = $this->ThongSo;
         $mathang->BaoHanh = $this->BaoHanh;

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\KhachHang;
+use App\Rules\SoDienThoai;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class KhachHangController extends Controller
 {
@@ -66,7 +67,9 @@ class KhachHangController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(KhachHang::VALIDATE_RULES, KhachHang::VALIDATE_MESSAGE);
+        request()->validate(array_merge(KhachHang::VALIDATE_RULES, [
+            'DienThoai' => [ 'required', 'numeric',  new SoDienThoai() ]
+            ]), KhachHang::VALIDATE_MESSAGE);
 
         KhachHang::create(array_merge(request()->only('HoTenKH', 'DiaChi', 'DienThoai', 'Email', 'SoTaiKhoan'), [
             'MatKhau' => Hash::make(request('MatKhau'))

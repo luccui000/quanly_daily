@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\KhachHang;
+use App\MyApp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -52,10 +53,18 @@ class PhieuXuat extends Model
     }
     public function getMauSacTrangThaiAttribute()
     {
-        return [
-            '0' => 'red', 
-            '1' => 'green',
-            '2' => 'indigo'
-        ][$this->TrangThai] ?? 'cool-gray';
+        return MyApp::MAU_SAC_TRANG_THAI_DON_HANG[$this->TrangThai] ?? 'cool-gray';
     }
+    public function getTenTrangThaiAttribute()
+    {
+        return MyApp::TRANG_THAI_PHIEU_XUAT[$this->TrangThai] ?? 'Đang chờ xác nhận';
+    }
+    public function getMaPhieuXuatAttribute()
+    { 
+        return 'PX000'. $this->id;
+    }
+    public function getTenHinhThucThanhToanAttribute()
+    {
+        return MyApp::HINH_THUC_THANH_TOAN[$this->HinhThucThanhToan];
+    } 
 }

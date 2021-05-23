@@ -6,6 +6,7 @@ use App\Models\NguoiDung;
 use App\Models\PhieuXuat;
 use Illuminate\Http\Request;
 use App\Models\CodeGenerator;
+use App\Models\NhanVien;
 
 class PhieuXuatController extends Controller
 {
@@ -79,7 +80,9 @@ class PhieuXuatController extends Controller
      */
     public function show($id)
     {
-        //
+        $nhanviens = NhanVien::all();
+        $phieuxuat = PhieuXuat::where('id', $id)->with(['nhanvien', 'kho', 'khachhang'])->first(); 
+        return view('phieuxuat.show', ['phieuxuat' => $phieuxuat, 'nhanviens' => $nhanviens]);
     }
 
     /**

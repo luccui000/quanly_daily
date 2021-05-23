@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Rules\SoDienThoai; 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -29,8 +29,7 @@ class KhachHang extends Authenticatable
     } 
     public const VALIDATE_RULES = [
         'HoTenKH' => 'required',
-        'DiaChi' => 'required',
-        'DienThoai' => 'required|numeric',
+        'DiaChi' => 'required', 
         'Email' => 'required|email|unique:App\Models\KhachHang,Email', 
         'SoTaiKhoan' => 'numeric', 
         'MatKhau' => 'required',

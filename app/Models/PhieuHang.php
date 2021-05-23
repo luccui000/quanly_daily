@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\MyApp;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,11 +31,7 @@ class PhieuHang extends Model
     ]; 
     public function getMauSacTrangThaiAttribute()
     {
-        return [
-            '0' => 'red',
-            '1' => 'green',
-            '2' => 'red',
-        ][$this->TrangThai] ?? 'cool-gray';
+        return MyApp::MAU_SAC_TRANG_THAI_DON_HANG[$this->TrangThai] ?? 'cool-gray';
     }
     public function mathang()
     {

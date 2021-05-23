@@ -4,9 +4,7 @@ namespace App\Http\Livewire\TrangChu;
 
 use App\Models\MatHang;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use App\Facades\GioHang as GioHangFacade;
+use App\Models\PhieuXuat;  
 
 class GioHang extends Component
 {
@@ -36,7 +34,7 @@ class GioHang extends Component
     }
     public function thanhtoan()
     {
-        $khachhang = Auth::guard('khachhangs')->user();
+        $khachhang = auth()->guard('khachhangs')->user();
         if($khachhang == null) {
             return redirect()->route('khachhang.dangnhap');
         }
@@ -52,32 +50,31 @@ class GioHang extends Component
         foreach($this->danhsachGioHang as $index => $giohang) {
             $tongTienHang += $giohang['GiaXuat'] * (+$this->danhsachSoLuong[$index]); 
         } 
-        // $phieuxuat = PhieuXuat::create([  
-        //     'MoTa' => " ",
-        //     'TongTien' => $tongTienHang,
-        //     'TongVAT' => $tongVAT,
-        //     'TongChietKhau' => $tongGiamGia,
-        //     'TongThanhToan' => $tongTienHang + $tongVAT - $tongGiamGia,
-        //     'HinhThucThanhToan' => 1,
-        //     'TrangThai' => 0, 
-        //     'nhanvien_id' => 1,
-        //     'kho_id' => 1,
-        //     'khachhang_id' => $khachhangId
-        // ]); 
+        $phieuxuat = PhieuXuat::create([  
+            'MoTa' => " ",
+            'TongTien' => $tongTienHang,
+            'TongVAT' => $tongVAT,
+            'TongChietKhau' => $tongGiamGia,
+            'TongThanhToan' => $tongTienHang + $tongVAT - $tongGiamGia,
+            'HinhThucThanhToan' => 1,
+            'TrangThai' => 0, 
+            'nhanvien_id' => 1,
+            'kho_id' => 1,
+            'khachhang_id' => $khachhangId
+        ]); 
 
-        // foreach ($this->danhsachGioHang as $index => $mathang) {
-        //     $dongiaMatHang = MatHang::where('id', $mathang['id'])->first()->GiaXuat;
-        //     $phieuxuat->mathang()->attach($mathang['id'], [
-        //         'SoLuong' => $this->danhsachSoLuong[$index],
-        //         'DonGia' => $dongiaMatHang,
-        //         'TienChietKhau' => 0,
-        //         'TienVAT' => 0,
-        //         'ThanhTien' => $dongiaMatHang * (+$this->danhsachSoLuong[$index]),
-        //         'LoaiPhieu' => 1
-        //     ]);
-        // }
-        // request()->session()->put('giohang', []);
-        // session()->f 
+        foreach ($this->danhsachGioHang as $index => $mathang) {
+            $dongiaMatHang = MatHang::where('id', $mathang['id'])->first()->GiaXuat;
+            $phieuxuat->mathang()->attach($mathang['id'], [
+                'SoLuong' => $this->danhsachSoLuong[$index],
+                'DonGia' => $dongiaMatHang,
+                'TienChietKhau' => 0,
+                'TienVAT' => 0,
+                'ThanhTien' => $dongiaMatHang * (+$this->danhsachSoLuong[$index]),
+                'LoaiPhieu' => 1
+            ]);
+        }
+        request()->session()->put('giohang', null); 
         $this->dispatchBrowserEvent('swal.modal', [
             'type' => 'success',
             'title' => 'Đặt hàng thành công'
