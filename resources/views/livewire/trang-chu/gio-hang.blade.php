@@ -52,22 +52,24 @@
                           <tr>Chưa có mặt hàng nào trong giỏ.</tr>
                         @endforelse
                     </tbody>
-                </table>  
-                @json($danhsachSoLuong)
+                </table>   
                 <div class="my-4 mt-6 -mx-2 lg:flex">
                     <div class="lg:px-2 lg:w-1/2">
                       <div class="p-4 bg-gray-100 rounded">
-                        <h1 class="ml-2 font-bold uppercase">Mã giảm giá</h1>
+                        <h1 class="ml-2 font-bold uppercase">Thông tin nhận hàng</h1>
                       </div>
                       <div class="p-4">
-                        <p class="mb-4 italic">Nhập mã khuyến mãi</p>
-                        <div class="justify-center md:flex">
-                          <form action="" method="POST">
-                              <div class="flex items-center w-full h-10 pl-3 bg-white bg-gray-100 border rounded">
-                                <input type="coupon" name="code" id="coupon" readonly placeholder="Tính năng chưa hoàn thành" 
-                                    class="w-full bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none"/> 
-                              </div>
-                          </form>
+                        <div class="flex justify-between mt-3 mb-3">
+                          <h2 class="text-gray-800 font-bold mt-1">Họ tên nhận hàng</h2>
+                          <p class="font-bold">{{ auth()->guard('khachhangs')->user()->HoTenKH ?? "" }}</p> 
+                        </div>
+                        <div class="flex justify-between mt-3 mb-3">
+                          <h2 class="text-gray-800 font-bold mt-1">Số điện thoại nhận hàng</h2>
+                          <p class="font-bold">{{ auth()->guard('khachhangs')->user()->DienThoai ?? "" }}</p> 
+                        </div>
+                        <div class="flex justify-between mt-3 mb-3">
+                          <h2 class="text-gray-800 font-bold mt-1">Địa chỉ nhận hàng</h2>
+                          <p class="font-bold">{{ auth()->guard('khachhangs')->user()->DiaChi ?? "" }}</p> 
                         </div>
                       </div> 
                     </div>

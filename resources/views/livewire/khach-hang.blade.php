@@ -5,34 +5,24 @@
                 <x-input.text wire:model.debounce.500ms="search" placeholder="Search ..."></x-input.text> 
             </div>    
             <div class="py-2 mt-1 ml-2">
-                <x-dropdown label="Bộ lọc"> 
-                    <x-dropdown.item wire:click="" label="" class="flex item-center space-x-3">
-                        <x-icon.csv ></x-icon.csv><span>csv</span>
-                    </x-dropdown.item>
-                    <x-dropdown.item wire:click="" class="flex item-center space-x-3">
-                        <x-icon.xlsx></x-icon.xlsx><span>xlsx</span>
-                    </x-dropdown.item> 
-                </x-dropdown> 
+                <x-button.success wire:click="create" >Thêm mới</x-button.success>
             </div>
             <div class="py-2 mt-1 ml-2">
-                <x-button.success wire:click="create" >New</x-button.success>
+                <x-button.primary wire:click="export('csv')" >Xuất CSV</x-button.success>
             </div>
             <div class="py-2 mt-1 ml-2">
-                <x-button.primary wire:click="export('csv')" >export CSV</x-button.success>
+                <x-button.primary class="bg-green-200"  wire:click="export('xlsx')" >Xuất XLSX</x-button.success>
             </div>
             <div class="py-2 mt-1 ml-2">
-                <x-button.primary class="bg-green-200"  wire:click="export('xlsx')" >export XLSX</x-button.success>
-            </div>
-            <div class="py-2 mt-1 ml-2">
-                <x-button.danger wire:click="deleteSelected">Delete</x-button.primary>
+                <x-button.danger wire:click="deleteSelected">Xóa chọn</x-button.primary>
             </div> 
         </div>   
         <x-table>   
             <x-slot name="head"> 
                 <x-table.heading >
                     <x-input.checkbox wire:click="selectAll" wire:model="checked"></x-input.checkbox>
-                </x-table.heading >
-                <x-table.heading >Mã khách hàng</x-table.heading>
+                </x-table.heading > 
+                <x-table.heading >#</x-table.heading> 
                 <x-table.heading >Họ tên khách hàng</x-table.heading> 
                 <x-table.heading >Địa chỉ</x-table.heading>
                 <x-table.heading >Điện thoại</x-table.heading>
@@ -44,8 +34,8 @@
                     <x-table.row wire:loading.class.defer="opacity-50" wire:key="{{ $item->id }}" >
                             <x-table.cell class="pr-0 w-5" > 
                                 <x-input.checkbox wire:model="selected" value="{{ $item->id }}" ></x-input.checkbox>
-                            </x-table.cell >  
-                            <x-table.cell >{{ $item->MaKH }}</x-table> 
+                            </x-table.cell >    
+                            <x-table.cell >{{ $loop->iteration }}</x-table> 
                             <x-table.cell >{{ $item->HoTenKH }}</x-table> 
                             <x-table.cell >{{ $item->DiaChi }}</x-table> 
                             <x-table.cell >{{ $item->DienThoai }}</x-table> 

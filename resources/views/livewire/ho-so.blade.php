@@ -39,12 +39,14 @@
                             <x-table.cell >{{ $item->MatKhau }}</x-table>
                             <x-table.cell > 
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{ $item->mau_sac_trang_thai }}-100 text-{{ $item->mau_sac_trang_thai }}-800">
-                                    {{ $item->TrangThai ? 'active' : 'inactive' }}
+                                    {{ $item->TrangThai ? 'Hoạt động' : 'Không hoạt động' }}
                                 </span>  
                             </x-table>
                             <x-table.cell >{{ $item->date_for_humans }}</x-table>
-                            <x-table.cell>
-                                <x-button.link wire:click="edit('{{ $item->id }}')" >Edit</x-button.link> 
+                            <x-table.cell> 
+                                @if(optional($item->nhanvien)->chucvu_id != 1 ?? optional($item->nhanvien)->chucvu_id != 2)
+                                    <x-button.link wire:click="edit('{{ $item->id }}')" >Xem</x-button.link> 
+                                @endif
                             </x-table>
                         </x-table.row> 
                     @empty

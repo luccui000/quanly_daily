@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PhieuXuatImport;
 use App\Models\NguoiDung;
 use App\Models\PhieuXuat;
 use Illuminate\Http\Request;
 use App\Models\CodeGenerator;
 use App\Models\NhanVien;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PhieuXuatController extends Controller
 {
@@ -18,7 +20,9 @@ class PhieuXuatController extends Controller
     public function index()
     {
         return view('phieuxuat.index', [
-            'phieuxuat' => PhieuXuat::with(['nhanvien', 'kho', 'khachhang'])->get()
+            'DangChoXacNhan' => PhieuXuat::where('TrangThai', 0)->with(['nhanvien', 'kho', 'khachhang'])->get(),
+            'DangGiaoHang' => PhieuXuat::where('TrangThai', 1)->with(['nhanvien', 'kho', 'khachhang'])->get(),
+            'DaThanhToan' => PhieuXuat::where('TrangThai', 2)->with(['nhanvien', 'kho', 'khachhang'])->get()
         ]);
     }
 
@@ -85,6 +89,11 @@ class PhieuXuatController extends Controller
         return view('phieuxuat.show', ['phieuxuat' => $phieuxuat, 'nhanviens' => $nhanviens]);
     }
 
+    public function import()
+    {
+        Excel::import(new PhieuXuatImport(), request()->file);
+        return redirect()->route('dashboard.phieuxuat.index');
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -103,9 +112,26 @@ class PhieuXuatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update($id)
+    {  
+        $phieuxuat = PhieuXuat::where('id', $id)->first();
+        
+        if(request('TrangThai') == 0) {
+            $phieuxuat->update([
+                'nhanvien_id' => request('nhanvien_id'),
+                'MoTa' => request('MoTa') ?? "",
+                'TrangThai' => 1
+            ]);
+        }
+        if(request('TrangThai') == 1) 
+        {
+            $phieuxuat->update([
+                'nhanvien_id' => request('nhanvien_id'),
+                'MoTa' => request('MoTa') ?? "",
+                'TrangThai' => 2
+            ]);
+        } 
+        return redirect()->route('dashboard.phieuxuat.index');
     }
 
     /**

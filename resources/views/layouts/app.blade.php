@@ -62,7 +62,7 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: block;">
                                 <li class="nav-item ">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('dashboard.hoso') }}" class="nav-link">
                                         <i class="fab fa-slideshare nav-icon"></i><p>Hồ sơ người dùng</p>
                                     </a>
                                 </li> 

@@ -132,6 +132,7 @@ class HoSo extends Component
     { 
         return view('livewire.ho-so', [
                 'hoso' => NguoiDung::query()
+                        ->with('nhanvien')
                         ->when($this->search, fn($query, $search) => $query->where('TenDangNhap', 'like', '%'.$search.'%'))
                         ->orderBy($this->sortBy, $this->sortDirection)
                         ->paginate(10)
