@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory; 
+use App\Models\VaiTro;
 
 use Illuminate\Notifications\Notifiable; 
+use Illuminate\Database\Eloquent\Factories\HasFactory; 
 use Illuminate\Foundation\Auth\User as Authenticatable; 
 
 class NguoiDung extends Authenticatable 
@@ -27,6 +28,10 @@ class NguoiDung extends Authenticatable
     public function nhanvien()
     {
         return $this->hasOne(NhanVien::class, 'id', 'nhanvien_id');
+    }
+    public function vaitro()
+    {
+        return $this->belongsToMany(VaiTro::class, 'NGUOIDUNG_VAITRO', 'nguoidung_id', 'vaitro_id');
     }
     protected $guarded = ['id'];
     public function getMauSacTrangThaiAttribute()
@@ -52,4 +57,8 @@ class NguoiDung extends Authenticatable
     {
      return $this->MatKhau;
     } 
+    public function coVaiTro(VaiTro $vaitro)
+    {   
+        return !!optional($this->vaitro)->contains($vaitro);
+    }
 }

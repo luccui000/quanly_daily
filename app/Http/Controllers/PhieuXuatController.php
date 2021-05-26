@@ -9,6 +9,7 @@ use App\Models\PhieuXuat;
 use Illuminate\Http\Request;
 use App\Models\CodeGenerator;
 use App\Imports\PhieuXuatImport;
+use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PhieuXuatController extends Controller
@@ -19,12 +20,20 @@ class PhieuXuatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('phieuxuat.index', [
+    {      
+        $data = [
             'DangChoXacNhan' => PhieuXuat::where('TrangThai', 0)->with(['nhanvien', 'kho', 'khachhang'])->get(),
             'DangGiaoHang' => PhieuXuat::where('TrangThai', 1)->with(['nhanvien', 'kho', 'khachhang'])->get(),
             'DaThanhToan' => PhieuXuat::where('TrangThai', 2)->with(['nhanvien', 'kho', 'khachhang'])->get()
-        ]);
+        ];
+        // $phieuxuat = PhieuXuat::all();
+        // $this->authorize('view', $data);
+        // if ($user->can('view', $phieuxuat)) {
+        //     echo "Người dùng được quyền xem";
+        // } else {
+        // echo 'Người dùng không được quyền xem.';
+        // }
+        return view('phieuxuat.index', $data);
     }
 
     /**

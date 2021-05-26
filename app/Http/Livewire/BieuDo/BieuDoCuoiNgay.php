@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\BieuDo;
 
+use App\Models\ChiTietPhieuXuat;
 use App\Models\LoaiMatHang;
 use App\Models\MatHang;
 use App\Models\PhieuXuat;
@@ -56,12 +57,12 @@ class BieuDoCuoiNgay extends Component
                 ->setColumnWidth(90)
                 ->withGrid()
             );  
-        $phieuxuat = PhieuXuat::all();
+        $phieuxuat = PhieuXuat::orderBy('created_at')->get();
         $lineChartModel = $phieuxuat
             ->reduce(function ($lineChartModel, $data) use ($phieuxuat) {
-                $index = $phieuxuat->search($data); 
+                $index = $phieuxuat->first()->created_at->format('m');
                 $amountSum = $phieuxuat->take($index + 1)->sum('TongThanhToan'); 
-
+                
                 return $lineChartModel->addPoint($index, $data->TongThanhToan, ['id' => $data->id]);
             }, LivewireCharts::lineChartModel()
                 ->setTitle('Biến động bán hàng')
@@ -72,10 +73,32 @@ class BieuDoCuoiNgay extends Component
                 ->setDataLabelsEnabled($this->showDataLabels)
                 ->sparklined()
             ); 
+        
+        $chitietPX = \DB::table('CHITIET_PHIEUXUAT')
+                        ->join('MATHANG', 'MATHANG.id', '=', 'CHITIET_PHIEUXUAT.mathang_id')
+                        ->select('TenMH', \DB::raw('count(SoLuong) as SoLuongBan'))
+                        ->groupBy('mathang_id')
+                        ->get();
+        
+            
+        $columnChartModel2 = $chitietPX
+            ->reduce(function ($columnChartModel2, $data) {   
+                return $columnChartModel2->addColumn($data->TenMH, $data->SoLuongBan, $this->colors[1]);
+            }, LivewireCharts::columnChartModel()
+                ->setTitle('Số lượng bán được')
+                ->setAnimated($this->firstRun) 
+                ->setLegendVisibility(false)
+                ->setDataLabelsEnabled($this->showDataLabels)
+                // ->setOpacity(0.25)
+                ->setColors(['#b01a1b', '#d41b2c', '#ec3c3b', '#f66665'])
+                ->setColumnWidth(90)
+                ->withGrid()
+            ); 
+         
         $this->firstRun = false;
         return view('livewire.bieu-do.bieu-do-cuoi-ngay')
             ->with([
-                'columnChartModel' => $columnChartModel,
+                'columnChartModel' => $columnChartModel2,
                 'lineChartModel' => $lineChartModel
             ]);
     }
