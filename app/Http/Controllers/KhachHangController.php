@@ -43,11 +43,15 @@ class KhachHangController extends Controller
                 $data = request()->session()->get('giohang') ?? [];
                 Auth::guard('khachhangs')->login($khachHang);  
                 if($data) request()->session()->put('giohang', $data);
-                return redirect()->back(); 
+                return redirect()->route('trangchu'); 
             }  else {
                 return redirect()->back()->withErrors( ['Email' => 'Email không đúng', 'MatKhau' => 'MK không đúng']);
             } 
         }
+    }
+    public function dangxuat()
+    {
+        return auth()->guard('khachhangs')->logout();
     }
     /**
      * Show the form for creating a new resource.

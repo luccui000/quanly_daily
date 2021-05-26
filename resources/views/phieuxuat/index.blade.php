@@ -47,9 +47,14 @@
                                         </span> 
                                     </x-table.cell> 
                                     <x-table.cell> 
-                                        <a href="{{ route('dashboard.phieuxuat.show', ['id' => $px->id]) }}"  type="button" class="text-cool-gray-700 text-sm leading-5 font-medium focus:outline-none focus:text-cool-gray-800 focus:underline transition duration-150 ease-in-out" >
-                                            Xem
-                                        </a>
+                                        <div class="space-x-2">
+                                            <a href="{{ route('dashboard.phieuxuat.show', ['id' => $px->id]) }}"  type="button" class="text-cool-gray-700 text-sm font-medium border-r border-gray-600 hover:text-green-500" >
+                                                Xem
+                                            </a>
+                                            <a href="{{ route('dashboard.phieuxuat.exportPdf', ['id' => $px->id ]) }}"  type="button" class="text-cool-gray-700 text-sm font-medium  hover:text-green-500" >
+                                                In phiếu
+                                            </a>
+                                        </div>
                                     </x-table.cell> 
                                 </x-table.row>
                             @endforeach 

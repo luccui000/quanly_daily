@@ -53,4 +53,5 @@
             </div>
         </div>
     </div>
+    @livewire('trang-chu.footer')
 </div>

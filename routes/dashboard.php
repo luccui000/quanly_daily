@@ -31,6 +31,7 @@ Route::group(['middleware' => 'isLogin', 'as' => 'dashboard.'], function() {
     Route::get('/phieuxuat/{id}', [App\Http\Controllers\PhieuXuatController::class, 'show'])->name('phieuxuat.show');
     Route::put('/phieuxuat/{id}', [App\Http\Controllers\PhieuXuatController::class, 'update'])->name('phieuxuat.update');
     Route::post('/phieuxuat', [App\Http\Controllers\PhieuXuatController::class, 'store'])->name('phieuxuat.store');
+    Route::get('/phieuxuat/{id}/pdf', [App\Http\Controllers\PhieuXuatController::class, 'exportPdf'])->name('phieuxuat.exportPdf');
     Route::get('/phieuchi', [App\Http\Controllers\PhieuChiController::class, 'index'])->name('phieuchi.index');
     Route::post('/phieuchi', [App\Http\Controllers\PhieuChiController::class, 'store'])->name('phieuchi.store');
 });

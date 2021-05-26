@@ -20,6 +20,9 @@
                 word-wrap: break-word;
                 overflow: hidden;
             }
+            .dropdown:hover .dropdown-menu {
+                display: block;
+            }
         </style>
     </head>
     <body>  

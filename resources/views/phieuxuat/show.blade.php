@@ -57,6 +57,7 @@
                     <h2 class="text-gray-800 font-bold">Ngày lập</h2>
                     <p>{{ $phieuxuat->ngay_lap}}</p>
                 </div>
+                @if($phieuxuat->TrangThai != 2)
                 <x-input.group label="Nhân viên lập" for="nhanvien_id">
                     <x-input.select name="nhanvien_id" > 
                         @foreach ($nhanviens as $nhanvien)
@@ -64,6 +65,12 @@
                         @endforeach 
                     </x-input.select>
                 </x-input.group>
+                @else
+                <div class="flex justify-between mt-3 mb-3">
+                    <h2 class="text-gray-800 font-bold">Nhân viên lập</h2>
+                    <p>{{ $phieuxuat->nhanvien->HoTenNV }}</p>
+                </div>
+                @endif
                 <div class="mt-6 mb-2">
                     <hr>
                 </div>
@@ -118,8 +125,12 @@
                 <input type="hidden" name="TrangThai" value="{{  $phieuxuat->TrangThai }}">
                 <div class="flex float-right mt-12 space-x-2"> 
                     <x-button type="button"><p class="text-gray-900">Hủy</p></x-button>
-                    <x-button.success type="submit">Xác nhận</x-button.success>
-                    <x-button.primary type="button" wire:click="export('pdf')">In phiếu</x-button.primary>
+                    @if($phieuxuat->TrangThai != 2)
+                        <x-button.success type="submit">Xác nhận</x-button.success>
+                    @endif
+                    <a href="{{ route('dashboard.phieuxuat.exportPdf', ['id' => $phieuxuat->id ]) }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-200 active:bg-gray-200 focus:outline-none focus:border-gray-100 focus:shadow-outline-gray disabled:opacity-25 transition text-white bg-blue-600 hover:bg-blue-500 active:bg-green-700 border-green-600">
+                        In phiếu 
+                    </a>
                 </div> 
             </div> 
         </div>

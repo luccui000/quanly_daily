@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\PhieuXuatImport;
+use App\Models\NhanVien;
+use PDF;
 use App\Models\NguoiDung;
 use App\Models\PhieuXuat;
 use Illuminate\Http\Request;
 use App\Models\CodeGenerator;
-use App\Models\NhanVien;
+use App\Imports\PhieuXuatImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PhieuXuatController extends Controller
@@ -140,6 +141,16 @@ class PhieuXuatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function exportPdf($id)
+    { 
+        $phieuxuat = PhieuXuat::where('id', $id)->with(['nhanvien', 'mathang', 'khachhang'])->first();
+        // return view('pdf.phieugiaohang', compact('phieuxuat'));
+        $DanhSach = [0 => "Phiếu Xuất Kho", 1 => 'Phiếu Giao Hàng', 2 => 'Phiếu thanh toán'];
+        $tenphieu = $DanhSach[$phieuxuat->TrangThai];
+        
+        $pdf = PDF::loadView('pdf.phieugiaohang', compact('phieuxuat', 'tenphieu'));
+        return $pdf->download('test.pdf');
+    }
     public function destroy($id)
     {
         //

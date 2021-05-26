@@ -61,7 +61,9 @@ class PhieuXuat extends Model
     }
     public function getMaPhieuXuatAttribute()
     { 
-        return 'PX000'. $this->id;
+        $dat = ['PX', 'PG', 'PTT'];
+        $prefix = $dat[$this->TrangThai];
+        return $prefix . date('dmy'). $this->id;
     }
     public function getTenHinhThucThanhToanAttribute()
     {

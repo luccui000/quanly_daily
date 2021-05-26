@@ -12,6 +12,8 @@ Route::get('/xemgiohang', GioHang::class)->name('trangchu.xemgiohang');
 Route::get('/dangky', [App\Http\Controllers\KhachHangController::class, 'dangky'])->name('khachhang.dangky');
 Route::post('/dangky', [App\Http\Controllers\KhachHangController::class, 'store'])->name('khachhang.store');
 Route::get('/dangnhap', [App\Http\Controllers\KhachHangController::class, 'dangnhap'])->name('khachhang.dangnhap'); 
+Route::get('/dangxuat', [App\Http\Controllers\KhachHangController::class, 'dangxuat'])->name('khachhang.dangxuat'); 
+
 Route::post('/dangnhap', [App\Http\Controllers\KhachHangController::class, 'xacthuc'])->name('khachhang.xacthuc'); 
 
  

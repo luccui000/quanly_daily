@@ -11,8 +11,8 @@
                         <span class="mt-2 text-base leading-normal">Select a file</span>
                         <input type='file' class="hidden" name="file" />
                     </label>
-                    <x-button.success type="submit">Tai len</x-button.success>
                 </div>
+                <x-button.success class="mt-2 float-right mb-2" type="submit">Tải lên</x-button.success>
             </form>
         </x-slot>
     </x-modal.dialog>

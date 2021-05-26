@@ -9,7 +9,7 @@
                     style="background-image: url('{{ URL::asset('img/dangky.jpg') }}')"
                 ></div> 
                 <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
-                    <h3 class="pt-4 text-2xl text-center">Tạo tài khoản mới</h3> 
+                    <h3 class="pt-4 text-2xl text-center">Đăng nhập</h3> 
                     <form action="{{ route('khachhang.xacthuc') }}" method="POST" class="px-8 pt-6 pb-8 mb-4 bg-white rounded"> 
                         @csrf 
                         <div class="mb-2">
@@ -56,9 +56,9 @@
                         <div class="text-center">
                             <a
                                 class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                href="#"
+                                href="{{ route('khachhang.dangky') }}"
                             >
-                                Đã có tài khoản? Đăng nhập!
+                                Chưa có tài khoản? Đăng ký!
                             </a>
                         </div>
                     </form>
