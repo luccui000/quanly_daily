@@ -18,6 +18,14 @@ class GioHang extends Component
     }
     public function xoaHang($idMh)
     {
+        $arr = $this->danhsachGioHang->toArray();
+ 
+        $index = array_search($idMh, array_column($arr, 'id'));
+        unset($this->danhsachGioHang[$index]);
+        $giohang = request()->session()->get('giohang');
+        unset($giohang[$index]);
+        request()->session()->put('giohang', $giohang);
+
         $this->emit('xoaMatHang', $idMh);
     } 
     public function render()

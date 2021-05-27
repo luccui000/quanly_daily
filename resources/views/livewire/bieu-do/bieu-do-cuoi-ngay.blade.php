@@ -8,11 +8,11 @@
                 />
             </div>  
             <div class="shadow rounded p-4 border bg-white flex-1" style="height: 40rem;">
-                <livewire:livewire-line-chart
-                    key="{{ $lineChartModel->reactiveKey() }}"
-                    :line-chart-model="$lineChartModel"
+                <livewire:livewire-column-chart
+                    key="{{ $columnChartModel2->reactiveKey() }}"
+                    :column-chart-model="$columnChartModel2"
                 />
-            </div>
+            </div>   
         </div> 
     </div>
 </div>

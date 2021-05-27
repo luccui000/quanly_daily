@@ -103,12 +103,7 @@
                                     <a href="{{ route('dashboard.mathang') }}" class="nav-link"> 
                                     <i class="fas fa-cube nav-icon"></i><p>Thiết lập hàng hóa</p>
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('dashboard.mathang') }}" class="nav-link"> 
-                                    <i class="fas fa-fw fa fa-tags nav-icon"></i><p>Thiết lập giá</p>
-                                    </a>
-                                </li>   
+                                </li>  
                             </ul>
                         </li>
                         <li class="nav-item menu-open">

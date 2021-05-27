@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KhachHang;
 use App\Rules\SoDienThoai;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -51,7 +52,8 @@ class KhachHangController extends Controller
     }
     public function dangxuat()
     {
-        return auth()->guard('khachhangs')->logout();
+        if(auth()->guard('khachhangs')->user()) auth()->guard('khachhangs')->logout();
+        return redirect()->route('trangchu');
     }
     /**
      * Show the form for creating a new resource.
@@ -72,7 +74,8 @@ class KhachHangController extends Controller
     public function store(Request $request)
     {
         request()->validate(array_merge(KhachHang::VALIDATE_RULES, [
-            'DienThoai' => [ 'required', 'numeric',  new SoDienThoai() ]
+            'DienThoai' => [ 'required', 'numeric',  new SoDienThoai() ],
+            'Email' => 'required|email|unique:App\Models\KhachHang,Email', 
             ]), KhachHang::VALIDATE_MESSAGE);
 
         KhachHang::create(array_merge(request()->only('HoTenKH', 'DiaChi', 'DienThoai', 'Email', 'SoTaiKhoan'), [
@@ -100,7 +103,9 @@ class KhachHangController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort_if(auth()->guard('khachhangs')->user()->id != $id, Response::HTTP_FORBIDDEN);
+        $thongtin = KhachHang::findOrFail($id);
+        return view('khachhang.edit', ['thongtin' => $thongtin]);
     }
 
     /**
@@ -112,7 +117,17 @@ class KhachHangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          
+        $khachHang = KhachHang::findOrFail($id)->first();
+        $khachHang->update([
+            'HoTenKH' => $request->input('HoTenKH'),
+            'DiaChi' => $request->input('DiaChi'),
+            'DienThoai' => $request->input('DienThoai'),
+            'SoTaiKhoan' => $request->input('SoTaiKhoan'),
+        ]);
+        $khachHang->save();
+        
+        return redirect()->back();
     }
 
     /**

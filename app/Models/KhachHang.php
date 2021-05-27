@@ -29,8 +29,7 @@ class KhachHang extends Authenticatable
     } 
     public const VALIDATE_RULES = [
         'HoTenKH' => 'required',
-        'DiaChi' => 'required', 
-        'Email' => 'required|email|unique:App\Models\KhachHang,Email', 
+        'DiaChi' => 'required',  
         'SoTaiKhoan' => 'numeric', 
         'MatKhau' => 'required',
         'XacNhanMatKhau' => 'required|same:MatKhau'

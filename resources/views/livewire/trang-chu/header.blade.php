@@ -13,10 +13,7 @@
           <div class="text-sm lg:flex-grow">
             <a href="/" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-gray-200 mr-4">
                 Trang chủ
-            </a>
-            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-gray-200 mr-4">
-                Sản phẩm
-            </a>
+            </a> 
             <a href="{{ route('trangchu.xemgiohang') }}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-gray-200">
                 Xem giỏ hàng ({{ $soLuongHang }})
             </a>
@@ -28,8 +25,9 @@
                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
               </button>
               <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
-                <li class=""><a class="rounded-t bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="#">Tài khoản của tôi</a></li>
-                <li class=""><a class="bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="#">Two</a></li>
+                <li class=""><a class="rounded-t bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" 
+                  href="{{ route('khachhang.edit', ['id' => auth()->guard('khachhangs')->user()->id ]) }}">Tài khoản của tôi</a></li>
+                <li class=""><a class="bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="#">Quản lý đơn hàng</a></li>
                 <hr>
                 <li class=""><a class="rounded-b bg-white hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="{{ route('khachhang.dangxuat') }}">Đăng xuất</a></li>
               </ul>

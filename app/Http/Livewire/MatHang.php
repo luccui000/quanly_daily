@@ -123,7 +123,7 @@ class MatHang extends Component
                 $mathang = new MatHangModel(); 
                 $this->store($mathang);
                 $mathang->save(); 
-                CodeGenerator::find(1)->update(['ma_m_h' => 12321]);
+                CodeGenerator::tangMa('MaMatHang');
                 $this->MaMH = 'MH' . $this->getCodeGenerator();
                 $this->dispatchAlert('success', 'Thêm thành công mặt hàng', '');
             } catch(\Exception $e) {

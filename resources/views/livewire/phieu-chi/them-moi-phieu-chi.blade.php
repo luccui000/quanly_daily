@@ -30,9 +30,16 @@
                     <x-input.money wire:model="TongTien" :error="$errors->first('TongTien')"></x-input.text>
                     @error('TongTien') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                 </x-input.group>
+                <x-input.group label="Mã phiếu" for="MaPN"> 
+                    <select wire:model="mapn_id" class="w-64 block w-full px-2 py-2 text-black placeholder-gray-400 transition duration-100 ease-in-out bg-white border border-gray-300 rounded focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed">  
+                        @foreach ($phieunhap as $pn)
+                            <option value="{{ $pn->id }}">{{ $pn->ma_phieu_hang }} - {{ $pn->ngay_lap }} - {{ $pn->nhacungcap->TenNCC }}</option>
+                        @endforeach
+                    </select> 
+                </x-input.group> 
             </x-slot>
             <x-slot name="footer">
-                <x-button.secondary wire:click="$set('showEditModal', false)">close</x-button.secondary>
+                <x-button.secondary wire:click="$set('showModal', false)">close</x-button.secondary>
                 <x-button.success type="submit">Lưu</x-button.success>
             </x-slot>
         </x-modal.dialog>

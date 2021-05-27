@@ -40,7 +40,15 @@ class PhieuHang extends Model
     }
     public function getDateForHumansAttribute()
     {
-        return date_format(date_create($this->NgayLap), 'd/m/Y');
+        return date_format(date_create($this->created_at), 'd/m/Y');
+    }
+    public function getNgayLapAttribute()
+    {
+        return date_format(date_create($this->created_at), 'd/m/Y');
+    }
+    public function getMaPhieuHangAttribute()
+    {
+        return 'PN' . $this->nhacungcap_id . ''. $this->kho_id. '' .$this->id;
     }
     public function nhacungcap()
     {

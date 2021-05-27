@@ -56,23 +56,7 @@ class BieuDoCuoiNgay extends Component
                 ->setColors(['#b01a1b', '#d41b2c', '#ec3c3b', '#f66665'])
                 ->setColumnWidth(90)
                 ->withGrid()
-            );  
-        $phieuxuat = PhieuXuat::orderBy('created_at')->get();
-        $lineChartModel = $phieuxuat
-            ->reduce(function ($lineChartModel, $data) use ($phieuxuat) {
-                $index = $phieuxuat->first()->created_at->format('m');
-                $amountSum = $phieuxuat->take($index + 1)->sum('TongThanhToan'); 
-                
-                return $lineChartModel->addPoint($index, $data->TongThanhToan, ['id' => $data->id]);
-            }, LivewireCharts::lineChartModel()
-                ->setTitle('Biến động bán hàng')
-                ->setAnimated($this->firstRun)
-                ->withOnPointClickEvent('onPointClick')
-                ->setSmoothCurve()
-                ->setXAxisVisible(true)
-                ->setDataLabelsEnabled($this->showDataLabels)
-                ->sparklined()
-            ); 
+            );   
         
         $chitietPX = \DB::table('CHITIET_PHIEUXUAT')
                         ->join('MATHANG', 'MATHANG.id', '=', 'CHITIET_PHIEUXUAT.mathang_id')
@@ -98,8 +82,8 @@ class BieuDoCuoiNgay extends Component
         $this->firstRun = false;
         return view('livewire.bieu-do.bieu-do-cuoi-ngay')
             ->with([
-                'columnChartModel' => $columnChartModel2,
-                'lineChartModel' => $lineChartModel
+                'columnChartModel' => $columnChartModel,
+                'columnChartModel2' => $columnChartModel2,
             ]);
     }
 }

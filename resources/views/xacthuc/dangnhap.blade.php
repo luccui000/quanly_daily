@@ -1,9 +1,8 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <h1 class="font-semibold text-2xl uppercase w-96 text-center">Hệ thống quản lý cửa hàng bán thiết bị công nghệ </h1>
         </x-slot>
-
         <x-jet-validation-errors class="mb-4" />
 
         @if (session('status'))
