@@ -19,6 +19,6 @@ Route::get('/{id}/thaydoithongtin',[App\Http\Controllers\KhachHangController::cl
 Route::post('/{id}',[App\Http\Controllers\KhachHangController::class, 'update'])->name('khachhang.update'); 
 
  
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');

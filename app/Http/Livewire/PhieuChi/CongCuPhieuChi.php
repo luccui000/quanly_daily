@@ -10,6 +10,7 @@ class CongCuPhieuChi extends Component
 {
     protected $listeners = ['detete' => 'Delete'];
     public $phieuchiDaChon = [];
+    public $showImportModal = false;
 
     public function Delete($id)
     {
@@ -19,6 +20,10 @@ class CongCuPhieuChi extends Component
             unset($this->phieuchiDaChon[array_search($id, $this->phieuchiDaChon)]);
             $this->phieuchiDaChon = array_values($this->phieuchiDaChon);
         }
+    }
+    public function import()
+    {
+        $this->showImportModal = true;
     }
     public function deleteSelected()
     { 

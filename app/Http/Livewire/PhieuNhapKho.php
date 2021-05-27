@@ -23,6 +23,7 @@ class PhieuNhapKho extends Component
     public Collection $thanhtien;
     public Collection $mathangs; 
     public PhieuHang $phieuhang; 
+    public $showImportModal = false;
 
     public $tongGiamGia = 0;
     public $TongTienHang = 0;
@@ -54,6 +55,10 @@ class PhieuNhapKho extends Component
     {
         $this->phieuhangs = PhieuHang::with(['nhacungcap', 'nhanvien', 'kho'])->get();   
         abort_if(!auth()->user()->nhanvien_id, Response::HTTP_UNAUTHORIZED);
+    }
+    public function import()
+    {
+        $this->showImportModal = true;
     }
     public function ThemVaoNhapKho($id)
     {    

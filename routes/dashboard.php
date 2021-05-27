@@ -11,7 +11,7 @@ use App\Mail\XacNhanDonHangMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
  
-
+Route::get('/', function() { return redirect()->route('auth.dangnhap'); });
 Route::get('dangnhap', [App\Http\Controllers\XacThucController::class, 'dangnhap'])->name('auth.dangnhap');
 Route::post('dangnhap', [App\Http\Controllers\XacThucController::class, 'xacthuc'])->name('auth.xacthuc');
 Route::get('dangxuat', [App\Http\Controllers\XacThucController::class, 'dangxuat'])->name('auth.dangxuat');
